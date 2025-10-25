@@ -32,7 +32,7 @@ function CaregiverProfileSection() {
       setLoading(true);
       const token = localStorage.getItem("token");
 
-      const res = await axios.get("https://hospitalbackend-pfva.onrender.com/auth/me", {
+      const res = await axios.get("https://hospitalbackend-1-eail.onrender.com/auth/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -89,7 +89,7 @@ function CaregiverProfileSection() {
       const { _id, careGiverId, createdAt, updatedAt, ...updatePayload } = payload;
 
       const res = await axios.put(
-        `https://hospitalbackend-pfva.onrender.com/caregivers/${id}`,
+        `https://hospitalbackend-1-eail.onrender.com/caregivers/${id}`,
         updatePayload,
         {
           headers: {

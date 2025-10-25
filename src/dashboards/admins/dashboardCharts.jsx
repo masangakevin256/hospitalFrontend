@@ -40,16 +40,16 @@ const DashboardCharts = () => {
         
         // Fetch all data in parallel
         const [patientsRes, alertsRes, vitalsRes, doctorsRes] = await Promise.all([
-          axios.get("https://hospitalbackend-pfva.onrender.com/patients", {
+          axios.get("https://hospitalbackend-1-eail.onrender.com/patients", {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          axios.get("https://hospitalbackend-pfva.onrender.com/alerts", {
+          axios.get("https://hospitalbackend-1-eail.onrender.com/alerts", {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          axios.get("https://hospitalbackend-pfva.onrender.com/vitals", {
+          axios.get("https://hospitalbackend-1-eail.onrender.com/vitals", {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          axios.get("https://hospitalbackend-pfva.onrender.com/doctors", {
+          axios.get("https://hospitalbackend-1-eail.onrender.com/doctors", {
             headers: { Authorization: `Bearer ${token}` }
           })
         ]);

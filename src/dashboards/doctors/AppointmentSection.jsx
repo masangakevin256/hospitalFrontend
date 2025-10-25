@@ -39,7 +39,7 @@ function AppointmentsSection() {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const res = await axios.get("https://hospitalbackend-pfva.onrender.com/appointments", {
+      const res = await axios.get("https://hospitalbackend-1-eail.onrender.com/appointments", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAppointments(res.data);
@@ -55,7 +55,7 @@ function AppointmentsSection() {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.post("https://hospitalbackend-pfva.onrender.com/appointments", formData, {
+      await axios.post("https://hospitalbackend-1-eail.onrender.com/appointments", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setShowAddModal(false);
@@ -71,7 +71,7 @@ function AppointmentsSection() {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`https://hospitalbackend-pfva.onrender.com/appointments/${selectedAppointment._id}`, formData, {
+      await axios.put(`https://hospitalbackend-1-eail.onrender.com/appointments/${selectedAppointment._id}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setShowEditModal(false);
@@ -86,7 +86,7 @@ function AppointmentsSection() {
   const handleDeleteAppointment = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`https://hospitalbackend-pfva.onrender.com/appointments/${selectedAppointment._id}`, {
+      await axios.delete(`https://hospitalbackend-1-eail.onrender.com/appointments/${selectedAppointment._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setShowDeleteModal(false);
@@ -100,7 +100,7 @@ function AppointmentsSection() {
   const updateAppointmentStatus = async (appointmentId, newStatus) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`https://hospitalbackend-pfva.onrender.com/appointments/${appointmentId}`, 
+      await axios.put(`https://hospitalbackend-1-eail.onrender.com/appointments/${appointmentId}`, 
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

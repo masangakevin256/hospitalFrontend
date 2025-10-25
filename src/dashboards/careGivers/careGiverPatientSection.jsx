@@ -47,7 +47,7 @@ function AssignedPatientsSection() {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const response = await axios.get("https://hospitalbackend-pfva.onrender.com/patients", {
+      const response = await axios.get("https://hospitalbackend-1-eail.onrender.com/patients", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPatients(response.data);
@@ -111,7 +111,7 @@ function AssignedPatientsSection() {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `https://hospitalbackend-pfva.onrender.com/patients/${selectedPatient._id}`,
+        `https://hospitalbackend-1-eail.onrender.com/patients/${selectedPatient._id}`,
         editFormData,
         {
           headers: { Authorization: `Bearer ${token}` },

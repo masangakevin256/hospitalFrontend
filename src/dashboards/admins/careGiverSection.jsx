@@ -56,7 +56,7 @@ function CaregiversSection() {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const res = await axios.get("https://hospitalbackend-pfva.onrender.com/careGivers", {
+      const res = await axios.get("https://hospitalbackend-1-eail.onrender.com/careGivers", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCaregivers(res.data);
@@ -73,7 +73,7 @@ function CaregiversSection() {
     try {
       setAddError("");
       const token = localStorage.getItem("token");
-      const res = await axios.post("https://hospitalbackend-pfva.onrender.com/caregivers", newCaregiver, {
+      const res = await axios.post("https://hospitalbackend-1-eail.onrender.com/caregivers", newCaregiver, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCaregivers([...caregivers, res.data]);
@@ -104,7 +104,7 @@ function CaregiversSection() {
       setEditError("");
       const token = localStorage.getItem("token");
       const res = await axios.put(
-        `https://hospitalbackend-pfva.onrender.com/caregivers/${selectedCaregiver._id}`,
+        `https://hospitalbackend-1-eail.onrender.com/caregivers/${selectedCaregiver._id}`,
         editCaregiver,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -133,7 +133,7 @@ function CaregiversSection() {
     if (!window.confirm("Are you sure you want to delete this caregiver?")) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`https://hospitalbackend-pfva.onrender.com/caregivers/${id}`, {
+      await axios.delete(`https://hospitalbackend-1-eail.onrender.com/caregivers/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCaregivers(caregivers.filter((c) => c._id !== id));

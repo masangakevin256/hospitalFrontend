@@ -43,7 +43,7 @@ function AssignedPatientsSection() {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const res = await axios.get("https://hospitalbackend-pfva.onrender.com/patients/assignedDoctor", {
+      const res = await axios.get("https://hospitalbackend-1-eail.onrender.com/patients/assignedDoctor", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAssigned(res.data);
@@ -59,7 +59,7 @@ function AssignedPatientsSection() {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`https://hospitalbackend-pfva.onrender.com/patients/${selectedPatient._id}`, formData, {
+      await axios.put(`https://hospitalbackend-1-eail.onrender.com/patients/${selectedPatient._id}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setShowEditModal(false);
@@ -74,7 +74,7 @@ function AssignedPatientsSection() {
   const handleDeletePatient = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`https://hospitalbackend-pfva.onrender.com/patients/${selectedPatient._id}`, {
+      await axios.delete(`https://hospitalbackend-1-eail.onrender.com/patients/${selectedPatient._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setShowDeleteModal(false);

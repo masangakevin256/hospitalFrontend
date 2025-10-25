@@ -26,7 +26,7 @@ function AlertsSection({ patientData }) {
     const fetchAlerts = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("https://hospitalbackend-pfva.onrender.com/alerts", {
+        const response = await axios.get("https://hospitalbackend-1-eail.onrender.com/alerts", {
           headers: { Authorization: `Bearer ${token}` },
         });
         
@@ -75,7 +75,7 @@ function AlertsSection({ patientData }) {
         timeStamp: new Date().toISOString()
       };
 
-      const response = await axios.post("https://hospitalbackend-pfva.onrender.com/alerts", alertData, {
+      const response = await axios.post("https://hospitalbackend-1-eail.onrender.com/alerts", alertData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -94,7 +94,7 @@ function AlertsSection({ patientData }) {
     if (!window.confirm("Are you sure you want to delete this alert?")) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`https://hospitalbackend-pfva.onrender.com/alerts/${id}`, {
+      await axios.delete(`https://hospitalbackend-1-eail.onrender.com/alerts/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAlerts(alerts.filter((alert) => alert._id !== id));
@@ -110,7 +110,7 @@ function AlertsSection({ patientData }) {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.patch(
-        `https://hospitalbackend-pfva.onrender.com/alerts/${id}`,
+        `https://hospitalbackend-1-eail.onrender.com/alerts/${id}`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
