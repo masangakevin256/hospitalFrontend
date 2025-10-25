@@ -865,22 +865,17 @@ function DoctorPatientsSection() {
                       </select>
                     </div>
 
-                    <div className="col-md-6">
-                      <label className="form-label fw-semibold">Assign Care Giver *</label>
-                      <select
-                        className="form-select"
-                        value={formData.assignedCareGiver}
-                        onChange={(e) => setFormData({...formData, assignedCareGiver: e.target.value})}
-                        
-                      >
-                        <option value="">Select Care Giver</option>
-                        {caregivers.map(caregiver => (
-                          <option key={caregiver._id} value={caregiver._id}>
-                            {caregiver.name} - {caregiver.qualification}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+              <div className="col-md-6">
+                <label className="form-label fw-semibold">Assign Care Giver *</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter Care Giver name"
+                  value={formData.assignedCareGiver}
+                  onChange={(e) => setFormData({ ...formData, assignedCareGiver: e.target.value })}
+                  required
+                />
+              </div>
 
                     {/* Account Security */}
                     <div className="col-12 mt-4">
