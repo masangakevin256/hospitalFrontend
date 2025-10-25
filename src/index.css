@@ -1,0 +1,334 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+.hidden{
+  display: none;
+}
+/* Body background setup */
+body { 
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) ;
+   /* overflow: hidden; Prevent global scroll */
+}
+
+/* Login and signup forms */
+.login-form,
+.signup-form {
+
+  width: 100%;
+  max-width: 480px;
+  min-height: 50vh;
+  margin: 50px auto;
+  border: 1px solid hsla(0, 7%, 84%, 0.137);
+  border-radius: 10px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+a {
+  text-decoration: none;
+  font-style: italic;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+input[type="submit"] {
+  width: 80%;
+}
+
+/* .hidden {
+  display: none;
+} */
+
+/* DASHBOARD LAYOUT STYLES */
+
+.admin-dashboard {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+.admin-dashboard ul li{
+  padding: 10px;
+}
+.admin-dashboard ul li a{
+  font-style: normal;
+}
+.nu:hover{
+  transform: translate(5px);
+  cursor: pointer;
+}
+/* Sidebar - scrolls independently */
+.admin-sidebar {
+  max-width: 260px;
+  width: 100%;
+  background-color: #0d6efd;
+  color: white;
+  padding: 1rem;
+  overflow-y: auto;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.3) transparent;
+}
+
+/* Hide scrollbar visually (optional smooth look) */
+.admin-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.admin-sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+}
+.admin-sidebar:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Sidebar content styling */
+.profile-pic img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.admin-name {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.admin-sidebar ul li {
+  list-style: none;
+}
+
+.admin-sidebar ul li a {
+  color: white;
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background 0.2s ease-in-out;
+}
+
+.admin-sidebar ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+}
+
+/* Main content - scrolls separately */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  height: 100vh;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+/* Table section */
+.table-responsive {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  background-color: white;
+  padding: 10px;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+/* Optional: Smooth hover effect for table rows */
+.table tbody tr:hover {
+  background-color: rgba(13, 110, 253, 0.1);
+}
+footer a:hover {
+  color: #ffe082 !important; /* Light yellow hover */
+  text-decoration: underline;
+}
+
+footer i {
+  color: #fff;
+}
+
+footer i:hover {
+  color: #ffe082 !important; /* Light yellow hover */
+}
+.log-header{
+  width: 100%;
+  height: 30px;
+}
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+.table th, .table td {
+  vertical-align: middle;
+}
+
+button.btn-info {
+  background-color: #0dcaf0 !important;
+  border: none;
+}
+
+button.btn-info:hover {
+  background-color: #0bb0d1 !important;
+}
+.welcome-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 180px;
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.welcome-content {
+  text-align: center;
+  position: relative;
+}
+
+.welcome-icon {
+  font-size: 3rem;
+  color: #ffc107;
+  animation: bounce 1.5s infinite;
+}
+
+.welcome-text {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-top: 10px;
+  animation: slideIn 1s ease-out;
+}
+
+.welcome-progress {
+  margin: 10px auto 0;
+  width: 120px;
+  height: 4px;
+  border-radius: 10px;
+  background: #e0e0e0;
+  overflow: hidden;
+  position: relative;
+}
+
+.welcome-progress::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(to right, #0d6efd, #6c63ff);
+  animation: progressSlide 2s infinite;
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes progressSlide {
+  0% { left: -40%; }
+  100% { left: 100%; }
+}
+/* ===== Logout Animation ===== */
+.logout-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.logout-content {
+  text-align: center;
+  animation: slideUp 0.8s ease-out;
+}
+
+.logout-icon {
+  font-size: 5rem;
+  color: #ff4b5c;
+  margin-bottom: 1rem;
+  animation: pulseIcon 1.5s infinite ease-in-out;
+}
+
+.logout-text {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
+  letter-spacing: 1px;
+  animation: fadeText 2s ease-in-out;
+}
+
+.logout-progress {
+  margin-top: 2rem;
+  width: 220px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.logout-progress::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: #fff;
+  border-radius: 10px;
+  animation: progressFill 2.5s forwards ease-in-out;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulseIcon {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+}
+
+@keyframes fadeText {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes progressFill {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
