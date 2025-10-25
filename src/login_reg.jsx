@@ -185,7 +185,7 @@ function Login() {
 
     setLoading(true);
     try {
-      const endpoint = `http://localhost:3500/login/${formData.roles}s`;
+      const endpoint = `https://kevinnyprojectmedicarehospital.vercel.app/${formData.roles}s`;
       const payload = formData.roles === "patient" || formData.roles === "careGiver" 
         ? { name: formData.username, password: formData.password }
         : { username: formData.username, password: formData.password };
@@ -224,7 +224,7 @@ function Login() {
     try {
       let res;
       if (formData.roles === "doctor") {
-        res = await axios.post("http://localhost:3500/register/doctors", {
+        res = await axios.post("https://kevinnyprojectmedicarehospital.vercel.app/", {
           email: formData.email,
           username: formData.username,
           phoneNumber: formData.phoneNumber,
@@ -234,7 +234,7 @@ function Login() {
           secretReg: formData.secretReg
         });
       } else if (formData.roles === "admin") {
-        res = await axios.post("http://localhost:3500/register/admins", {
+        res = await axios.post("https://kevinnyprojectmedicarehospital.vercel.app/", {
           email: formData.email,
           username: formData.username,
           phoneNumber: formData.phoneNumber,
