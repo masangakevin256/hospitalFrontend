@@ -185,7 +185,7 @@ function Login() {
 
     setLoading(true);
     try {
-      const endpoint = `https://hospitalbackend-1-eail.onrender.com/${formData.roles}s`;
+      const endpoint = `https://hospitalbackend-1-eail.onrender.com/login/${formData.roles}s`;
       const payload = formData.roles === "patient" || formData.roles === "careGiver" 
         ? { name: formData.username, password: formData.password }
         : { username: formData.username, password: formData.password };
@@ -224,7 +224,7 @@ function Login() {
     try {
       let res;
       if (formData.roles === "doctor") {
-        res = await axios.post("https://hospitalbackend-1-eail.onrender.com/", {
+        res = await axios.post("https://hospitalbackend-1-eail.onrender.com/register/doctors", {
           email: formData.email,
           username: formData.username,
           phoneNumber: formData.phoneNumber,
@@ -234,7 +234,7 @@ function Login() {
           secretReg: formData.secretReg
         });
       } else if (formData.roles === "admin") {
-        res = await axios.post("https://hospitalbackend-1-eail.onrender.com/", {
+        res = await axios.post("https://hospitalbackend-1-eail.onrender.com/register/admins", {
           email: formData.email,
           username: formData.username,
           phoneNumber: formData.phoneNumber,
