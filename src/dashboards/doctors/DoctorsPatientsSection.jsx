@@ -871,7 +871,7 @@ function DoctorPatientsSection() {
                         className="form-select"
                         value={formData.assignedCareGiver}
                         onChange={(e) => setFormData({...formData, assignedCareGiver: e.target.value})}
-                        required
+                        
                       >
                         <option value="">Select Care Giver</option>
                         {caregivers.map(caregiver => (
