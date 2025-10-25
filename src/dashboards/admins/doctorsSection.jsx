@@ -41,7 +41,7 @@ function DoctorsSection() {
       try {
         setLoading(true);
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:3500/doctors", {
+        const response = await axios.get("https://hospitalbackend-pfva.onrender.com/doctors", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setDoctors(response.data);
@@ -73,7 +73,7 @@ function DoctorsSection() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:3500/register/doctors",
+        "https://hospitalbackend-pfva.onrender.com/register/doctors",
         newDoctor,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -104,7 +104,7 @@ function DoctorsSection() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        `http://localhost:3500/doctors/${selectedDoctor._id}`,
+        `https://hospitalbackend-pfva.onrender.com/doctors/${selectedDoctor._id}`,
         editDoctor,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -126,7 +126,7 @@ function DoctorsSection() {
     if (!window.confirm("Are you sure you want to delete this doctor?")) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:3500/doctors/${id}`, {
+      await axios.delete(`https://hospitalbackend-pfva.onrender.com/doctors/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setDoctors(doctors.filter((doctor) => doctor._id !== id));

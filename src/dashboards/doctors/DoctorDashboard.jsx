@@ -55,10 +55,10 @@ function DoctorDashboard() {
       
       // Fetch all data in parallel
       const [statsRes, notificationsRes] = await Promise.all([
-        axios.get("http://localhost:3500/alerts", {
+        axios.get("https://hospitalbackend-pfva.onrender.com/alerts", {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get("http://localhost:3500/alerts", {
+        axios.get("https://hospitalbackend-pfva.onrender.com/alerts", {
           headers: { Authorization: `Bearer ${token}` },
         })
       ]);
@@ -91,7 +91,7 @@ function DoctorDashboard() {
   const handleNotificationClick = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:3500/alerts/${id}/read`, {}, {
+      await axios.put(`https://hospitalbackend-pfva.onrender.com/alerts/${id}/read`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -108,7 +108,7 @@ function DoctorDashboard() {
   const markAllAsRead = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put("http://localhost:3500/alerts", {}, {
+      await axios.put("https://hospitalbackend-pfva.onrender.com/alerts", {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -124,7 +124,7 @@ function DoctorDashboard() {
     setShowLogout(true);
     setTimeout(async () => {
       try {
-        await axios.post("http://localhost:3500/logout/doctors");
+        await axios.post("https://hospitalbackend-pfva.onrender.com/logout/doctors");
         localStorage.removeItem("token");
         navigate("/");
       } catch (error) {

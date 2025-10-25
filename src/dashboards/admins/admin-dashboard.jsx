@@ -73,7 +73,7 @@ function AdminDashboard() {
   setTimeout(() => {
     const performLogout = async () => {
       try {
-        await axios.post("http://localhost:3500/logout/admins");
+        await axios.post("https://hospitalbackend-pfva.onrender.com/logout/admins");
         localStorage.removeItem("token");
         navigate("/");
       } catch (error) {

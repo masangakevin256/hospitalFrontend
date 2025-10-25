@@ -31,7 +31,7 @@ function AdminProfileSection() {
       setLoading(true);
       const token = localStorage.getItem("token");
 
-      const res = await axios.get("http://localhost:3500/auth/me", {
+      const res = await axios.get("https://hospitalbackend-pfva.onrender.com/auth/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -88,7 +88,7 @@ function AdminProfileSection() {
   const { _id, adminId, createdAt, updatedAt, ...updatePayload } = payload;
 
     const res = await axios.put(
-      `http://localhost:3500/admins/${id}`,
+      `https://hospitalbackend-pfva.onrender.com/admins/${id}`,
       updatePayload,
       {
         headers: {

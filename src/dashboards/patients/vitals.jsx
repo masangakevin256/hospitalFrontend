@@ -32,7 +32,7 @@ function VitalsSection() {
     const fetchVitals = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:3500/vitals", {
+        const response = await axios.get("https://hospitalbackend-pfva.onrender.com/vitals", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setVitals(response.data);
@@ -63,7 +63,7 @@ function VitalsSection() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:3500/vitals",
+        "https://hospitalbackend-pfva.onrender.com/vitals",
         newVital,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -95,7 +95,7 @@ function VitalsSection() {
     if (!window.confirm("Are you sure you want to delete this vital record?")) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:3500/vitals/${id}`, {
+      await axios.delete(`https://hospitalbackend-pfva.onrender.com/vitals/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setVitals(vitals.filter((vital) => vital._id !== id));

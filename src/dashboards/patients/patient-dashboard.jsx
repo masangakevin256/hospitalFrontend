@@ -68,7 +68,7 @@ function PatientDashboard() {
             }
 
             // Fetch ALL patients and find the current one by name
-            const patientsRes = await axios.get("http://localhost:3500/patients", {
+            const patientsRes = await axios.get("https://hospitalbackend-pfva.onrender.com/patients", {
             headers: { Authorization: `Bearer ${token}` },
             });
 
@@ -93,7 +93,7 @@ function PatientDashboard() {
 
             // Fetch appointments
             try {
-            const appointmentsRes = await axios.get("http://localhost:3500/appointments", {
+            const appointmentsRes = await axios.get("https://hospitalbackend-pfva.onrender.com/appointments", {
                 headers: { Authorization: `Bearer ${token}` },
             });
             
@@ -109,7 +109,7 @@ function PatientDashboard() {
 
             // Fetch vitals
             try {
-            const vitalsRes = await axios.get("http://localhost:3500/vitals", {
+            const vitalsRes = await axios.get("https://hospitalbackend-pfva.onrender.com/vitals", {
                 headers: { Authorization: `Bearer ${token}` },
             });
             
@@ -198,7 +198,7 @@ function PatientDashboard() {
     setShowLogout(true);
     setTimeout(async () => {
       try {
-        await axios.post("http://localhost:3500/logout/patients");
+        await axios.post("https://hospitalbackend-pfva.onrender.com/logout/patients");
         localStorage.removeItem("token");
         navigate("/");
       } catch (error) {

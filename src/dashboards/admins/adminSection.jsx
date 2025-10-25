@@ -41,7 +41,7 @@ function AdminsSection() {
     const fetchAdmins = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:3500/admins", {
+        const response = await axios.get("https://hospitalbackend-pfva.onrender.com/admins", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setAdmins(response.data);
@@ -73,7 +73,7 @@ function AdminsSection() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:3500/register/admins",
+        "https://hospitalbackend-pfva.onrender.com/register/admins",
         newAdmin,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -104,7 +104,7 @@ function AdminsSection() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        `http://localhost:3500/admins/${selectedAdmin._id}`,
+        `https://hospitalbackend-pfva.onrender.com/admins/${selectedAdmin._id}`,
         editAdmin,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -126,7 +126,7 @@ function AdminsSection() {
     if (!window.confirm("Are you sure you want to delete this admin?")) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:3500/admins/${id}`, {
+      await axios.delete(`https://hospitalbackend-pfva.onrender.com/admins/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAdmins(admins.filter((admin) => admin._id !== id));

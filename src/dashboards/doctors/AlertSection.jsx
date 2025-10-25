@@ -24,7 +24,7 @@ function AlertsSection() {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:3500/alerts", {
+      const res = await axios.get("https://hospitalbackend-pfva.onrender.com/alerts", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAlerts(res.data);
@@ -39,7 +39,7 @@ function AlertsSection() {
   const markAsRead = async (alertId) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:3500/alerts/${alertId}`, 
+      await axios.put(`https://hospitalbackend-pfva.onrender.com/alerts/${alertId}`, 
         { status: 'read' },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -53,7 +53,7 @@ function AlertsSection() {
   const markAllAsRead = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:3500/alerts/mark-all-read`, 
+      await axios.put(`https://hospitalbackend-pfva.onrender.com/alerts/mark-all-read`, 
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -67,7 +67,7 @@ function AlertsSection() {
   const resolveAlert = async (alertId) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:3500/alerts/${alertId}`, 
+      await axios.put(`https://hospitalbackend-pfva.onrender.com/alerts/${alertId}`, 
         { status: 'resolved' },
         { headers: { Authorization: `Bearer ${token}` } }
       );

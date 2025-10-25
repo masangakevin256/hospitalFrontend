@@ -55,10 +55,10 @@ function CaregiverDashboard() {
       
       // Fetch all data in parallel
       const [statsRes, notificationsRes] = await Promise.all([
-        axios.get("http://localhost:3500/caregivers/", {
+        axios.get("https://hospitalbackend-pfva.onrender.com/caregivers/", {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get("http://localhost:3500/notifications/caregiver", {
+        axios.get("https://hospitalbackend-pfva.onrender.com/notifications/caregiver", {
           headers: { Authorization: `Bearer ${token}` },
         })
       ]);
@@ -91,7 +91,7 @@ function CaregiverDashboard() {
   const handleNotificationClick = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:3500/notifications/${id}/read`, {}, {
+      await axios.put(`https://hospitalbackend-pfva.onrender.com/notifications/${id}/read`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -108,7 +108,7 @@ function CaregiverDashboard() {
   const markAllAsRead = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put("http://localhost:3500/notifications/mark-all-read", {}, {
+      await axios.put("https://hospitalbackend-pfva.onrender.com/notifications/mark-all-read", {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -124,7 +124,7 @@ function CaregiverDashboard() {
     setShowLogout(true);
     setTimeout(async () => {
       try {
-        await axios.post("http://localhost:3500/logout/caregivers");
+        await axios.post("https://hospitalbackend-pfva.onrender.com/logout/caregivers");
         localStorage.removeItem("token");
         navigate("/");
       } catch (error) {
