@@ -43,7 +43,7 @@ function VitalsSection() {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const res = await axios.get("https://hospitalbackend-1-eail.onrender.com", {
+      const res = await axios.get("https://hospitalbackend-1-eail.onrender.com/vitals", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setVitals(res.data);
@@ -77,7 +77,7 @@ function VitalsSection() {
 
       console.log("Sending vital data:", vitalData);
 
-      const response = await axios.post("https://hospitalbackend-1-eail.onrender.com", vitalData, {
+      const response = await axios.post("https://hospitalbackend-1-eail.onrender.com/vitals", vitalData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -112,7 +112,7 @@ function VitalsSection() {
         notes: formData.notes || undefined
       };
 
-      await axios.put(`https://hospitalbackend-1-eail.onrender.com/${selectedVital._id}`, vitalData, {
+      await axios.put(`https://hospitalbackend-1-eail.onrender.com/vitals/${selectedVital._id}`, vitalData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -131,7 +131,7 @@ function VitalsSection() {
   const handleDeleteVital = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`https://hospitalbackend-1-eail.onrender.com/${selectedVital._id}`, {
+      await axios.delete(`https://hospitalbackend-1-eail.onrender.com/vitals/${selectedVital._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setShowDeleteModal(false);
