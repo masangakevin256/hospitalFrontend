@@ -75,7 +75,7 @@ input[type="submit"] {
   scrollbar-color: rgba(255,255,255,0.3) transparent;
 }
 
-/* Hide scrollbar visually (optional smooth look) */
+/* Hide scrollbar visually */
 .admin-sidebar::-webkit-scrollbar {
   width: 6px;
 }
@@ -139,12 +139,12 @@ input[type="submit"] {
   vertical-align: middle;
 }
 
-/* Optional: Smooth hover effect for table rows */
+/*  Smooth hover effect for table rows */
 .table tbody tr:hover {
   background-color: rgba(13, 110, 253, 0.1);
 }
 footer a:hover {
-  color: #ffe082 !important; /* Light yellow hover */
+  color: #ffe082 !important; 
   text-decoration: underline;
 }
 
@@ -153,7 +153,7 @@ footer i {
 }
 
 footer i:hover {
-  color: #ffe082 !important; /* Light yellow hover */
+  color: #ffe082 !important; 
 }
 .log-header{
   width: 100%;

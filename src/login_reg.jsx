@@ -210,7 +210,8 @@ function Login() {
       }, 2000);
 
     } catch (error) {
-      setError(error.response?.data?.message || "Login failed! Please check your credentials.");
+      setError("Login failed! Please check your credentials.");
+      // error.response?.data?.message || 
     } finally {
       setLoading(false);
     }
