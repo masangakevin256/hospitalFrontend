@@ -22,7 +22,7 @@ import {
   FaExclamationTriangle
 } from "react-icons/fa";
 import "./Login.css";
-import errorLog from "../../../backend/middleware/errorLog";
+
 
 function Login() {
   const [formData, setFormData] = useState({
