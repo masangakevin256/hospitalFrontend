@@ -185,7 +185,8 @@ function Login() {
 
     setLoading(true);
     try {
-      const endpoint = `https://hospitalbackend-1-eail.onrender.com/login/${formData.roles}s`;
+      // const endpoint = `https://hospitalbackend-1-eail.onrender.com/login/${formData.roles}s`;
+      const endpoint = `https://hospitalbackend-1-eail.onrender.com`;
       const payload = formData.roles === "patient" || formData.roles === "careGiver" 
         ? { name: formData.username, password: formData.password }
         : { username: formData.username, password: formData.password };
