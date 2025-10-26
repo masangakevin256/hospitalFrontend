@@ -22,6 +22,7 @@ import {
   FaExclamationTriangle
 } from "react-icons/fa";
 import "./Login.css";
+import errorLog from "../../../backend/middleware/errorLog";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -185,15 +186,12 @@ function Login() {
 
     setLoading(true);
     try {
-      // const endpoint = `https://hospitalbackend-1-eail.onrender.com/login/${formData.roles}s`;
-      const endpoint = `https://hospitalbackend-1-eail.onrender.com`;
-      // const payload = formData.roles === "patient" || formData.roles === "careGiver" 
-      //   ? { name: formData.username, password: formData.password }
-      //   : { username: formData.username, password: formData.password };
+      const endpoint = `https://hospitalbackend-1-eail.onrender.com/login/${formData.roles}s`;
+      const payload = formData.roles === "patient" || formData.roles === "careGiver" 
+        ? { name: formData.username, password: formData.password }
+        : { username: formData.username, password: formData.password };
 
-      // const res = await axios.post(endpoint, payload);
-      const res = await axios.post(endpoint);
-
+      const res = await axios.post(endpoint, payload);
       if (res.data.accessToken) {
         localStorage.setItem("token", res.data.accessToken);
         localStorage.setItem("userRole", formData.roles);
@@ -214,6 +212,8 @@ function Login() {
     } catch (error) {
       setError("Login failed! Please check your credentials.");
       // error.response?.data?.message || 
+      console.log(error);
+      
     } finally {
       setLoading(false);
     }
