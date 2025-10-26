@@ -187,11 +187,12 @@ function Login() {
     try {
       // const endpoint = `https://hospitalbackend-1-eail.onrender.com/login/${formData.roles}s`;
       const endpoint = `https://hospitalbackend-1-eail.onrender.com`;
-      const payload = formData.roles === "patient" || formData.roles === "careGiver" 
-        ? { name: formData.username, password: formData.password }
-        : { username: formData.username, password: formData.password };
+      // const payload = formData.roles === "patient" || formData.roles === "careGiver" 
+      //   ? { name: formData.username, password: formData.password }
+      //   : { username: formData.username, password: formData.password };
 
-      const res = await axios.post(endpoint, payload);
+      // const res = await axios.post(endpoint, payload);
+      const res = await axios.post(endpoint);
 
       if (res.data.accessToken) {
         localStorage.setItem("token", res.data.accessToken);
