@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Modal, Button, Table, Form, Spinner, Alert, Badge, Card } from "react-bootstrap";
 import { FaEye, FaTrash, FaPlus, FaHeartbeat, FaTint, FaHeart } from "react-icons/fa";
+import {jwtDecode} from "jwt-decode"
 
 function VitalsSection() {
   const [vitals, setVitals] = useState([]);
@@ -12,7 +13,6 @@ function VitalsSection() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
   const [newVital, setNewVital] = useState({
     patientId: "",
     bloodPressure: "",
@@ -56,7 +56,13 @@ function VitalsSection() {
       return () => clearTimeout(timer);
     }
   }, [error, success]);
-
+//get current patient id
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  const decoded = jwtDecode(token);
+  const currentPatientId = decoded.userInfo?.patientId;
+  setNewVital({ ...newVital, patientId: currentPatientId });
+}, [])
   // Add new vital
   const handleAddVital = async (e) => {
     e.preventDefault();
@@ -504,12 +510,12 @@ function VitalsSection() {
               <Form.Group className="mb-3 col-md-6">
                 <Form.Label>Patient ID <span className="text-danger">*</span></Form.Label>
                 <Form.Control
-                  type="text"
-                  value={newVital.patientId}
-                  onChange={(e) => setNewVital({ ...newVital, patientId: e.target.value })}
-                  required
-                  placeholder="Enter patient ID"
-                />
+                    type="text"
+                    value={newVital.patientId}
+                    readOnly
+                    className="bg-light"
+                    placeholder="Patient ID (auto-filled)"
+                  />
               </Form.Group>
 
               <Form.Group className="mb-3 col-md-6">
