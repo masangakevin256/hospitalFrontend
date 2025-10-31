@@ -6,7 +6,7 @@ import {
   FaMapMarkerAlt, FaNotesMedical, FaStethoscope, FaKey, 
   FaAllergies, FaProcedures, FaWeight, FaRulerVertical,
   FaBirthdayCake, FaTransgender, FaEye, FaEyeSlash, FaLock,
-   FaHistory, FaUserMd, FaHandHoldingHeart
+  FaHistory, FaUserMd, FaHandHoldingHeart
 } from "react-icons/fa";
 
 function PatientProfileSection({ patientData, onUpdate }) {
@@ -68,11 +68,18 @@ function PatientProfileSection({ patientData, onUpdate }) {
 
       // Check if password is being changed
       if (passwordData.newPassword) {
+        if (!passwordData.currentPassword) {
+          setMessage({ type: "error", text: "Current password is required to set a new password" });
+          setSaving(false);
+          return;
+        }
+        
         if (passwordData.newPassword !== passwordData.confirmPassword) {
           setMessage({ type: "error", text: "New password and confirmation do not match" });
           setSaving(false);
           return;
         }
+        
         if (passwordData.newPassword.length < 6) {
           setMessage({ type: "error", text: "Password must be at least 6 characters long" });
           setSaving(false);
@@ -80,13 +87,16 @@ function PatientProfileSection({ patientData, onUpdate }) {
         }
       }
 
+      // Prepare payload according to backend expectations
       const payload = { 
-        ...formData,
-        ...(passwordData.newPassword && {
-          currentPassword: passwordData.currentPassword,
-          password: passwordData.newPassword
-        })
+        ...formData
       };
+
+      // Add password fields if changing password (matching backend structure)
+      if (passwordData.currentPassword && passwordData.newPassword) {
+        payload.currentPassword = passwordData.currentPassword;
+        payload.newPassword = passwordData.newPassword;
+      }
 
       // Remove unnecessary fields
       const { _id, patientId, createdAt, updatedAt, __v, ...updatePayload } = payload;
@@ -776,6 +786,9 @@ function PatientProfileSection({ patientData, onUpdate }) {
                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
                               </button>
                             </div>
+                            {editing && (
+                              <small className="text-muted">Required when setting a new password</small>
+                            )}
                           </div>
                         </div>
                       </div>
