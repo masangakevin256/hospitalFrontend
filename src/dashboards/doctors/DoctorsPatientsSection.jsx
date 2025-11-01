@@ -97,13 +97,14 @@ function DoctorPatientsSection() {
     try {
       const token = localStorage.getItem("token");
       
-      // Transform data for backend
+      // Transform data for backend - send strings, not objects
       const selectedDoctor = doctors.find(d => d._id === formData.assignedDoctor);
+      const selectedCaregiver = caregivers.find(c => c._id === formData.assignedCareGiver);
       
       const patientData = {
         ...formData,
-        assignedDoctor: selectedDoctor?.username || "",
-        assignedCareGiver: formData.assignedCareGiver, // Use the text input directly
+        assignedDoctor: selectedDoctor?.username || "", // Send username string
+        assignedCareGiver: selectedCaregiver?.name || "", // Send name string
         age: parseInt(formData.age) || 0
       };
 
@@ -129,11 +130,12 @@ function DoctorPatientsSection() {
       const token = localStorage.getItem("token");
       
       const selectedDoctor = doctors.find(d => d._id === formData.assignedDoctor);
+      const selectedCaregiver = caregivers.find(c => c._id === formData.assignedCareGiver);
       
       const patientData = {
         ...formData,
         assignedDoctor: selectedDoctor?.username || formData.assignedDoctor,
-        assignedCareGiver: formData.assignedCareGiver, // Use the text input directly
+        assignedCareGiver: selectedCaregiver?.name || formData.assignedCareGiver,
         age: parseInt(formData.age) || 0
       };
 
@@ -195,6 +197,11 @@ function DoctorPatientsSection() {
 
   const openEditModal = (patient) => {
     setSelectedPatient(patient);
+    
+    // Find the IDs based on the names
+    const doctor = doctors.find(d => d.username === patient.assignedDoctor?.name);
+    const caregiver = caregivers.find(c => c.name === patient.assignedCareGiver?.name);
+    
     setFormData({
       patientId: patient.patientId || "",
       name: patient.name || "",
@@ -206,8 +213,8 @@ function DoctorPatientsSection() {
       password: "",
       sickness: patient.sickness || "",
       regId: patient.regId || "",
-      assignedDoctor: patient.assignedDoctor?._id || patient.assignedDoctor || "",
-      assignedCareGiver: patient.assignedCareGiver.name || "",
+      assignedDoctor: doctor?._id || "",
+      assignedCareGiver: caregiver?._id || "",
       condition: patient.condition || "Stable",
       emergencyContact: patient.emergencyContact || "",
       bloodType: patient.bloodType || "",
@@ -566,10 +573,13 @@ function DoctorPatientsSection() {
                             ) : (
                               <div className="text-warning">No doctor assigned</div>
                             )}
-                            {patient.assignedCareGiver.name ? (
+                            {patient.assignedCareGiver?.name ? (
                               <div className="d-flex align-items-center">
                                 <FaHandsHelping className="me-2 text-info" size={12} />
                                 <span>{patient.assignedCareGiver.name}</span>
+                                {patient.assignedCareGiver.phoneNumber && (
+                                  <small className="text-muted ms-2">({patient.assignedCareGiver.phoneNumber})</small>
+                                )}
                               </div>
                             ) : (
                               <div className="text-warning">No caregiver</div>
@@ -866,14 +876,19 @@ function DoctorPatientsSection() {
 
                     <div className="col-md-6">
                       <label className="form-label fw-semibold">Assign Care Giver *</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter Care Giver name"
-                        value={formData.assignedCareGiver.name}
-                        onChange={(e) => setFormData({ ...formData, assignedCareGiver: e.target.value })}
+                      <select
+                        className="form-select"
+                        value={formData.assignedCareGiver}
+                        onChange={(e) => setFormData({...formData, assignedCareGiver: e.target.value})}
                         required
-                      />
+                      >
+                        <option value="">Select Care Giver</option>
+                        {caregivers.map(caregiver => (
+                          <option key={caregiver._id} value={caregiver._id}>
+                            {caregiver.name} - {caregiver.phoneNumber}
+                          </option>
+                        ))}
+                      </select>
                     </div>
 
                     {/* Account Security */}
@@ -1080,10 +1095,18 @@ function DoctorPatientsSection() {
                       <div className="col-md-6 mb-3">
                         <label className="form-label fw-semibold">Assigned Care Giver</label>
                         <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                          {selectedPatient.assignedCareGiver.name ? (
-                            <div className="d-flex align-items-center">
-                              <FaHandsHelping className="me-2 text-info" />
-                              <span>{selectedPatient.assignedCareGiver.name}</span>
+                          {selectedPatient.assignedCareGiver?.name ? (
+                            <div>
+                              <div className="d-flex align-items-center">
+                                <FaHandsHelping className="me-2 text-info" />
+                                <span>{selectedPatient.assignedCareGiver.name}</span>
+                              </div>
+                              {selectedPatient.assignedCareGiver.phoneNumber && (
+                                <div className="small text-muted mt-1">
+                                  <FaPhone className="me-1" size={10} />
+                                  {selectedPatient.assignedCareGiver.phoneNumber}
+                                </div>
+                              )}
                             </div>
                           ) : (
                             <span className="text-warning">Unassigned</span>
@@ -1374,13 +1397,18 @@ function DoctorPatientsSection() {
 
                     <div className="col-md-6">
                       <label className="form-label fw-semibold">Assign Care Giver</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={formData.assignedCareGiver.name}
+                      <select
+                        className="form-select"
+                        value={formData.assignedCareGiver}
                         onChange={(e) => setFormData({...formData, assignedCareGiver: e.target.value})}
-                        placeholder="Enter Care Giver name"
-                      />
+                      >
+                        <option value="">Select Care Giver</option>
+                        {caregivers.map(caregiver => (
+                          <option key={caregiver._id} value={caregiver._id}>
+                            {caregiver.name} - {caregiver.phoneNumber}
+                          </option>
+                        ))}
+                      </select>
                     </div>
 
                     {/* Password Update */}
