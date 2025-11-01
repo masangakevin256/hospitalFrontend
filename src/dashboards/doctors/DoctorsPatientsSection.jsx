@@ -103,7 +103,7 @@ function DoctorPatientsSection() {
       const patientData = {
         ...formData,
         assignedDoctor: selectedDoctor?.username || "",
-        assignedCareGiver: formData.assignedCareGiver, // Use the text input directly
+        assignedCareGiver: formData.assignedCareGiver.name, // Use the text input directly
         age: parseInt(formData.age) || 0
       };
 
@@ -133,7 +133,7 @@ function DoctorPatientsSection() {
       const patientData = {
         ...formData,
         assignedDoctor: selectedDoctor?.username || formData.assignedDoctor,
-        assignedCareGiver: formData.assignedCareGiver, // Use the text input directly
+        assignedCareGiver: formData.assignedCareGiver.name, // Use the text input directly
         age: parseInt(formData.age) || 0
       };
 
@@ -207,7 +207,7 @@ function DoctorPatientsSection() {
       sickness: patient.sickness || "",
       regId: patient.regId || "",
       assignedDoctor: patient.assignedDoctor?._id || patient.assignedDoctor || "",
-      assignedCareGiver: patient.assignedCareGiver || "",
+      assignedCareGiver: patient.assignedCareGiver.name || "",
       condition: patient.condition || "Stable",
       emergencyContact: patient.emergencyContact || "",
       bloodType: patient.bloodType || "",
@@ -630,6 +630,7 @@ function DoctorPatientsSection() {
                   }}
                 ></button>
               </div>
+              
               <form onSubmit={handleAddPatient}>
                 <div className="modal-body">
                   <div className="row g-4">
@@ -869,7 +870,7 @@ function DoctorPatientsSection() {
                         type="text"
                         className="form-control"
                         placeholder="Enter Care Giver name"
-                        value={formData.assignedCareGiver}
+                        value={formData.assignedCareGiver.name}
                         onChange={(e) => setFormData({ ...formData, assignedCareGiver: e.target.value })}
                         required
                       />
@@ -1079,10 +1080,10 @@ function DoctorPatientsSection() {
                       <div className="col-md-6 mb-3">
                         <label className="form-label fw-semibold">Assigned Care Giver</label>
                         <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                          {selectedPatient.assignedCareGiver ? (
+                          {selectedPatient.assignedCareGiver.name ? (
                             <div className="d-flex align-items-center">
                               <FaHandsHelping className="me-2 text-info" />
-                              <span>{selectedPatient.assignedCareGiver}</span>
+                              <span>{selectedPatient.assignedCareGiver.name}</span>
                             </div>
                           ) : (
                             <span className="text-warning">Unassigned</span>
@@ -1376,7 +1377,7 @@ function DoctorPatientsSection() {
                       <input
                         type="text"
                         className="form-control"
-                        value={formData.assignedCareGiver}
+                        value={formData.assignedCareGiver.name}
                         onChange={(e) => setFormData({...formData, assignedCareGiver: e.target.value})}
                         placeholder="Enter Care Giver name"
                       />
