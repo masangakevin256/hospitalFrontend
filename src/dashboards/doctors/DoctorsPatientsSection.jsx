@@ -1419,7 +1419,7 @@ function DoctorPatientsSection() {
                     </div>
 
                     {/* Password Update */}
-                    <div className="col-12 mt-4">
+                    {/* <div className="col-12 mt-4">
                       <h6 className="fw-semibold text-primary mb-3 d-flex align-items-center">
                         <FaLock className="me-2" />
                         Password Update
@@ -1446,7 +1446,7 @@ function DoctorPatientsSection() {
                         </button>
                       </div>
                       <small className="text-muted">Leave blank to keep current password</small>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className="modal-footer border-0">
