@@ -129,14 +129,14 @@ function DoctorPatientsSection() {
     try {
       const token = localStorage.getItem("token");
       
-      const selectedDoctor = doctors.find(d => d._id === formData.assignedDoctor);
-      const selectedCaregiver = caregivers.find(c => c._id === formData.assignedCareGiver);
+      // const selectedDoctor = doctors.find(d => d._id === formData.assignedDoctor);
+      // const selectedCaregiver = caregivers.find(c => c._id === formData.assignedCareGiver);
       
       const patientData = {
         ...formData,
-        assignedDoctor: selectedDoctor?.username || formData.assignedDoctor,
-        assignedCareGiver: selectedCaregiver?.name || formData.assignedCareGiver,
-        age: parseInt(formData.age) || 0
+        // assignedDoctor: selectedDoctor?.username || formData.assignedDoctor,
+        // assignedCareGiver: selectedCaregiver?.name || formData.assignedCareGiver,
+        // age: parseInt(formData.age) || 0
       };
 
       await axios.put(`https://hospitalbackend-1-eail.onrender.com/patients/${selectedPatient._id}`, patientData, {
@@ -1384,7 +1384,8 @@ function DoctorPatientsSection() {
                       <select
                         className="form-select"
                         value={formData.assignedDoctor}
-                        onChange={(e) => setFormData({...formData, assignedDoctor: e.target.value})}
+                        readonly
+                        // onChange={(e) => setFormData({...formData, assignedDoctor: e.target.value})}
                       >
                         <option value="">Select Doctor</option>
                         {doctors.map(doctor => (
@@ -1400,7 +1401,8 @@ function DoctorPatientsSection() {
                       <select
                         className="form-select"
                         value={formData.assignedCareGiver}
-                        onChange={(e) => setFormData({...formData, assignedCareGiver: e.target.value})}
+                        readonly
+                        // onChange={(e) => setFormData({...formData, assignedCareGiver: e.target.value})}
                       >
                         <option value="">Select Care Giver</option>
                         {caregivers.map(caregiver => (
