@@ -129,14 +129,21 @@ function DoctorPatientsSection() {
     try {
       const token = localStorage.getItem("token");
       
-      // const selectedDoctor = doctors.find(d => d._id === formData.assignedDoctor);
-      // const selectedCaregiver = caregivers.find(c => c._id === formData.assignedCareGiver);
+      // For editing, send as objects to maintain the object structure
+      const selectedDoctor = doctors.find(d => d._id === formData.assignedDoctor);
+      const selectedCaregiver = caregivers.find(c => c._id === formData.assignedCareGiver);
       
       const patientData = {
         ...formData,
-        // assignedDoctor: selectedDoctor?.username || formData.assignedDoctor,
-        // assignedCareGiver: selectedCaregiver?.name || formData.assignedCareGiver,
-        // age: parseInt(formData.age) || 0
+        assignedDoctor: {
+          name: selectedDoctor?.username || "",
+          phoneNumber: selectedDoctor?.phoneNumber || ""
+        },
+        assignedCareGiver: {
+          name: selectedCaregiver?.name || "",
+          phoneNumber: selectedCaregiver?.phoneNumber || ""
+        },
+        age: parseInt(formData.age) || 0
       };
 
       await axios.put(`https://hospitalbackend-1-eail.onrender.com/patients/${selectedPatient._id}`, patientData, {
@@ -568,7 +575,7 @@ function DoctorPatientsSection() {
                             {patient.assignedDoctor?.name ? (
                               <div className="d-flex align-items-center mb-1">
                                 <FaUserMd className="me-2 text-success" size={12} />
-                                <span>Dr. {patient.assignedDoctor.name || patient.assignedDoctor}</span>
+                                <span>Dr. {patient.assignedDoctor.name}</span>
                               </div>
                             ) : (
                               <div className="text-warning">No doctor assigned</div>
@@ -576,7 +583,7 @@ function DoctorPatientsSection() {
                             {patient.assignedCareGiver?.name ? (
                               <div className="d-flex align-items-center">
                                 <FaHandsHelping className="me-2 text-info" size={12} />
-                                <span>{patient.assignedCareGiver.name || patient.assignedCareGiver}</span>
+                                <span>{patient.assignedCareGiver.name}</span>
                                 {patient.assignedCareGiver.phoneNumber && (
                                   <small className="text-muted ms-2">({patient.assignedCareGiver.phoneNumber})</small>
                                 )}
@@ -1384,8 +1391,7 @@ function DoctorPatientsSection() {
                       <select
                         className="form-select"
                         value={formData.assignedDoctor}
-                        readonly
-                        // onChange={(e) => setFormData({...formData, assignedDoctor: e.target.value})}
+                        onChange={(e) => setFormData({...formData, assignedDoctor: e.target.value})}
                       >
                         <option value="">Select Doctor</option>
                         {doctors.map(doctor => (
@@ -1395,14 +1401,13 @@ function DoctorPatientsSection() {
                         ))}
                       </select>
                     </div>
- 
+
                     <div className="col-md-6">
                       <label className="form-label fw-semibold">Assign Care Giver</label>
                       <select
                         className="form-select"
                         value={formData.assignedCareGiver}
-                        readonly
-                        // onChange={(e) => setFormData({...formData, assignedCareGiver: e.target.value})}
+                        onChange={(e) => setFormData({...formData, assignedCareGiver: e.target.value})}
                       >
                         <option value="">Select Care Giver</option>
                         {caregivers.map(caregiver => (
@@ -1411,7 +1416,7 @@ function DoctorPatientsSection() {
                           </option>
                         ))}
                       </select>
-                    </div> 
+                    </div>
 
                     {/* Password Update */}
                     <div className="col-12 mt-4">
