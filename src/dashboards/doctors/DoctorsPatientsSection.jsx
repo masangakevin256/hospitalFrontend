@@ -103,7 +103,7 @@ function DoctorPatientsSection() {
       const patientData = {
         ...formData,
         assignedDoctor: selectedDoctor?.username || "",
-        assignedCareGiver: formData.assignedCareGiver.name, // Use the text input directly
+        assignedCareGiver: formData.assignedCareGiver, // Use the text input directly
         age: parseInt(formData.age) || 0
       };
 
@@ -133,7 +133,7 @@ function DoctorPatientsSection() {
       const patientData = {
         ...formData,
         assignedDoctor: selectedDoctor?.username || formData.assignedDoctor,
-        assignedCareGiver: formData.assignedCareGiver.name, // Use the text input directly
+        assignedCareGiver: formData.assignedCareGiver, // Use the text input directly
         age: parseInt(formData.age) || 0
       };
 
