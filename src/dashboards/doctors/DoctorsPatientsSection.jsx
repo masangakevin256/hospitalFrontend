@@ -99,12 +99,11 @@ function DoctorPatientsSection() {
       
       // Transform data for backend
       const selectedDoctor = doctors.find(d => d._id === formData.assignedDoctor);
-      const selectedCaregiver = caregivers.find(c => c._id === formData.assignedCareGiver);
       
       const patientData = {
         ...formData,
         assignedDoctor: selectedDoctor?.username || "",
-        assignedCareGiver: selectedCaregiver?.name || "",
+        assignedCareGiver: formData.assignedCareGiver, // Use the text input directly
         age: parseInt(formData.age) || 0
       };
 
@@ -130,12 +129,11 @@ function DoctorPatientsSection() {
       const token = localStorage.getItem("token");
       
       const selectedDoctor = doctors.find(d => d._id === formData.assignedDoctor);
-      const selectedCaregiver = caregivers.find(c => c._id === formData.assignedCareGiver);
       
       const patientData = {
         ...formData,
         assignedDoctor: selectedDoctor?.username || formData.assignedDoctor,
-        assignedCareGiver: selectedCaregiver?.name || formData.assignedCareGiver,
+        assignedCareGiver: formData.assignedCareGiver, // Use the text input directly
         age: parseInt(formData.age) || 0
       };
 
@@ -209,7 +207,7 @@ function DoctorPatientsSection() {
       sickness: patient.sickness || "",
       regId: patient.regId || "",
       assignedDoctor: patient.assignedDoctor?._id || patient.assignedDoctor || "",
-      assignedCareGiver: patient.assignedCareGiver?._id || patient.assignedCareGiver || "",
+      assignedCareGiver: patient.assignedCareGiver || "",
       condition: patient.condition || "Stable",
       emergencyContact: patient.emergencyContact || "",
       bloodType: patient.bloodType || "",
@@ -568,7 +566,7 @@ function DoctorPatientsSection() {
                             ) : (
                               <div className="text-warning">No doctor assigned</div>
                             )}
-                            {patient.assignedCareGiver?.name ? (
+                            {patient.assignedCareGiver.name ? (
                               <div className="d-flex align-items-center">
                                 <FaHandsHelping className="me-2 text-info" size={12} />
                                 <span>{patient.assignedCareGiver.name}</span>
@@ -865,17 +863,17 @@ function DoctorPatientsSection() {
                       </select>
                     </div>
 
-              <div className="col-md-6">
-                <label className="form-label fw-semibold">Assign Care Giver *</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter Care Giver name"
-                  value={formData.assignedCareGiver}
-                  onChange={(e) => setFormData({ ...formData, assignedCareGiver: e.target.value })}
-                  required
-                />
-              </div>
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold">Assign Care Giver *</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Care Giver name"
+                        value={formData.assignedCareGiver}
+                        onChange={(e) => setFormData({ ...formData, assignedCareGiver: e.target.value })}
+                        required
+                      />
+                    </div>
 
                     {/* Account Security */}
                     <div className="col-12 mt-4">
@@ -932,553 +930,486 @@ function DoctorPatientsSection() {
         </div>
       )}
 
-      {/* Similar modals for Edit, View, and Delete would follow the same modern design pattern */}
+      {/* View Patient Modal */}
+      {showViewModal && selectedPatient && (
+        <div className="modal fade show d-block" style={{backgroundColor: 'rgba(0,0,0,0.5)'}} tabIndex="-1">
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content border-0 shadow-lg">
+              <div className="modal-header bg-info text-white border-0">
+                <h5 className="modal-title fw-bold">
+                  <FaEye className="me-2" />
+                  Patient Details
+                </h5>
+                <button 
+                  type="button" 
+                  className="btn-close btn-close-white"
+                  onClick={() => setShowViewModal(false)}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="row g-4">
+                  {/* Personal Information */}
+                  <div className="col-md-6">
+                    <h6 className="fw-semibold text-primary mb-3">Personal Information</h6>
+                    <div className="mb-3">
+                      <label className="form-label fw-semibold">Patient ID</label>
+                      <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                        {selectedPatient.patientId}
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label fw-semibold">Full Name</label>
+                      <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                        {selectedPatient.name}
+                      </div>
+                    </div>
+                    <div className="row mb-3">
+                      <div className="col-6">
+                        <label className="form-label fw-semibold">Age</label>
+                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                          {selectedPatient.age || "N/A"}
+                        </div>
+                      </div>
+                      <div className="col-6">
+                        <label className="form-label fw-semibold">Gender</label>
+                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                          {selectedPatient.gender || "N/A"}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label fw-semibold">Blood Type</label>
+                      <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                        {selectedPatient.bloodType ? (
+                          <span className="badge bg-danger">{selectedPatient.bloodType}</span>
+                        ) : "Unknown"}
+                      </div>
+                    </div>
+                  </div>
 
-        {/* View Patient Modal */}
-        {showViewModal && selectedPatient && (
-          <div className="modal fade show d-block" style={{backgroundColor: 'rgba(0,0,0,0.5)'}} tabIndex="-1">
-            <div className="modal-dialog modal-lg">
-              <div className="modal-content border-0 shadow-lg">
-                <div className="modal-header bg-info text-white border-0">
-                  <h5 className="modal-title fw-bold">
-                    <FaEye className="me-2" />
-                    Patient Details
-                  </h5>
-                  <button 
-                    type="button" 
-                    className="btn-close btn-close-white"
-                    onClick={() => setShowViewModal(false)}
-                  ></button>
+                  {/* Contact Information */}
+                  <div className="col-md-6">
+                    <h6 className="fw-semibold text-primary mb-3">Contact Information</h6>
+                    <div className="mb-3">
+                      <label className="form-label fw-semibold">Email</label>
+                      <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                        {selectedPatient.email ? (
+                          <a href={`mailto:${selectedPatient.email}`} className="text-decoration-none">
+                            {selectedPatient.email}
+                          </a>
+                        ) : "N/A"}
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label fw-semibold">Phone Number</label>
+                      <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                        {selectedPatient.phoneNumber ? (
+                          <a href={`tel:${selectedPatient.phoneNumber}`} className="text-decoration-none">
+                            {selectedPatient.phoneNumber}
+                          </a>
+                        ) : "N/A"}
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label fw-semibold">Emergency Contact</label>
+                      <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                        {selectedPatient.emergencyContact || "N/A"}
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label fw-semibold">Address</label>
+                      <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                        {selectedPatient.address || "N/A"}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Medical Information */}
+                  <div className="col-12">
+                    <hr />
+                    <h6 className="fw-semibold text-primary mb-3">Medical Information</h6>
+                    <div className="row">
+                      <div className="col-md-6 mb-3">
+                        <label className="form-label fw-semibold">Sickness/Condition</label>
+                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                          {selectedPatient.sickness || "Not specified"}
+                        </div>
+                      </div>
+                      <div className="col-md-6 mb-3">
+                        <label className="form-label fw-semibold">Medical Condition</label>
+                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                          <span className={`badge bg-${getConditionBadge(selectedPatient.condition)}`}>
+                            {selectedPatient.condition || "N/A"}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="col-md-6 mb-3">
+                        <label className="form-label fw-semibold">Allergies</label>
+                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                          {selectedPatient.allergies || "None reported"}
+                        </div>
+                      </div>
+                      <div className="col-md-6 mb-3">
+                        <label className="form-label fw-semibold">Current Medications</label>
+                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                          {selectedPatient.currentMedications || "None"}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Care Team */}
+                  <div className="col-12">
+                    <hr />
+                    <h6 className="fw-semibold text-primary mb-3">Care Team</h6>
+                    <div className="row">
+                      <div className="col-md-6 mb-3">
+                        <label className="form-label fw-semibold">Assigned Doctor</label>
+                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                          {selectedPatient.assignedDoctor?.name ? (
+                            <div className="d-flex align-items-center">
+                              <FaUserMd className="me-2 text-success" />
+                              <span>Dr. {selectedPatient.assignedDoctor.name}</span>
+                            </div>
+                          ) : (
+                            <span className="text-warning">Unassigned</span>
+                          )}
+                        </div>
+                      </div>
+                      <div className="col-md-6 mb-3">
+                        <label className="form-label fw-semibold">Assigned Care Giver</label>
+                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                          {selectedPatient.assignedCareGiver ? (
+                            <div className="d-flex align-items-center">
+                              <FaHandsHelping className="me-2 text-info" />
+                              <span>{selectedPatient.assignedCareGiver}</span>
+                            </div>
+                          ) : (
+                            <span className="text-warning">Unassigned</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Additional Info */}
+                  <div className="col-12">
+                    <hr />
+                    <h6 className="fw-semibold text-primary mb-3">Additional Information</h6>
+                    <div className="row">
+                      <div className="col-md-6 mb-3">
+                        <label className="form-label fw-semibold">Registration ID</label>
+                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                          {selectedPatient.regId || "N/A"}
+                        </div>
+                      </div>
+                      <div className="col-md-6 mb-3">
+                        <label className="form-label fw-semibold">Registered By</label>
+                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
+                          {selectedPatient.registeredBy || "System"}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
+              <div className="modal-footer border-0">
+                <button 
+                  type="button" 
+                  className="btn btn-secondary"
+                  onClick={() => setShowViewModal(false)}
+                >
+                  Close
+                </button>
+                <button 
+                  type="button" 
+                  className="btn btn-warning"
+                  onClick={() => {
+                    setShowViewModal(false);
+                    openEditModal(selectedPatient);
+                  }}
+                >
+                  <FaEdit className="me-2" />
+                  Edit Patient
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Patient Modal */}
+      {showEditModal && selectedPatient && (
+        <div className="modal fade show d-block" style={{backgroundColor: 'rgba(0,0,0,0.5)'}} tabIndex="-1">
+          <div className="modal-dialog modal-xl">
+            <div className="modal-content border-0 shadow-lg">
+              <div className="modal-header bg-warning text-dark border-0">
+                <h5 className="modal-title fw-bold">
+                  <FaEdit className="me-2" />
+                  Edit Patient: {selectedPatient.name}
+                </h5>
+                <button 
+                  type="button" 
+                  className="btn-close"
+                  onClick={() => {
+                    setShowEditModal(false);
+                    resetForm();
+                  }}
+                ></button>
+              </div>
+              <form onSubmit={handleEditPatient}>
                 <div className="modal-body">
                   <div className="row g-4">
                     {/* Personal Information */}
+                    <div className="col-12">
+                      <h6 className="fw-semibold text-primary mb-3 d-flex align-items-center">
+                        <FaUserInjured className="me-2" />
+                        Personal Information
+                      </h6>
+                    </div>
+                    
                     <div className="col-md-6">
-                      <h6 className="fw-semibold text-primary mb-3">Personal Information</h6>
-                      <div className="mb-3">
-                        <label className="form-label fw-semibold">Patient ID</label>
-                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                          {selectedPatient.patientId}
-                        </div>
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label fw-semibold">Full Name</label>
-                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                          {selectedPatient.name}
-                        </div>
-                      </div>
-                      <div className="row mb-3">
-                        <div className="col-6">
-                          <label className="form-label fw-semibold">Age</label>
-                          <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                            {selectedPatient.age || "N/A"}
-                          </div>
-                        </div>
-                        <div className="col-6">
-                          <label className="form-label fw-semibold">Gender</label>
-                          <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                            {selectedPatient.gender || "N/A"}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label fw-semibold">Blood Type</label>
-                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                          {selectedPatient.bloodType ? (
-                            <span className="badge bg-danger">{selectedPatient.bloodType}</span>
-                          ) : "Unknown"}
-                        </div>
-                      </div>
+                      <label className="form-label fw-semibold">Patient ID *</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={formData.patientId}
+                        onChange={(e) => setFormData({...formData, patientId: e.target.value})}
+                        required
+                      />
+                    </div>
+                    
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold">Registration ID</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={formData.regId}
+                        onChange={(e) => setFormData({...formData, regId: e.target.value})}
+                      />
+                    </div>
+
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold">Full Name *</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        required
+                      />
+                    </div>
+
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold">Email *</label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        required
+                      />
+                    </div>
+
+                    <div className="col-md-4">
+                      <label className="form-label fw-semibold">Age</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        value={formData.age}
+                        onChange={(e) => setFormData({...formData, age: e.target.value})}
+                        min="0"
+                        max="120"
+                      />
+                    </div>
+
+                    <div className="col-md-4">
+                      <label className="form-label fw-semibold">Gender</label>
+                      <select
+                        className="form-select"
+                        value={formData.gender}
+                        onChange={(e) => setFormData({...formData, gender: e.target.value})}
+                      >
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+
+                    <div className="col-md-4">
+                      <label className="form-label fw-semibold">Blood Type</label>
+                      <select
+                        className="form-select"
+                        value={formData.bloodType}
+                        onChange={(e) => setFormData({...formData, bloodType: e.target.value})}
+                      >
+                        <option value="">Select Blood Type</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                      </select>
                     </div>
 
                     {/* Contact Information */}
+                    <div className="col-12 mt-4">
+                      <h6 className="fw-semibold text-primary mb-3 d-flex align-items-center">
+                        <FaPhone className="me-2" />
+                        Contact Information
+                      </h6>
+                    </div>
+
                     <div className="col-md-6">
-                      <h6 className="fw-semibold text-primary mb-3">Contact Information</h6>
-                      <div className="mb-3">
-                        <label className="form-label fw-semibold">Email</label>
-                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                          {selectedPatient.email ? (
-                            <a href={`mailto:${selectedPatient.email}`} className="text-decoration-none">
-                              {selectedPatient.email}
-                            </a>
-                          ) : "N/A"}
-                        </div>
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label fw-semibold">Phone Number</label>
-                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                          {selectedPatient.phoneNumber ? (
-                            <a href={`tel:${selectedPatient.phoneNumber}`} className="text-decoration-none">
-                              {selectedPatient.phoneNumber}
-                            </a>
-                          ) : "N/A"}
-                        </div>
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label fw-semibold">Emergency Contact</label>
-                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                          {selectedPatient.emergencyContact || "N/A"}
-                        </div>
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label fw-semibold">Address</label>
-                        <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                          {selectedPatient.address || "N/A"}
-                        </div>
-                      </div>
+                      <label className="form-label fw-semibold">Phone Number</label>
+                      <input
+                        type="tel"
+                        className="form-control"
+                        value={formData.phoneNumber}
+                        onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})}
+                      />
+                    </div>
+
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold">Emergency Contact</label>
+                      <input
+                        type="tel"
+                        className="form-control"
+                        value={formData.emergencyContact}
+                        onChange={(e) => setFormData({...formData, emergencyContact: e.target.value})}
+                      />
+                    </div>
+
+                    <div className="col-12">
+                      <label className="form-label fw-semibold">Address</label>
+                      <textarea
+                        className="form-control"
+                        rows="2"
+                        value={formData.address}
+                        onChange={(e) => setFormData({...formData, address: e.target.value})}
+                      />
                     </div>
 
                     {/* Medical Information */}
+                    <div className="col-12 mt-4">
+                      <h6 className="fw-semibold text-primary mb-3 d-flex align-items-center">
+                        <FaHeartbeat className="me-2" />
+                        Medical Information
+                      </h6>
+                    </div>
+
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold">Sickness/Condition</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={formData.sickness}
+                        onChange={(e) => setFormData({...formData, sickness: e.target.value})}
+                      />
+                    </div>
+
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold">Medical Condition</label>
+                      <select
+                        className="form-select"
+                        value={formData.condition}
+                        onChange={(e) => setFormData({...formData, condition: e.target.value})}
+                      >
+                        <option value="Stable">Stable</option>
+                        <option value="Critical">Critical</option>
+                        <option value="Improving">Improving</option>
+                        <option value="Observation">Observation</option>
+                        <option value="Post-Op">Post-Op</option>
+                      </select>
+                    </div>
+
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold">Allergies</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={formData.allergies}
+                        onChange={(e) => setFormData({...formData, allergies: e.target.value})}
+                      />
+                    </div>
+
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold">Current Medications</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={formData.currentMedications}
+                        onChange={(e) => setFormData({...formData, currentMedications: e.target.value})}
+                      />
+                    </div>
+
+                    {/* Care Team Assignment */}
+                    <div className="col-12 mt-4">
+                      <h6 className="fw-semibold text-primary mb-3 d-flex align-items-center">
+                        <FaUserMd className="me-2" />
+                        Care Team Assignment
+                      </h6>
+                    </div>
+
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold">Assign Doctor</label>
+                      <select
+                        className="form-select"
+                        value={formData.assignedDoctor}
+                        onChange={(e) => setFormData({...formData, assignedDoctor: e.target.value})}
+                      >
+                        <option value="">Select Doctor</option>
+                        {doctors.map(doctor => (
+                          <option key={doctor._id} value={doctor._id}>
+                            Dr. {doctor.username} - {doctor.specialty}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold">Assign Care Giver</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={formData.assignedCareGiver}
+                        onChange={(e) => setFormData({...formData, assignedCareGiver: e.target.value})}
+                        placeholder="Enter Care Giver name"
+                      />
+                    </div>
+
+                    {/* Password Update */}
+                    <div className="col-12 mt-4">
+                      <h6 className="fw-semibold text-primary mb-3 d-flex align-items-center">
+                        <FaLock className="me-2" />
+                        Password Update
+                      </h6>
+                    </div>
+
                     <div className="col-12">
-                      <hr />
-                      <h6 className="fw-semibold text-primary mb-3">Medical Information</h6>
-                      <div className="row">
-                        <div className="col-md-6 mb-3">
-                          <label className="form-label fw-semibold">Sickness/Condition</label>
-                          <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                            {selectedPatient.sickness || "Not specified"}
-                          </div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                          <label className="form-label fw-semibold">Medical Condition</label>
-                          <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                            <span className={`badge bg-${getConditionBadge(selectedPatient.condition)}`}>
-                              {selectedPatient.condition || "N/A"}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                          <label className="form-label fw-semibold">Allergies</label>
-                          <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                            {selectedPatient.allergies || "None reported"}
-                          </div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                          <label className="form-label fw-semibold">Current Medications</label>
-                          <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                            {selectedPatient.currentMedications || "None"}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Care Team */}
-                    <div className="col-12">
-                      <hr />
-                      <h6 className="fw-semibold text-primary mb-3">Care Team</h6>
-                      <div className="row">
-                        <div className="col-md-6 mb-3">
-                          <label className="form-label fw-semibold">Assigned Doctor</label>
-                          <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                            {selectedPatient.assignedDoctor?.name ? (
-                              <div className="d-flex align-items-center">
-                                <FaUserMd className="me-2 text-success" />
-                                <span>Dr. {selectedPatient.assignedDoctor.name}</span>
-                              </div>
-                            ) : (
-                              <span className="text-warning">Unassigned</span>
-                            )}
-                          </div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                          <label className="form-label fw-semibold">Assigned Care Giver</label>
-                          <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                            {selectedPatient.assignedCareGiver?.name ? (
-                              <div className="d-flex align-items-center">
-                                <FaHandsHelping className="me-2 text-info" />
-                                <span>{selectedPatient.assignedCareGiver.name}</span>
-                              </div>
-                            ) : (
-                              <span className="text-warning">Unassigned</span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Additional Info */}
-                    <div className="col-12">
-                      <hr />
-                      <h6 className="fw-semibold text-primary mb-3">Additional Information</h6>
-                      <div className="row">
-                        <div className="col-md-6 mb-3">
-                          <label className="form-label fw-semibold">Registration ID</label>
-                          <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                            {selectedPatient.regId || "N/A"}
-                          </div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                          <label className="form-label fw-semibold">Registered By</label>
-                          <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                            {selectedPatient.registeredBy || "System"}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="modal-footer border-0">
-                  <button 
-                    type="button" 
-                    className="btn btn-secondary"
-                    onClick={() => setShowViewModal(false)}
-                  >
-                    Close
-                  </button>
-                  <button 
-                    type="button" 
-                    className="btn btn-warning"
-                    onClick={() => {
-                      setShowViewModal(false);
-                      openEditModal(selectedPatient);
-                    }}
-                  >
-                    <FaEdit className="me-2" />
-                    Edit Patient
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Edit Patient Modal */}
-        {showEditModal && selectedPatient && (
-          <div className="modal fade show d-block" style={{backgroundColor: 'rgba(0,0,0,0.5)'}} tabIndex="-1">
-            <div className="modal-dialog modal-xl">
-              <div className="modal-content border-0 shadow-lg">
-                <div className="modal-header bg-warning text-dark border-0">
-                  <h5 className="modal-title fw-bold">
-                    <FaEdit className="me-2" />
-                    Edit Patient: {selectedPatient.name}
-                  </h5>
-                  <button 
-                    type="button" 
-                    className="btn-close"
-                    onClick={() => {
-                      setShowEditModal(false);
-                      resetForm();
-                    }}
-                  ></button>
-                </div>
-                <form onSubmit={handleEditPatient}>
-                  <div className="modal-body">
-                    <div className="row g-4">
-                      {/* Personal Information */}
-                      <div className="col-12">
-                        <h6 className="fw-semibold text-primary mb-3 d-flex align-items-center">
-                          <FaUserInjured className="me-2" />
-                          Personal Information
-                        </h6>
-                      </div>
-                      
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Patient ID *</label>
+                      <label className="form-label fw-semibold">New Password</label>
+                      <div className="input-group">
                         <input
-                          type="text"
+                          type={showPassword ? "text" : "password"}
                           className="form-control"
-                          value={formData.patientId}
-                          onChange={(e) => setFormData({...formData, patientId: e.target.value})}
-                          required
+                          value={formData.password}
+                          onChange={(e) => setFormData({...formData, password: e.target.value})}
+                          placeholder="Leave blank to keep current password"
+                          minLength="6"
                         />
-                      </div>
-                      
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Registration ID</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={formData.regId}
-                          onChange={(e) => setFormData({...formData, regId: e.target.value})}
-                        />
-                      </div>
-
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Full Name *</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={formData.name}
-                          onChange={(e) => setFormData({...formData, name: e.target.value})}
-                          required
-                        />
-                      </div>
-
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Email *</label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          value={formData.email}
-                          onChange={(e) => setFormData({...formData, email: e.target.value})}
-                          required
-                        />
-                      </div>
-
-                      <div className="col-md-4">
-                        <label className="form-label fw-semibold">Age</label>
-                        <input
-                          type="number"
-                          className="form-control"
-                          value={formData.age}
-                          onChange={(e) => setFormData({...formData, age: e.target.value})}
-                          min="0"
-                          max="120"
-                        />
-                      </div>
-
-                      <div className="col-md-4">
-                        <label className="form-label fw-semibold">Gender</label>
-                        <select
-                          className="form-select"
-                          value={formData.gender}
-                          onChange={(e) => setFormData({...formData, gender: e.target.value})}
+                        <button
+                          type="button"
+                          className="btn btn-outline-secondary"
+                          onClick={() => setShowPassword(!showPassword)}
                         >
-                          <option value="">Select Gender</option>
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                          <option value="Other">Other</option>
-                        </select>
+                          {showPassword ? <FaEye /> : <FaEye />}
+                        </button>
                       </div>
-
-                      <div className="col-md-4">
-                        <label className="form-label fw-semibold">Blood Type</label>
-                        <select
-                          className="form-select"
-                          value={formData.bloodType}
-                          onChange={(e) => setFormData({...formData, bloodType: e.target.value})}
-                        >
-                          <option value="">Select Blood Type</option>
-                          <option value="A+">A+</option>
-                          <option value="A-">A-</option>
-                          <option value="B+">B+</option>
-                          <option value="B-">B-</option>
-                          <option value="AB+">AB+</option>
-                          <option value="AB-">AB-</option>
-                          <option value="O+">O+</option>
-                          <option value="O-">O-</option>
-                        </select>
-                      </div>
-
-                      {/* Contact Information */}
-                      <div className="col-12 mt-4">
-                        <h6 className="fw-semibold text-primary mb-3 d-flex align-items-center">
-                          <FaPhone className="me-2" />
-                          Contact Information
-                        </h6>
-                      </div>
-
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Phone Number</label>
-                        <input
-                          type="tel"
-                          className="form-control"
-                          value={formData.phoneNumber}
-                          onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})}
-                        />
-                      </div>
-
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Emergency Contact</label>
-                        <input
-                          type="tel"
-                          className="form-control"
-                          value={formData.emergencyContact}
-                          onChange={(e) => setFormData({...formData, emergencyContact: e.target.value})}
-                        />
-                      </div>
-
-                      <div className="col-12">
-                        <label className="form-label fw-semibold">Address</label>
-                        <textarea
-                          className="form-control"
-                          rows="2"
-                          value={formData.address}
-                          onChange={(e) => setFormData({...formData, address: e.target.value})}
-                        />
-                      </div>
-
-                      {/* Medical Information */}
-                      <div className="col-12 mt-4">
-                        <h6 className="fw-semibold text-primary mb-3 d-flex align-items-center">
-                          <FaHeartbeat className="me-2" />
-                          Medical Information
-                        </h6>
-                      </div>
-
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Sickness/Condition</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={formData.sickness}
-                          onChange={(e) => setFormData({...formData, sickness: e.target.value})}
-                        />
-                      </div>
-
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Medical Condition</label>
-                        <select
-                          className="form-select"
-                          value={formData.condition}
-                          onChange={(e) => setFormData({...formData, condition: e.target.value})}
-                        >
-                          <option value="Stable">Stable</option>
-                          <option value="Critical">Critical</option>
-                          <option value="Improving">Improving</option>
-                          <option value="Observation">Observation</option>
-                          <option value="Post-Op">Post-Op</option>
-                        </select>
-                      </div>
-
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Allergies</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={formData.allergies}
-                          onChange={(e) => setFormData({...formData, allergies: e.target.value})}
-                        />
-                      </div>
-
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Current Medications</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={formData.currentMedications}
-                          onChange={(e) => setFormData({...formData, currentMedications: e.target.value})}
-                        />
-                      </div>
-
-                      {/* Care Team Assignment */}
-                      <div className="col-12 mt-4">
-                        <h6 className="fw-semibold text-primary mb-3 d-flex align-items-center">
-                          <FaUserMd className="me-2" />
-                          Care Team Assignment
-                        </h6>
-                      </div>
-
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Assign Doctor</label>
-                        <select
-                          className="form-select"
-                          value={formData.assignedDoctor}
-                          onChange={(e) => setFormData({...formData, assignedDoctor: e.target.value})}
-                        >
-                          <option value="">Select Doctor</option>
-                          {doctors.map(doctor => (
-                            <option key={doctor._id} value={doctor._id}>
-                              Dr. {doctor.username} - {doctor.specialty}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Assign Care Giver</label>
-                        <select
-                          className="form-select"
-                          value={formData.assignedCareGiver}
-                          onChange={(e) => setFormData({...formData, assignedCareGiver: e.target.value})}
-                        >
-                          <option value="">Select Care Giver</option>
-                          {caregivers.map(caregiver => (
-                            <option key={caregiver._id} value={caregiver._id}>
-                              {caregiver.name} - {caregiver.qualification}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-
-                      {/* Password Update */}
-                      <div className="col-12 mt-4">
-                        <h6 className="fw-semibold text-primary mb-3 d-flex align-items-center">
-                          <FaLock className="me-2" />
-                          Password Update
-                        </h6>
-                      </div>
-
-                      <div className="col-12">
-                        <label className="form-label fw-semibold">New Password</label>
-                        <div className="input-group">
-                          <input
-                            type={showPassword ? "text" : "password"}
-                            className="form-control"
-                            value={formData.password}
-                            onChange={(e) => setFormData({...formData, password: e.target.value})}
-                            placeholder="Leave blank to keep current password"
-                            minLength="6"
-                          />
-                          <button
-                            type="button"
-                            className="btn btn-outline-secondary"
-                            onClick={() => setShowPassword(!showPassword)}
-                          >
-                            {showPassword ? <FaEye /> : <FaEye />}
-                          </button>
-                        </div>
-                        <small className="text-muted">Leave blank to keep current password</small>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="modal-footer border-0">
-                    <button 
-                      type="button" 
-                      className="btn btn-outline-secondary px-4"
-                      onClick={() => {
-                        setShowEditModal(false);
-                        resetForm();
-                      }}
-                    >
-                      <FaTimes className="me-2" />
-                      Cancel
-                    </button>
-                    <button type="submit" className="btn btn-warning px-4">
-                      <FaEdit className="me-2" />
-                      Update Patient
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Delete Confirmation Modal */}
-        {showDeleteModal && selectedPatient && (
-          <div className="modal fade show d-block" style={{backgroundColor: 'rgba(0,0,0,0.5)'}} tabIndex="-1">
-            <div className="modal-dialog">
-              <div className="modal-content border-0 shadow-lg">
-                <div className="modal-header bg-danger text-white border-0">
-                  <h5 className="modal-title fw-bold">
-                    <FaTrash className="me-2" />
-                    Delete Patient
-                  </h5>
-                  <button 
-                    type="button" 
-                    className="btn-close btn-close-white"
-                    onClick={() => setShowDeleteModal(false)}
-                  ></button>
-                </div>
-                <div className="modal-body">
-                  <div className="text-center mb-4">
-                    <div className="avatar-lg bg-danger bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3">
-                      <FaExclamationTriangle className="text-danger" size={32} />
-                    </div>
-                    <h5 className="fw-bold text-danger">Confirm Deletion</h5>
-                    <p className="text-muted mb-0">
-                      Are you sure you want to delete patient <strong>"{selectedPatient.name}"</strong>? 
-                      This action cannot be undone and all associated data will be permanently removed.
-                    </p>
-                  </div>
-                  <div className="alert alert-warning">
-                    <div className="d-flex">
-                      <FaExclamationTriangle className="me-2 mt-1 flex-shrink-0" />
-                      <div>
-                        <strong>Warning:</strong> This will remove all patient records, 
-                        medical history, and associated data from the system.
-                      </div>
+                      <small className="text-muted">Leave blank to keep current password</small>
                     </div>
                   </div>
                 </div>
@@ -1486,23 +1417,83 @@ function DoctorPatientsSection() {
                   <button 
                     type="button" 
                     className="btn btn-outline-secondary px-4"
-                    onClick={() => setShowDeleteModal(false)}
+                    onClick={() => {
+                      setShowEditModal(false);
+                      resetForm();
+                    }}
                   >
+                    <FaTimes className="me-2" />
                     Cancel
                   </button>
-                  <button 
-                    type="button" 
-                    className="btn btn-danger px-4"
-                    onClick={handleDeletePatient}
-                  >
-                    <FaTrash className="me-2" />
-                    Delete Patient
+                  <button type="submit" className="btn btn-warning px-4">
+                    <FaEdit className="me-2" />
+                    Update Patient
                   </button>
                 </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && selectedPatient && (
+        <div className="modal fade show d-block" style={{backgroundColor: 'rgba(0,0,0,0.5)'}} tabIndex="-1">
+          <div className="modal-dialog">
+            <div className="modal-content border-0 shadow-lg">
+              <div className="modal-header bg-danger text-white border-0">
+                <h5 className="modal-title fw-bold">
+                  <FaTrash className="me-2" />
+                  Delete Patient
+                </h5>
+                <button 
+                  type="button" 
+                  className="btn-close btn-close-white"
+                  onClick={() => setShowDeleteModal(false)}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="text-center mb-4">
+                  <div className="avatar-lg bg-danger bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3">
+                    <FaExclamationTriangle className="text-danger" size={32} />
+                  </div>
+                  <h5 className="fw-bold text-danger">Confirm Deletion</h5>
+                  <p className="text-muted mb-0">
+                    Are you sure you want to delete patient <strong>"{selectedPatient.name}"</strong>? 
+                    This action cannot be undone and all associated data will be permanently removed.
+                  </p>
+                </div>
+                <div className="alert alert-warning">
+                  <div className="d-flex">
+                    <FaExclamationTriangle className="me-2 mt-1 flex-shrink-0" />
+                    <div>
+                      <strong>Warning:</strong> This will remove all patient records, 
+                      medical history, and associated data from the system.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer border-0">
+                <button 
+                  type="button" 
+                  className="btn btn-outline-secondary px-4"
+                  onClick={() => setShowDeleteModal(false)}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="button" 
+                  className="btn btn-danger px-4"
+                  onClick={handleDeletePatient}
+                >
+                  <FaTrash className="me-2" />
+                  Delete Patient
+                </button>
               </div>
             </div>
           </div>
-        )}
+        </div>
+      )}
 
     </div>
   );
