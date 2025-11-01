@@ -1379,7 +1379,7 @@ function DoctorPatientsSection() {
                       </h6>
                     </div>
 
-                    <div className="col-md-6">
+                    {/* <div className="col-md-6">
                       <label className="form-label fw-semibold">Assign Doctor</label>
                       <select
                         className="form-select"
@@ -1392,10 +1392,10 @@ function DoctorPatientsSection() {
                             Dr. {doctor.username} - {doctor.specialty}
                           </option>
                         ))}
-                      </select>
-                    </div>
+                      </select> */}
+                    {/* </div> */}
 
-                    <div className="col-md-6">
+                    {/* <div className="col-md-6">
                       <label className="form-label fw-semibold">Assign Care Giver</label>
                       <select
                         className="form-select"
@@ -1409,7 +1409,7 @@ function DoctorPatientsSection() {
                           </option>
                         ))}
                       </select>
-                    </div>
+                    </div> */}
 
                     {/* Password Update */}
                     <div className="col-12 mt-4">
