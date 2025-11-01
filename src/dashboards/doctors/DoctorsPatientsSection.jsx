@@ -568,7 +568,7 @@ function DoctorPatientsSection() {
                             {patient.assignedDoctor?.name ? (
                               <div className="d-flex align-items-center mb-1">
                                 <FaUserMd className="me-2 text-success" size={12} />
-                                <span>Dr. {patient.assignedDoctor.name}</span>
+                                <span>Dr. {patient.assignedDoctor.name || patient.assignedDoctor}</span>
                               </div>
                             ) : (
                               <div className="text-warning">No doctor assigned</div>
@@ -576,7 +576,7 @@ function DoctorPatientsSection() {
                             {patient.assignedCareGiver?.name ? (
                               <div className="d-flex align-items-center">
                                 <FaHandsHelping className="me-2 text-info" size={12} />
-                                <span>{patient.assignedCareGiver.name}</span>
+                                <span>{patient.assignedCareGiver.name || patient.assignedCareGiver}</span>
                                 {patient.assignedCareGiver.phoneNumber && (
                                   <small className="text-muted ms-2">({patient.assignedCareGiver.phoneNumber})</small>
                                 )}
