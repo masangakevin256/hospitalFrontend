@@ -296,7 +296,7 @@ function DoctorPatientsSection() {
   }
 
   return (
-    <div className="container-fluid py-4">
+    <div className="DoctorPatientsSection container-fluid py-4">
       {/* Notifications */}
       {error && (
         <div className="alert alert-danger alert-dismissible fade show d-flex align-items-center mb-4" role="alert">

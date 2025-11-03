@@ -1,0 +1,2670 @@
+/* dark-mode.css -
+/* dark-mode.css - Dark Mode Styles Only with !important */
+
+/* ===== DARK MODE VARIABLES ===== */
+.doctor-dashboard.dark-mode {
+  /* Dark Theme Colors */
+  --primary-color: #3b82f6 !important;
+  --secondary-color: #6b7280 !important;
+  --success-color: #10b981 !important;
+  --warning-color: #f59e0b !important;
+  --danger-color: #ef4444 !important;
+  --info-color: #06b6d4 !important;
+  
+  /* Dark Theme Backgrounds */
+  --bg-primary: #0f172a !important;
+  --bg-secondary: #1e293b !important;
+  --bg-tertiary: #334155 !important;
+  
+  /* Dark Theme Text */
+  --text-primary: #f8fafc !important;
+  --text-secondary: #cbd5e1 !important;
+  --text-muted: #94a3b8 !important;
+  
+  /* Borders */
+  --border-color: #475569 !important;
+  --border-radius: 8px !important;
+}
+
+/* ===== DARK MODE BASE STYLES ===== */
+.doctor-dashboard.dark-mode {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ===== LAYOUT COMPONENTS ===== */
+
+/* Mobile Header */
+.doctor-dashboard.dark-mode .mobile-header {
+  background: var(--bg-secondary) !important;
+  border-bottom-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .mobile-title {
+  color: var(--text-primary) !important;
+}
+
+/* Sidebar */
+.doctor-dashboard.dark-mode .doctor-sidebar {
+  background: var(--bg-secondary) !important;
+  border-right-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .sidebar-header {
+  background: var(--bg-tertiary) !important;
+  border-bottom-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .sidebar-brand {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .brand-text {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .sidebar-close {
+  color: var(--text-secondary) !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.doctor-dashboard.dark-mode .sidebar-close:hover {
+  background: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Profile Section */
+.doctor-dashboard.dark-mode .profile-section {
+  background: var(--bg-secondary) !important;
+  border-bottom-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .doctor-name {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .doctor-role {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .profile-stats {
+  border-top-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .stat-value {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .stat-label {
+  color: var(--text-secondary) !important;
+}
+
+/* Navigation */
+.doctor-dashboard.dark-mode .nav-link {
+  color: var(--text-secondary) !important;
+  background: transparent !important;
+  border: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.doctor-dashboard.dark-mode .nav-link:hover {
+  background: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .nav-link.active {
+  background: var(--primary-color) !important;
+  color: white !important;
+}
+
+.doctor-dashboard.dark-mode .nav-icon {
+  color: inherit !important;
+}
+
+.doctor-dashboard.dark-mode .nav-text {
+  color: inherit !important;
+}
+
+/* Sidebar Footer */
+.doctor-dashboard.dark-mode .sidebar-footer {
+  border-top-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .logout-link {
+  color: var(--danger-color) !important;
+}
+
+.doctor-dashboard.dark-mode .logout-link:hover {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: var(--danger-color) !important;
+}
+
+/* Main Content */
+.doctor-dashboard.dark-mode .main-content {
+  background: var(--bg-primary) !important;
+}
+
+/* Desktop Header */
+.doctor-dashboard.dark-mode .desktop-header {
+  background: var(--bg-secondary) !important;
+  border-bottom-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .page-title {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .page-subtitle {
+  color: var(--text-secondary) !important;
+}
+
+/* Header Actions */
+.doctor-dashboard.dark-mode .theme-toggle-btn {
+  background: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .theme-toggle-btn:hover {
+  background: var(--bg-secondary) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .notification-btn {
+  background: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .notification-btn:hover {
+  background: var(--bg-secondary) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .notification-badge {
+  background: var(--danger-color) !important;
+  color: white !important;
+}
+
+.doctor-dashboard.dark-mode .user-profile {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .user-greeting {
+  color: var(--text-secondary) !important;
+}
+
+/* Notifications Dropdown */
+.doctor-dashboard.dark-mode .notifications-dropdown {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .notifications-header {
+  border-bottom-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .notifications-header h6 {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .mark-all-read {
+  color: var(--primary-color) !important;
+  background: none !important;
+  border: none !important;
+}
+
+.doctor-dashboard.dark-mode .mark-all-read:hover {
+  color: var(--info-color) !important;
+}
+.doctor-dashboard.dark-mode .welcome-header{
+    background:  var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+}
+.doctor-dashboard.dark-mode .notification-item {
+  border-bottom-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .notification-item:hover {
+  background: var(--bg-tertiary) !important;
+}
+
+.doctor-dashboard.dark-mode .notification-item.unread {
+  background: rgba(59, 130, 246, 0.05) !important;
+}
+
+.doctor-dashboard.dark-mode .notification-message {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .notification-time {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .unread-indicator {
+  background: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .no-notifications {
+  color: var(--text-secondary) !important;
+}
+
+/* Content Area */
+.doctor-dashboard.dark-mode .content-area {
+  background: var(--bg-primary) !important;
+}
+
+/* Dashboard Overview */
+.doctor-dashboard.dark-mode .welcome-header h1 {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .welcome-header p {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .date-display .badge {
+  background: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* Stats Cards */
+.doctor-dashboard.dark-mode .stat-card {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .stat-number {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .stat-label {
+  color: var(--text-secondary) !important;
+}
+
+/* Quick Actions */
+.doctor-dashboard.dark-mode .quick-actions .card {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .quick-actions .card-header {
+  background: var(--bg-tertiary) !important;
+  border-bottom-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .quick-action-btn {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  transition: all 0.2s ease !important;
+}
+
+.doctor-dashboard.dark-mode .quick-action-btn:hover {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Recent Activities - Enhanced Hover Effects */
+.doctor-dashboard.dark-mode .recent-activities .card {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .recent-activities .card-header {
+  background: var(--bg-tertiary) !important;
+  border-bottom-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .activity-item {
+  border-bottom-color: var(--border-color) !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+  padding: 12px 16px !important;
+  margin: 4px 0 !important;
+  border-radius: 6px !important;
+}
+
+.doctor-dashboard.dark-mode .activity-item:hover {
+  background: white !important;
+  transform: translateX(8px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Activity dot colors on hover */
+.doctor-dashboard.dark-mode .activity-item:hover .activity-dot {
+  transform: scale(1.2) !important;
+  transition: transform 0.3s ease !important;
+}
+
+.doctor-dashboard.dark-mode .activity-item:hover .dot-patient {
+  background-color: var(--info-color) !important;
+}
+
+.doctor-dashboard.dark-mode .activity-item:hover .dot-alert {
+  background-color: var(--danger-color) !important;
+}
+
+.doctor-dashboard.dark-mode .activity-item:hover .dot-appointment {
+  background-color: var(--warning-color) !important;
+}
+
+.doctor-dashboard.dark-mode .activity-item:hover .dot-vitals {
+  background-color: var(--success-color) !important;
+}
+
+.doctor-dashboard.dark-mode .activity-item:hover p {
+  color: #1a1a1a !important;
+  font-weight: 600 !important;
+}
+
+.doctor-dashboard.dark-mode .activity-item:hover small {
+  color: #666 !important;
+}
+
+.doctor-dashboard.dark-mode .activity-item:hover .badge {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.doctor-dashboard.dark-mode .activity-item p {
+  color: var(--text-primary) !important;
+  transition: color 0.3s ease !important;
+}
+
+.doctor-dashboard.dark-mode .activity-item small {
+  color: var(--text-secondary) !important;
+  transition: color 0.3s ease !important;
+}
+
+/* Activity Dot Colors */
+.doctor-dashboard.dark-mode .activity-dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease !important;
+}
+
+.doctor-dashboard.dark-mode .dot-patient {
+  background-color: var(--info-color) !important;
+}
+
+.doctor-dashboard.dark-mode .dot-alert {
+  background-color: var(--danger-color) !important;
+}
+
+.doctor-dashboard.dark-mode .dot-appointment {
+  background-color: var(--warning-color) !important;
+}
+
+.doctor-dashboard.dark-mode .dot-vitals {
+  background-color: var(--success-color) !important;
+}
+
+/* Loading States */
+.doctor-dashboard.dark-mode .spinner-border.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+/* Welcome & Logout Overlay */
+.doctor-dashboard.dark-mode .welcome-overlay {
+  background: rgba(15, 23, 42, 0.95) !important;
+}
+
+.doctor-dashboard.dark-mode .welcome-card {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .welcome-title {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .welcome-subtitle {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .welcome-progress-container {
+  background: var(--bg-tertiary) !important;
+}
+
+.doctor-dashboard.dark-mode .welcome-progress-bar {
+  background: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .logout-progress {
+  background: var(--danger-color) !important;
+}
+
+/* Sidebar Overlay */
+.doctor-dashboard.dark-mode .sidebar-overlay {
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .doctor-dashboard.dark-mode .mobile-header {
+    display: block !important;
+  }
+  
+  .doctor-dashboard.dark-mode .doctor-sidebar {
+    background: var(--bg-secondary) !important;
+  }
+  
+  .doctor-dashboard.dark-mode .mobile-theme-toggle {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+  }
+  
+  .doctor-dashboard.dark-mode .mobile-notification-btn {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+  }
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+.doctor-dashboard.dark-mode ::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.doctor-dashboard.dark-mode ::-webkit-scrollbar-track {
+  background: var(--bg-tertiary) !important;
+}
+
+.doctor-dashboard.dark-mode ::-webkit-scrollbar-thumb {
+  background: var(--border-color) !important;
+  border-radius: 4px !important;
+}
+
+.doctor-dashboard.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary) !important;
+}
+
+/* ===== FOCUS STATES ===== */
+.doctor-dashboard.dark-mode button:focus,
+.doctor-dashboard.dark-mode .nav-link:focus {
+  outline: 2px solid var(--primary-color) !important;
+  outline-offset: 2px !important;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.doctor-dashboard.dark-mode .bg-light {
+  background-color: var(--bg-tertiary) !important;
+}
+
+.doctor-dashboard.dark-mode .text-dark {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .border-bottom {
+  border-bottom-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ===== TRANSITIONS ===== */
+.doctor-dashboard.dark-mode .nav-link,
+.doctor-dashboard.dark-mode .theme-toggle-btn,
+.doctor-dashboard.dark-mode .quick-action-btn,
+.doctor-dashboard.dark-mode .activity-item {
+  transition: all 0.2s ease-in-out !important;
+}
+/* Dark Mode Variables */
+.doctor-dashboard.dark-mode .DoctorPatientsSection,
+.doctor-dashboard.dark-mode .doctor-patients-section {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #3a3a3a;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-muted: #888888;
+  --border-color: #404040;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Main Container */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .container-fluid,
+.doctor-dashboard.dark-mode .doctor-patients-section .container-fluid {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Cards */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .card,
+.doctor-dashboard.dark-mode .doctor-patients-section .card {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .card-header,
+.doctor-dashboard.dark-mode .doctor-patients-section .card-header {
+  background-color: var(--bg-tertiary) !important;
+  border-bottom-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .card-body,
+.doctor-dashboard.dark-mode .doctor-patients-section .card-body {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Stats Cards */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .stat-card,
+.doctor-dashboard.dark-mode .doctor-patients-section .stat-card {
+  background-color: var(--bg-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .hover-shadow:hover,
+.doctor-dashboard.dark-mode .doctor-patients-section .hover-shadow:hover {
+  box-shadow: 0 0.5rem 1rem var(--shadow-color) !important;
+}
+
+/* Text Colors */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .text-dark,
+.doctor-dashboard.dark-mode .doctor-patients-section .text-dark {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .text-muted,
+.doctor-dashboard.dark-mode .doctor-patients-section .text-muted {
+  color: var(--text-muted) !important;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .text-secondary,
+.doctor-dashboard.dark-mode .doctor-patients-section .text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+/* Background Colors */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .bg-light,
+.doctor-dashboard.dark-mode .doctor-patients-section .bg-light {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .bg-white,
+.doctor-dashboard.dark-mode .doctor-patients-section .bg-white {
+  background-color: var(--bg-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .bg-opacity-10,
+.doctor-dashboard.dark-mode .doctor-patients-section .bg-opacity-10 {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Form Controls */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .form-control,
+.doctor-dashboard.dark-mode .doctor-patients-section .form-control {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .form-control:focus,
+.doctor-dashboard.dark-mode .doctor-patients-section .form-control:focus {
+  background-color: var(--bg-tertiary);
+  border-color: #0d6efd;
+  color: var(--text-primary);
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .form-select,
+.doctor-dashboard.dark-mode .doctor-patients-section .form-select {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .form-select:focus,
+.doctor-dashboard.dark-mode .doctor-patients-section .form-select:focus {
+  background-color: var(--bg-tertiary);
+  border-color: #0d6efd;
+  color: var(--text-primary);
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .input-group-text,
+.doctor-dashboard.dark-mode .doctor-patients-section .input-group-text {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+/* Tables */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .table,
+.doctor-dashboard.dark-mode .doctor-patients-section .table {
+  --bs-table-bg: var(--bg-secondary);
+  --bs-table-color: var(--text-primary);
+  --bs-table-border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .table-hover tbody tr:hover,
+.doctor-dashboard.dark-mode .doctor-patients-section .table-hover tbody tr:hover {
+  --bs-table-accent-bg: rgba(255, 255, 255, 0.075);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .table th,
+.doctor-dashboard.dark-mode .doctor-patients-section .table th {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .table td,
+.doctor-dashboard.dark-mode .doctor-patients-section .table td {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Buttons */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .btn-outline-primary,
+.doctor-dashboard.dark-mode .doctor-patients-section .btn-outline-primary {
+  color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .btn-outline-primary:hover,
+.doctor-dashboard.dark-mode .doctor-patients-section .btn-outline-primary:hover {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .btn-outline-secondary,
+.doctor-dashboard.dark-mode .doctor-patients-section .btn-outline-secondary {
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .btn-outline-secondary:hover,
+.doctor-dashboard.dark-mode .doctor-patients-section .btn-outline-secondary:hover {
+  background-color: var(--border-color);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Badges */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .badge,
+.doctor-dashboard.dark-mode .doctor-patients-section .badge {
+  color: white;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .badge.bg-light,
+.doctor-dashboard.dark-mode .doctor-patients-section .badge.bg-light {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary);
+}
+
+/* Modal Styling */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .modal-content,
+.doctor-dashboard.dark-mode .doctor-patients-section .modal-content {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .modal-header,
+.doctor-dashboard.dark-mode .doctor-patients-section .modal-header {
+  border-bottom-color: var(--border-color);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .modal-footer,
+.doctor-dashboard.dark-mode .doctor-patients-section .modal-footer {
+  border-top-color: var(--border-color);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .form-control-plaintext,
+.doctor-dashboard.dark-mode .doctor-patients-section .form-control-plaintext {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Alerts */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .alert,
+.doctor-dashboard.dark-mode .doctor-patients-section .alert {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .alert-danger,
+.doctor-dashboard.dark-mode .doctor-patients-section .alert-danger {
+  background-color: rgba(220, 53, 69, 0.2);
+  border-color: rgba(220, 53, 69, 0.3);
+  color: #f8d7da;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .alert-success,
+.doctor-dashboard.dark-mode .doctor-patients-section .alert-success {
+  background-color: rgba(25, 135, 84, 0.2);
+  border-color: rgba(25, 135, 84, 0.3);
+  color: #d1e7dd;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .alert-warning,
+.doctor-dashboard.dark-mode .doctor-patients-section .alert-warning {
+  background-color: rgba(255, 193, 7, 0.2);
+  border-color: rgba(255, 193, 7, 0.3);
+  color: #fff3cd;
+}
+
+/* Links */
+.doctor-dashboard.dark-mode .DoctorPatientsSection a,
+.doctor-dashboard.dark-mode .doctor-patients-section a {
+  color: #6ea8fe;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection a:hover,
+.doctor-dashboard.dark-mode .doctor-patients-section a:hover {
+  color: #8bb9fe;
+}
+
+/* Spinner */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .spinner-border,
+.doctor-dashboard.dark-mode .doctor-patients-section .spinner-border {
+  color: #6ea8fe;
+}
+
+/* Avatar and Icons */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .avatar-sm,
+.doctor-dashboard.dark-mode .doctor-patients-section .avatar-sm,
+.doctor-dashboard.dark-mode .DoctorPatientsSection .avatar-lg,
+.doctor-dashboard.dark-mode .doctor-patients-section .avatar-lg {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Border Utilities */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .border-bottom,
+.doctor-dashboard.dark-mode .doctor-patients-section .border-bottom {
+  border-bottom-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .border-top,
+.doctor-dashboard.dark-mode .doctor-patients-section .border-top {
+  border-top-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection .border,
+.doctor-dashboard.dark-mode .doctor-patients-section .border {
+  border-color: var(--border-color) !important;
+}
+
+/* HR Styling */
+.doctor-dashboard.dark-mode .DoctorPatientsSection hr,
+.doctor-dashboard.dark-mode .doctor-patients-section hr {
+  border-top-color: var(--border-color);
+  opacity: 1;
+}
+
+/* Shadow Utilities */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .shadow-sm,
+.doctor-dashboard.dark-mode .doctor-patients-section .shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem var(--shadow-color) !important;
+}
+
+/* Button Group */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .btn-group .btn,
+.doctor-dashboard.dark-mode .doctor-patients-section .btn-group .btn {
+  border-color: var(--border-color);
+}
+
+/* Placeholder Text */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .form-control::placeholder,
+.doctor-dashboard.dark-mode .doctor-patients-section .form-control::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+/* Text Selection */
+.doctor-dashboard.dark-mode .DoctorPatientsSection ::selection,
+.doctor-dashboard.dark-mode .doctor-patients-section ::selection {
+  background-color: rgba(13, 110, 253, 0.3);
+  color: var(--text-primary);
+}
+
+/* Scrollbar Styling (Webkit browsers) */
+.doctor-dashboard.dark-mode .DoctorPatientsSection ::-webkit-scrollbar,
+.doctor-dashboard.dark-mode .doctor-patients-section ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection ::-webkit-scrollbar-track,
+.doctor-dashboard.dark-mode .doctor-patients-section ::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection ::-webkit-scrollbar-thumb,
+.doctor-dashboard.dark-mode .doctor-patients-section ::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.doctor-dashboard.dark-mode .DoctorPatientsSection ::-webkit-scrollbar-thumb:hover,
+.doctor-dashboard.dark-mode .doctor-patients-section ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Loading State Enhancements */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .min-vh-50,
+.doctor-dashboard.dark-mode .doctor-patients-section .min-vh-50 {
+  background-color: var(--bg-primary);
+}
+
+/* Table Responsive Container */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .table-responsive,
+.doctor-dashboard.dark-mode .doctor-patients-section .table-responsive {
+  background-color: var(--bg-secondary);
+}
+
+/* Modal Backdrop Enhancement */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .modal-backdrop,
+.doctor-dashboard.dark-mode .doctor-patients-section .modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Focus States */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .btn:focus,
+.doctor-dashboard.dark-mode .doctor-patients-section .btn:focus,
+.doctor-dashboard.dark-mode .DoctorPatientsSection .form-control:focus,
+.doctor-dashboard.dark-mode .doctor-patients-section .form-control:focus,
+.doctor-dashboard.dark-mode .DoctorPatientsSection .form-select:focus,
+.doctor-dashboard.dark-mode .doctor-patients-section .form-select:focus {
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Disabled States */
+.doctor-dashboard.dark-mode .DoctorPatientsSection .form-control:disabled,
+.doctor-dashboard.dark-mode .doctor-patients-section .form-control:disabled,
+.doctor-dashboard.dark-mode .DoctorPatientsSection .form-select:disabled,
+.doctor-dashboard.dark-mode .doctor-patients-section .form-select:disabled {
+  background-color: var(--bg-tertiary);
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+Alerts Section Dark Mode */
+
+/* ===== ALERTS SECTION DARK MODE ===== */
+.doctor-dashboard.dark-mode .AlertsSection,
+.doctor-dashboard.dark-mode .alerts-section {
+  /* Alerts Section Variables */
+  --alert-critical: #ef4444;
+  --alert-high: #f59e0b;
+  --alert-medium: #06b6d4;
+  --alert-low: #6b7280;
+  --alert-bg-critical: rgba(239, 68, 68, 0.1);
+  --alert-bg-high: rgba(245, 158, 11, 0.1);
+  --alert-bg-medium: rgba(6, 182, 212, 0.1);
+  --alert-bg-low: rgba(107, 114, 128, 0.1);
+}
+
+/* Main Container */
+.doctor-dashboard.dark-mode .section-container {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Header Section */
+.doctor-dashboard.dark-mode .section-container h2 {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .btn-outline-primary {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.doctor-dashboard.dark-mode .section-container .btn-outline-primary:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Stats Cards */
+.doctor-dashboard.dark-mode .bg-gradient-primary {
+  background: linear-gradient(135deg, var(--primary-color), #1e40af) !important;
+}
+
+.doctor-dashboard.dark-mode .bg-gradient-danger {
+  background: linear-gradient(135deg, var(--alert-critical), #dc2626) !important;
+}
+
+.doctor-dashboard.dark-mode .bg-gradient-warning {
+  background: linear-gradient(135deg, var(--alert-high), #d97706) !important;
+}
+
+.doctor-dashboard.dark-mode .bg-gradient-info {
+  background: linear-gradient(135deg, var(--alert-medium), #0891b2) !important;
+}
+
+/* Search and Filter Section */
+.doctor-dashboard.dark-mode .section-container .card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.doctor-dashboard.dark-mode .section-container .card-header {
+  background: var(--bg-tertiary) !important;
+  border-bottom-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .section-container .form-control {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .section-container .form-control:focus {
+  background: var(--bg-tertiary);
+  border-color: var(--primary-color);
+  color: var(--text-primary);
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+}
+
+.doctor-dashboard.dark-mode .section-container .form-select {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .section-container .form-select:focus {
+  background: var(--bg-tertiary);
+  border-color: var(--primary-color);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .section-container .input-group-text {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+.doctor-dashboard.dark-mode .section-container .btn-outline-secondary {
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+.doctor-dashboard.dark-mode .section-container .btn-outline-secondary:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--primary-color);
+  color: var(--text-primary);
+}
+
+/* Alerts List */
+.doctor-dashboard.dark-mode .list-group-item {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.doctor-dashboard.dark-mode .list-group-item:hover {
+  background: var(--bg-tertiary);
+}
+
+.doctor-dashboard.dark-mode .list-group-item.bg-light {
+  background: rgba(59, 130, 246, 0.05) !important;
+}
+
+/* Alert Severity Colors */
+.doctor-dashboard.dark-mode .text-danger {
+  color: var(--alert-critical) !important;
+}
+
+.doctor-dashboard.dark-mode .text-warning {
+  color: var(--alert-high) !important;
+}
+
+.doctor-dashboard.dark-mode .text-info {
+  color: var(--alert-medium) !important;
+}
+
+.doctor-dashboard.dark-mode .text-secondary {
+  color: var(--alert-low) !important;
+}
+
+/* Alert Icons Background */
+.doctor-dashboard.dark-mode .avatar-sm.bg-danger {
+  background: var(--alert-critical) !important;
+}
+
+.doctor-dashboard.dark-mode .avatar-sm.bg-warning {
+  background: var(--alert-high) !important;
+}
+
+.doctor-dashboard.dark-mode .avatar-sm.bg-info {
+  background: var(--alert-medium) !important;
+}
+
+.doctor-dashboard.dark-mode .avatar-sm.bg-secondary {
+  background: var(--alert-low) !important;
+}
+
+/* Alert Badges */
+.doctor-dashboard.dark-mode .badge.bg-danger {
+  background: var(--alert-critical) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-warning {
+  background: var(--alert-high) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-info {
+  background: var(--alert-medium) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-secondary {
+  background: var(--alert-low) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-primary {
+  background: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-success {
+  background: var(--success-color) !important;
+}
+
+/* Action Buttons */
+.doctor-dashboard.dark-mode .btn-group .btn {
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-primary {
+  color: var(--primary-color);
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-primary:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-success {
+  color: var(--success-color);
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-success:hover {
+  background: var(--success-color);
+  color: white;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-info {
+  color: var(--info-color);
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-info:hover {
+  background: var(--info-color);
+  color: white;
+}
+
+/* Empty State */
+.doctor-dashboard.dark-mode .text-center .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .text-center .opacity-25 {
+  opacity: 0.4 !important;
+}
+
+/* Modal Styles */
+.doctor-dashboard.dark-mode .modal-content {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.doctor-dashboard.dark-mode .modal-header {
+  background: var(--primary-color);
+  border-bottom-color: var(--border-color);
+}
+
+.doctor-dashboard.dark-mode .modal-header .modal-title {
+  color: white;
+}
+
+.doctor-dashboard.dark-mode .modal-body .form-label {
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .modal-body .form-control-static {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--text-primary);
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.doctor-dashboard.dark-mode .modal-body .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-footer {
+  border-top-color: var(--border-color);
+  background: var(--bg-secondary);
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-secondary {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-secondary:hover {
+  background: var(--border-color);
+  border-color: var(--border-color);
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-success {
+  background: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-info {
+  background: var(--info-color);
+  border-color: var(--info-color);
+}
+
+/* Alert Type Icons */
+.doctor-dashboard.dark-mode .fa-user-injured {
+  color: var(--alert-critical);
+}
+
+.doctor-dashboard.dark-mode .fa-heartbeat {
+  color: var(--alert-high);
+}
+
+.doctor-dashboard.dark-mode .fa-stethoscope {
+  color: var(--alert-medium);
+}
+
+.doctor-dashboard.dark-mode .fa-clock {
+  color: var(--alert-low);
+}
+
+/* Status Indicators */
+.doctor-dashboard.dark-mode .list-group-item[style*="border-left"] {
+  border-left-width: 4px !important;
+}
+
+/* Critical Alert Border */
+.doctor-dashboard.dark-mode .list-group-item[style*="var(--bs-danger)"] {
+  border-left-color: var(--alert-critical) !important;
+}
+
+/* High Alert Border */
+.doctor-dashboard.dark-mode .list-group-item[style*="var(--bs-warning)"] {
+  border-left-color: var(--alert-high) !important;
+}
+
+/* Medium Alert Border */
+.doctor-dashboard.dark-mode .list-group-item[style*="var(--bs-info)"] {
+  border-left-color: var(--alert-medium) !important;
+}
+
+/* Low Alert Border */
+.doctor-dashboard.dark-mode .list-group-item[style*="var(--bs-secondary)"] {
+  border-left-color: var(--alert-low) !important;
+}
+
+/* Loading State */
+.doctor-dashboard.dark-mode .spinner-border.text-primary {
+  color: var(--primary-color) !important;
+}
+
+/* Error State */
+.doctor-dashboard.dark-mode .alert-danger {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: var(--alert-critical);
+  color: var(--text-primary);
+}
+
+.doctor-dashboard.dark-mode .alert-danger .fa-exclamation-triangle {
+  color: var(--alert-critical);
+}
+
+/* Hover Effects */
+.doctor-dashboard.dark-mode .list-group-item-action:hover {
+  background: var(--bg-tertiary);
+  transform: translateX(2px);
+  transition: all 0.2s ease;
+}
+
+/* Focus States */
+.doctor-dashboard.dark-mode .btn:focus,
+.doctor-dashboard.dark-mode .form-control:focus,
+.doctor-dashboard.dark-mode .form-select:focus {
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+  border-color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .doctor-dashboard.dark-mode .section-container .btn-group .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .doctor-dashboard.dark-mode .section-container .list-group-item {
+    padding: 0.75rem;
+  }
+}
+
+/* Scrollbar for Alert List */
+.doctor-dashboard.dark-mode .list-group-flush {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.doctor-dashboard.dark-mode .list-group-flush::-webkit-scrollbar {
+  width: 6px;
+}
+
+.doctor-dashboard.dark-mode .list-group-flush::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+}
+
+.doctor-dashboard.dark-mode .list-group-flush::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.doctor-dashboard.dark-mode .list-group-flush::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+/* dark-mode.css - Appointments Section Dark Mode */
+
+/* ===== APPOINTMENTS SECTION DARK MODE ===== */
+.doctor-dashboard.dark-mode .AppointmentsSection,
+.doctor-dashboard.dark-mode .appointments-section {
+  /* Appointments Section Variables */
+  --appointment-scheduled: #3b82f6 !important;
+  --appointment-confirmed: #10b981 !important;
+  --appointment-completed: #06b6d4 !important;
+  --appointment-cancelled: #ef4444 !important;
+  --appointment-no-show: #f59e0b !important;
+}
+
+/* Main Container */
+.doctor-dashboard.dark-mode .section-container {
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Header Section */
+.doctor-dashboard.dark-mode .section-container h2 {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .btn-primary:hover {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+/* Stats Cards */
+.doctor-dashboard.dark-mode .bg-gradient-primary {
+  background: linear-gradient(135deg, var(--primary-color), #1e40af) !important;
+}
+
+.doctor-dashboard.dark-mode .bg-gradient-success {
+  background: linear-gradient(135deg, var(--appointment-confirmed), #059669) !important;
+}
+
+.doctor-dashboard.dark-mode .bg-gradient-info {
+  background: linear-gradient(135deg, var(--appointment-completed), #0891b2) !important;
+}
+
+.doctor-dashboard.dark-mode .bg-gradient-warning {
+  background: linear-gradient(135deg, var(--appointment-no-show), #d97706) !important;
+}
+
+/* Search and Filter Section */
+.doctor-dashboard.dark-mode .section-container .card {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .card-header {
+  background: var(--bg-tertiary) !important;
+  border-bottom-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .form-control {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .form-control:focus {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .form-select {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .form-select:focus {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .input-group-text {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .btn-outline-secondary {
+  border-color: var(--border-color) !important;
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .btn-outline-secondary:hover {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Appointments Table */
+.doctor-dashboard.dark-mode .table {
+  --bs-table-bg: var(--bg-secondary) !important;
+  --bs-table-color: var(--text-primary) !important;
+  --bs-table-border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .table th {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .table td {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .table-hover tbody tr:hover {
+  --bs-table-accent-bg: rgba(255, 255, 255, 0.05) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Table Rows Hover Effect */
+.doctor-dashboard.dark-mode .table tbody tr {
+  transition: all 0.3s ease !important;
+}
+
+.doctor-dashboard.dark-mode .table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: translateX(4px) !important;
+}
+
+/* Avatar Background */
+.doctor-dashboard.dark-mode .avatar-sm.bg-primary {
+  background: rgba(59, 130, 246, 0.2) !important;
+}
+
+.doctor-dashboard.dark-mode .avatar-sm .fa-user-injured {
+  color: var(--primary-color) !important;
+}
+
+/* Status Badges */
+.doctor-dashboard.dark-mode .badge.bg-primary {
+  background: var(--appointment-scheduled) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-success {
+  background: var(--appointment-confirmed) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-info {
+  background: var(--appointment-completed) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-danger {
+  background: var(--appointment-cancelled) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-warning {
+  background: var(--appointment-no-show) !important;
+}
+
+/* Appointment Type Badges */
+.doctor-dashboard.dark-mode .badge.bg-primary[class*="bg-"] {
+  background: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-success[class*="bg-"] {
+  background: var(--success-color) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-info[class*="bg-"] {
+  background: var(--info-color) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-danger[class*="bg-"] {
+  background: var(--danger-color) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-warning[class*="bg-"] {
+  background: var(--warning-color) !important;
+}
+
+/* Action Buttons */
+.doctor-dashboard.dark-mode .btn-group .btn {
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-success {
+  color: var(--success-color) !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-success:hover {
+  background: var(--success-color) !important;
+  color: white !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-danger {
+  color: var(--danger-color) !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-danger:hover {
+  background: var(--danger-color) !important;
+  color: white !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-warning {
+  color: var(--warning-color) !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-warning:hover {
+  background: var(--warning-color) !important;
+  color: white !important;
+}
+
+/* Empty State */
+.doctor-dashboard.dark-mode .text-center .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .text-center .opacity-25 {
+  opacity: 0.4 !important;
+}
+
+/* Modal Styles */
+.doctor-dashboard.dark-mode .modal-content {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-header {
+  border-bottom-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-header.bg-primary {
+  background: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-header.bg-warning {
+  background: var(--warning-color) !important;
+  color: #000 !important;
+}
+
+.doctor-dashboard.dark-mode .modal-header.bg-danger {
+  background: var(--danger-color) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-body .form-label {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-body .form-control {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-body .form-control:focus {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-body .form-select {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-body .form-select:focus {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-body textarea.form-control {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-footer {
+  border-top-color: var(--border-color) !important;
+  background: var(--bg-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-secondary {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-secondary:hover {
+  background: var(--border-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-warning {
+  background: var(--warning-color) !important;
+  border-color: var(--warning-color) !important;
+  color: #000 !important;
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-danger {
+  background: var(--danger-color) !important;
+  border-color: var(--danger-color) !important;
+}
+
+/* Icons in Dark Mode */
+.doctor-dashboard.dark-mode .fa-calendar-alt.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .fa-clock.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+/* Loading State */
+.doctor-dashboard.dark-mode .spinner-border.text-primary {
+  color: var(--primary-color) !important;
+}
+
+/* Error State */
+.doctor-dashboard.dark-mode .alert-danger {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border-color: var(--danger-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .alert-danger .fa-exclamation-triangle {
+  color: var(--danger-color) !important;
+}
+
+/* Focus States */
+.doctor-dashboard.dark-mode .btn:focus,
+.doctor-dashboard.dark-mode .form-control:focus,
+.doctor-dashboard.dark-mode .form-select:focus {
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .doctor-dashboard.dark-mode .section-container .btn-group .btn {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  .doctor-dashboard.dark-mode .table-responsive {
+    border: 1px solid var(--border-color) !important;
+  }
+}
+
+/* Table Row Animation */
+.doctor-dashboard.dark-mode .table tbody tr {
+  transition: all 0.3s ease !important;
+}
+
+.doctor-dashboard.dark-mode .table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  transform: translateX(4px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Status Badge Icons */
+.doctor-dashboard.dark-mode .badge .fa-clock {
+  color: inherit !important;
+}
+
+.doctor-dashboard.dark-mode .badge .fa-check-circle {
+  color: inherit !important;
+}
+
+.doctor-dashboard.dark-mode .badge .fa-times-circle {
+  color: inherit !important;
+}
+
+.doctor-dashboard.dark-mode .badge .fa-exclamation-triangle {
+  color: inherit !important;
+}
+
+/* Placeholder Text */
+.doctor-dashboard.dark-mode .form-control::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 1 !important;
+}
+
+/* Modal Backdrop Enhancement */
+.doctor-dashboard.dark-mode .modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Scrollbar for Table */
+.doctor-dashboard.dark-mode .table-responsive::-webkit-scrollbar {
+  height: 8px !important;
+}
+
+.doctor-dashboard.dark-mode .table-responsive::-webkit-scrollbar-track {
+  background: var(--bg-tertiary) !important;
+}
+
+.doctor-dashboard.dark-mode .table-responsive::-webkit-scrollbar-thumb {
+  background: var(--border-color) !important;
+  border-radius: 4px !important;
+}
+
+.doctor-dashboard.dark-mode .table-responsive::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary) !important;
+}
+/* dark-mode.css - Doctor Profile Section Dark Mode */
+
+/* ===== DOCTOR PROFILE SECTION DARK MODE ===== */
+.doctor-dashboard.dark-mode .DoctorProfileSection,
+.doctor-dashboard.dark-mode .doctor-profile-section {
+  /* Profile Section Variables */
+  --profile-primary: #3b82f6 !important;
+  --profile-success: #10b981 !important;
+  --profile-warning: #f59e0b !important;
+  --profile-danger: #ef4444 !important;
+}
+
+/* Main Container */
+.doctor-dashboard.dark-mode .container-fluid {
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Header Section */
+.doctor-dashboard.dark-mode .container-fluid h2 {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .container-fluid .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .container-fluid .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .container-fluid .btn-primary:hover {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+.doctor-dashboard.dark-mode .container-fluid .btn-success {
+  background: var(--success-color) !important;
+  border-color: var(--success-color) !important;
+}
+
+.doctor-dashboard.dark-mode .container-fluid .btn-success:hover {
+  background: #059669 !important;
+  border-color: #059669 !important;
+}
+
+.doctor-dashboard.dark-mode .container-fluid .btn-secondary {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .container-fluid .btn-secondary:hover {
+  background: var(--border-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Cards */
+.doctor-dashboard.dark-mode .card {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .card-header {
+  background: var(--bg-tertiary) !important;
+  border-bottom-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .card-header.bg-primary {
+  background: var(--primary-color) !important;
+  color: white !important;
+}
+
+.doctor-dashboard.dark-mode .card-header.bg-light {
+  background: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Profile Overview Card */
+.doctor-dashboard.dark-mode .avatar.bg-white {
+  background: var(--bg-tertiary) !important;
+  color: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-success {
+  background: var(--success-color) !important;
+}
+
+.doctor-dashboard.dark-mode .profile-stats .text-primary {
+  color: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .profile-stats .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .profile-stats .border-end {
+  border-right-color: var(--border-color) !important;
+}
+
+/* Contact Information */
+.doctor-dashboard.dark-mode .fa-envelope.text-muted,
+.doctor-dashboard.dark-mode .fa-phone.text-muted,
+.doctor-dashboard.dark-mode .fa-id-card.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .text-primary {
+  color: var(--primary-color) !important;
+}
+
+/* Form Controls */
+.doctor-dashboard.dark-mode .form-control {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .form-control:focus {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25) !important;
+}
+
+.doctor-dashboard.dark-mode .form-select {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .form-select:focus {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode textarea.form-control {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+  resize: vertical !important;
+}
+
+/* Form Control Plaintext (Read-only state) */
+.doctor-dashboard.dark-mode .form-control-plaintext {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .form-control-plaintext.bg-light {
+  background: var(--bg-tertiary) !important;
+}
+
+/* Form Labels */
+.doctor-dashboard.dark-mode .form-label {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .form-label.fw-semibold {
+  font-weight: 600 !important;
+}
+
+/* Section Headers */
+.doctor-dashboard.dark-mode .fw-semibold.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .fa-user.text-primary,
+.doctor-dashboard.dark-mode .fa-stethoscope.text-primary,
+.doctor-dashboard.dark-mode .fa-lock.text-primary,
+.doctor-dashboard.dark-mode .fa-award.text-primary,
+.doctor-dashboard.dark-mode .fa-shield-alt.text-primary {
+  color: var(--primary-color) !important;
+}
+
+/* Password Section */
+.doctor-dashboard.dark-mode .input-group .btn-outline-secondary {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .input-group .btn-outline-secondary:hover {
+  background: var(--border-color) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Password Strength Indicator */
+.doctor-dashboard.dark-mode .progress {
+  background: var(--bg-tertiary) !important;
+}
+
+.doctor-dashboard.dark-mode .progress-bar.bg-danger {
+  background: var(--danger-color) !important;
+}
+
+.doctor-dashboard.dark-mode .progress-bar.bg-warning {
+  background: var(--warning-color) !important;
+}
+
+.doctor-dashboard.dark-mode .progress-bar.bg-info {
+  background: var(--info-color) !important;
+}
+
+.doctor-dashboard.dark-mode .progress-bar.bg-primary {
+  background: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .progress-bar.bg-success {
+  background: var(--success-color) !important;
+}
+
+/* Password Strength Text */
+.doctor-dashboard.dark-mode .text-danger {
+  color: var(--danger-color) !important;
+}
+
+.doctor-dashboard.dark-mode .text-warning {
+  color: var(--warning-color) !important;
+}
+
+.doctor-dashboard.dark-mode .text-info {
+  color: var(--info-color) !important;
+}
+
+.doctor-dashboard.dark-mode .text-success {
+  color: var(--success-color) !important;
+}
+
+/* Dividers */
+.doctor-dashboard.dark-mode hr {
+  border-top-color: var(--border-color) !important;
+  opacity: 1 !important;
+}
+
+/* Alert Messages */
+.doctor-dashboard.dark-mode .alert {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .alert-success {
+  background: rgba(16, 185, 129, 0.1) !important;
+  border-color: var(--success-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .alert-danger {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border-color: var(--danger-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .alert .btn-close {
+  filter: invert(1) !important;
+}
+
+/* Loading State */
+.doctor-dashboard.dark-mode .spinner-border.text-primary {
+  color: var(--primary-color) !important;
+}
+
+/* Badges */
+.doctor-dashboard.dark-mode .badge.bg-success {
+  background: var(--success-color) !important;
+}
+
+/* Account Information Section */
+.doctor-dashboard.dark-mode .badge.bg-success[class*="bg-"] {
+  background: var(--success-color) !important;
+}
+
+/* Icons in Profile Overview */
+.doctor-dashboard.dark-mode .fa-briefcase-medical.text-primary,
+.doctor-dashboard.dark-mode .fa-user-check.text-primary {
+  color: var(--primary-color) !important;
+}
+
+/* Placeholder Text */
+.doctor-dashboard.dark-mode .form-control::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 1 !important;
+}
+
+/* Focus States */
+.doctor-dashboard.dark-mode .btn:focus,
+.doctor-dashboard.dark-mode .form-control:focus,
+.doctor-dashboard.dark-mode .form-select:focus {
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* Disabled States */
+.doctor-dashboard.dark-mode .btn:disabled {
+  opacity: 0.6 !important;
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Button Group */
+.doctor-dashboard.dark-mode .btn-group .btn {
+  border-color: var(--border-color) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .doctor-dashboard.dark-mode .container-fluid .btn-group {
+    width: 100% !important;
+  }
+  
+  .doctor-dashboard.dark-mode .container-fluid .btn-group .btn {
+    flex: 1 !important;
+  }
+  
+  .doctor-dashboard.dark-mode .profile-stats .border-end {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding-bottom: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+}
+
+/* Password Input Group Focus */
+.doctor-dashboard.dark-mode .input-group:focus-within .form-control {
+  border-color: var(--primary-color) !important;
+  z-index: 3 !important;
+}
+
+.doctor-dashboard.dark-mode .input-group:focus-within .btn-outline-secondary {
+  border-color: var(--primary-color) !important;
+  z-index: 3 !important;
+}
+
+/* Text Area Styling */
+.doctor-dashboard.dark-mode textarea.form-control {
+  min-height: 100px !important;
+}
+
+.doctor-dashboard.dark-mode textarea.form-control[rows="4"] {
+  min-height: 120px !important;
+}
+
+/* Profile Stats Hover Effects */
+.doctor-dashboard.dark-mode .profile-stats .col-6 {
+  transition: transform 0.2s ease !important;
+}
+
+.doctor-dashboard.dark-mode .profile-stats .col-6:hover {
+  transform: translateY(-2px) !important;
+}
+
+/* Card Hover Effects */
+.doctor-dashboard.dark-mode .card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.doctor-dashboard.dark-mode .card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Form Section Transitions */
+.doctor-dashboard.dark-mode .form-control,
+.doctor-dashboard.dark-mode .form-select {
+  transition: all 0.2s ease !important;
+}
+
+/* Password Strength Animation */
+.doctor-dashboard.dark-mode .progress-bar {
+  transition: width 0.3s ease !important;
+}
+
+/* Alert Animation */
+.doctor-dashboard.dark-mode .alert {
+  transition: all 0.3s ease !important;
+}
+
+/* Button Transitions */
+.doctor-dashboard.dark-mode .btn {
+  transition: all 0.2s ease !important;
+}
+
+/* Scrollbar Styling */
+.doctor-dashboard.dark-mode .container-fluid::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.doctor-dashboard.dark-mode .container-fluid::-webkit-scrollbar-track {
+  background: var(--bg-tertiary) !important;
+}
+
+.doctor-dashboard.dark-mode .container-fluid::-webkit-scrollbar-thumb {
+  background: var(--border-color) !important;
+  border-radius: 4px !important;
+}
+
+.doctor-dashboard.dark-mode .container-fluid::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary) !important;
+}
+
+/* Selection Color */
+.doctor-dashboard.dark-mode .container-fluid ::selection {
+  background: rgba(59, 130, 246, 0.3) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Focus Outline for Accessibility */
+.doctor-dashboard.dark-mode .btn:focus-visible,
+.doctor-dashboard.dark-mode .form-control:focus-visible,
+.doctor-dashboard.dark-mode .form-select:focus-visible {
+  outline: 2px solid var(--primary-color) !important;
+  outline-offset: 2px !important;
+}
+/* dark-mode.css - Appointments Section Dark Mode */
+
+/* ===== APPOINTMENTS SECTION DARK MODE ===== */
+.doctor-dashboard.dark-mode .AppointmentsSection,
+.doctor-dashboard.dark-mode .appointments-section {
+  /* Appointments Section Variables */
+  --appointment-scheduled: #3b82f6 !important;
+  --appointment-confirmed: #10b981 !important;
+  --appointment-completed: #06b6d4 !important;
+  --appointment-cancelled: #ef4444 !important;
+  --appointment-no-show: #f59e0b !important;
+}
+
+/* Main Container */
+.doctor-dashboard.dark-mode .section-container {
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Header Section */
+.doctor-dashboard.dark-mode .section-container h2 {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .btn-primary:hover {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+/* Alert Notifications */
+.doctor-dashboard.dark-mode .alert-danger {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border-color: var(--appointment-cancelled) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .alert-danger .fa-exclamation-triangle {
+  color: var(--appointment-cancelled) !important;
+}
+
+/* Stats Cards */
+.doctor-dashboard.dark-mode .bg-gradient-primary {
+  background: linear-gradient(135deg, var(--primary-color), #1e40af) !important;
+}
+
+.doctor-dashboard.dark-mode .bg-gradient-success {
+  background: linear-gradient(135deg, var(--appointment-confirmed), #059669) !important;
+}
+
+.doctor-dashboard.dark-mode .bg-gradient-info {
+  background: linear-gradient(135deg, var(--appointment-completed), #0891b2) !important;
+}
+
+.doctor-dashboard.dark-mode .bg-gradient-warning {
+  background: linear-gradient(135deg, var(--appointment-no-show), #d97706) !important;
+}
+
+/* Search and Filter Section */
+.doctor-dashboard.dark-mode .section-container .card {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .card-header {
+  background: var(--bg-tertiary) !important;
+  border-bottom-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .form-control {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .form-control:focus {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .form-select {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .form-select:focus {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .input-group-text {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .btn-outline-secondary {
+  border-color: var(--border-color) !important;
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .section-container .btn-outline-secondary:hover {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Appointments Table */
+.doctor-dashboard.dark-mode .table {
+  --bs-table-bg: var(--bg-secondary) !important;
+  --bs-table-color: var(--text-primary) !important;
+  --bs-table-border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .table th {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .table td {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .table-hover tbody tr:hover {
+  --bs-table-accent-bg: rgba(255, 255, 255, 0.05) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Table Rows Hover Effect */
+.doctor-dashboard.dark-mode .table tbody tr {
+  transition: all 0.3s ease !important;
+}
+
+.doctor-dashboard.dark-mode .table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  transform: translateX(4px) !important;
+}
+
+/* Avatar Background */
+.doctor-dashboard.dark-mode .avatar-sm.bg-primary {
+  background: rgba(59, 130, 246, 0.2) !important;
+}
+
+.doctor-dashboard.dark-mode .avatar-sm .fa-user-injured {
+  color: var(--primary-color) !important;
+}
+
+/* Status Badges */
+.doctor-dashboard.dark-mode .badge.bg-primary {
+  background: var(--appointment-scheduled) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-success {
+  background: var(--appointment-confirmed) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-info {
+  background: var(--appointment-completed) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-danger {
+  background: var(--appointment-cancelled) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-warning {
+  background: var(--appointment-no-show) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-secondary {
+  background: var(--secondary-color) !important;
+}
+
+/* Appointment Type Badges */
+.doctor-dashboard.dark-mode .badge.bg-primary[class*="bg-"] {
+  background: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-success[class*="bg-"] {
+  background: var(--success-color) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-info[class*="bg-"] {
+  background: var(--info-color) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-danger[class*="bg-"] {
+  background: var(--danger-color) !important;
+}
+
+.doctor-dashboard.dark-mode .badge.bg-warning[class*="bg-"] {
+  background: var(--warning-color) !important;
+}
+
+/* Status Badge Icons */
+.doctor-dashboard.dark-mode .badge .fa-clock,
+.doctor-dashboard.dark-mode .badge .fa-check-circle,
+.doctor-dashboard.dark-mode .badge .fa-times-circle,
+.doctor-dashboard.dark-mode .badge .fa-exclamation-triangle {
+  color: inherit !important;
+}
+
+/* Action Buttons */
+.doctor-dashboard.dark-mode .btn-group .btn {
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-success {
+  color: var(--success-color) !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-success:hover {
+  background: var(--success-color) !important;
+  color: white !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-danger {
+  color: var(--danger-color) !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-danger:hover {
+  background: var(--danger-color) !important;
+  color: white !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-warning {
+  color: var(--warning-color) !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-warning:hover {
+  background: var(--warning-color) !important;
+  color: white !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-primary {
+  color: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .btn-group .btn-outline-primary:hover {
+  background: var(--primary-color) !important;
+  color: white !important;
+}
+
+/* Empty State */
+.doctor-dashboard.dark-mode .text-center .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .text-center .opacity-25 {
+  opacity: 0.4 !important;
+}
+
+/* Modal Styles */
+.doctor-dashboard.dark-mode .modal-content {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-header {
+  border-bottom-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-header.bg-primary {
+  background: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-header.bg-warning {
+  background: var(--warning-color) !important;
+  color: #000 !important;
+}
+
+.doctor-dashboard.dark-mode .modal-header.bg-danger {
+  background: var(--danger-color) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-body .form-label {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-body .form-control {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-body .form-control:focus {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-body .form-select {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-body .form-select:focus {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-body textarea.form-control {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-footer {
+  border-top-color: var(--border-color) !important;
+  background: var(--bg-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-secondary {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-secondary:hover {
+  background: var(--border-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-warning {
+  background: var(--warning-color) !important;
+  border-color: var(--warning-color) !important;
+  color: #000 !important;
+}
+
+.doctor-dashboard.dark-mode .modal-footer .btn-danger {
+  background: var(--danger-color) !important;
+  border-color: var(--danger-color) !important;
+}
+
+/* Icons in Dark Mode */
+.doctor-dashboard.dark-mode .fa-calendar-alt.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.doctor-dashboard.dark-mode .fa-clock.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.doctor-dashboard.dark-mode .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+/* Loading State */
+.doctor-dashboard.dark-mode .spinner-border.text-primary {
+  color: var(--primary-color) !important;
+}
+
+/* Focus States */
+.doctor-dashboard.dark-mode .btn:focus,
+.doctor-dashboard.dark-mode .form-control:focus,
+.doctor-dashboard.dark-mode .form-select:focus {
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* Placeholder Text */
+.doctor-dashboard.dark-mode .form-control::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 1 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .doctor-dashboard.dark-mode .section-container .btn-group .btn {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  .doctor-dashboard.dark-mode .table-responsive {
+    border: 1px solid var(--border-color) !important;
+  }
+}
+
+/* Badge Hover Effects */
+.doctor-dashboard.dark-mode .badge {
+  transition: all 0.3s ease !important;
+}
+
+.doctor-dashboard.dark-mode .badge:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Card Hover Effects */
+.doctor-dashboard.dark-mode .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.doctor-dashboard.dark-mode .card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Modal Backdrop Enhancement */
+.doctor-dashboard.dark-mode .modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Scrollbar for Table */
+.doctor-dashboard.dark-mode .table-responsive::-webkit-scrollbar {
+  height: 8px !important;
+}
+
+.doctor-dashboard.dark-mode .table-responsive::-webkit-scrollbar-track {
+  background: var(--bg-tertiary) !important;
+}
+
+.doctor-dashboard.dark-mode .table-responsive::-webkit-scrollbar-thumb {
+  background: var(--border-color) !important;
+  border-radius: 4px !important;
+}
+
+.doctor-dashboard.dark-mode .table-responsive::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary) !important;
+}
+
+/* Button Transitions */
+.doctor-dashboard.dark-mode .btn {
+  transition: all 0.2s ease !important;
+}
+
+/* Disabled States */
+.doctor-dashboard.dark-mode .btn:disabled {
+  opacity: 0.6 !important;
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Selection Color */
+.doctor-dashboard.dark-mode .section-container ::selection {
+  background: rgba(59, 130, 246, 0.3) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Focus Outline for Accessibility */
+.doctor-dashboard.dark-mode .btn:focus-visible,
+.doctor-dashboard.dark-mode .form-control:focus-visible,
+.doctor-dashboard.dark-mode .form-select:focus-visible {
+  outline: 2px solid var(--primary-color) !important;
+  outline-offset: 2px !important;
+}
+
+/* Stats Card Icons */
+.doctor-dashboard.dark-mode .bg-gradient-primary .fa-calendar-alt,
+.doctor-dashboard.dark-mode .bg-gradient-success .fa-clock,
+.doctor-dashboard.dark-mode .bg-gradient-info .fa-user-injured,
+.doctor-dashboard.dark-mode .bg-gradient-warning .fa-times-circle {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Table Text Colors */
+.doctor-dashboard.dark-mode .table .fw-semibold {
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode .table small.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+/* Modal Close Buttons */
+.doctor-dashboard.dark-mode .btn-close {
+  filter: invert(1) !important;
+}
+
+.doctor-dashboard.dark-mode .btn-close:hover {
+  filter: invert(1) brightness(0.8) !important;
+}
+
+/* Form Required Indicators */
+.doctor-dashboard.dark-mode .text-danger {
+  color: var(--danger-color) !important;
+}
+
+/* Date and Time Inputs */
+.doctor-dashboard.dark-mode input[type="date"],
+.doctor-dashboard.dark-mode input[type="time"] {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.doctor-dashboard.dark-mode input[type="date"]:focus,
+.doctor-dashboard.dark-mode input[type="time"]:focus {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-primary) !important;
+}

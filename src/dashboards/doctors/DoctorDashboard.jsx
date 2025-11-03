@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { 
   FaBell, FaBars, FaTimes, FaHome, FaUserInjured, 
   FaClipboardList, FaHeartbeat, FaExclamationTriangle, 
-  FaUserMd, FaSignOutAlt, FaUser, FaStethoscope,
+  FaUserMd, FaSignOutAlt, FaUser, FaStethoscope, FaMoon, FaSun,
   FaCalendarCheck, FaChartLine, FaUserCircle, FaProcedures
 } from "react-icons/fa";
 import profile from "../../assets/bg.jpg";
@@ -14,6 +14,7 @@ import VitalsSection from "./VitalSection";
 import AlertsSection from "./AlertSection";
 import ProfileSection from "./ProfilesSection";
 import "./doctor.css";
+import "./dark-mode.css"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -33,6 +34,25 @@ function DoctorDashboard() {
   });
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  
+  // Initialize dark mode from localStorage or system preference
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+  const saved = localStorage.getItem("doctorDashboardDarkMode");
+  if (saved !== null) {
+    return JSON.parse(saved);
+  }
+  return false; // Default to light mode instead of system preference
+});
+
+  // Apply dark mode class to document and save preference
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+    localStorage.setItem("doctorDashboardDarkMode", JSON.stringify(isDarkMode));
+  }, [isDarkMode]);
 
   // Show welcome animation on component mount
   useEffect(() => {
@@ -81,6 +101,11 @@ function DoctorDashboard() {
     }
   };
 
+  // Toggler for dark/light mode
+  const toggleDarkMode = () => {
+    setIsDarkMode(prev => !prev);
+  };
+
   const getToken = () => localStorage.getItem("token");
 
   const handleNavClick = (section) => {
@@ -126,6 +151,7 @@ function DoctorDashboard() {
       try {
         await axios.post("https://hospitalbackend-1-eail.onrender.com/logout/doctors");
         localStorage.removeItem("token");
+        localStorage.removeItem("doctorDashboardDarkMode"); // Clean up dark mode preference
         navigate("/");
       } catch (error) {
         console.error("Logout failed:", error);
@@ -168,19 +194,19 @@ function DoctorDashboard() {
   };
 
   const formatTime = (timestamp) => {
-  if (!timestamp) return "Unknown time"; // safety check
-  
-  const notificationTime = new Date(timestamp);
-  if (isNaN(notificationTime)) return "Invalid date"; // handles bad format
-  
-  const now = new Date();
-  const diffInMinutes = Math.floor((now - notificationTime) / (1000 * 60));
+    if (!timestamp) return "Unknown time";
+    
+    const notificationTime = new Date(timestamp);
+    if (isNaN(notificationTime)) return "Invalid date";
+    
+    const now = new Date();
+    const diffInMinutes = Math.floor((now - notificationTime) / (1000 * 60));
 
-  if (diffInMinutes < 1) return "Just now";
-  if (diffInMinutes < 60) return `${diffInMinutes} min ago`;
-  if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)} hours ago`;
-  return `${Math.floor(diffInMinutes / 1440)} days ago`;
-};
+    if (diffInMinutes < 1) return "Just now";
+    if (diffInMinutes < 60) return `${diffInMinutes} min ago`;
+    if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)} hours ago`;
+    return `${Math.floor(diffInMinutes / 1440)} days ago`;
+  };
 
   const renderSection = () => {
     switch (activeSection) {
@@ -197,7 +223,7 @@ function DoctorDashboard() {
             <div className="welcome-header mb-4">
               <div className="row align-items-center">
                 <div className="col-md-8">
-                  <h1 className="display-6 fw-bold text-dark mb-2">
+                  <h1 className="display-6 welcome-txt fw-bold text-dark mb-2">
                      Hi, Dr. {username}!
                   </h1>
                   <p className="text-muted mb-0">
@@ -220,7 +246,7 @@ function DoctorDashboard() {
             </div>
 
             {/* Stats Cards */}
-            <div className="row g-4 mb-5">
+            <div className="row start-cards g-4 mb-5">
               <div className="col-xl-3 col-md-6">
                 <div className="card stat-card border-0 shadow-sm bg-gradient-primary">
                   <div className="card-body">
@@ -284,7 +310,7 @@ function DoctorDashboard() {
             </div>
 
             {/* Quick Actions */}
-            <div className="row">
+            <div className="row quick-actions">
               <div className="col-12">
                 <div className="card border-0 shadow-sm">
                   <div className="card-header bg-transparent border-0 py-3">
@@ -339,7 +365,7 @@ function DoctorDashboard() {
             </div>
 
             {/* Recent Activity */}
-            <div className="row mt-4">
+            <div className="row recent-activities mt-4">
               <div className="col-12">
                 <div className="card border-0 shadow-sm">
                   <div className="card-header bg-transparent border-0 py-3">
@@ -372,7 +398,7 @@ function DoctorDashboard() {
   };
 
   return (
-    <div className="doctor-dashboard">
+    <div className={`doctor-dashboard ${isDarkMode ? 'dark-mode' : ''}`}>
       {/* Welcome Animation */}
       {showWelcome && (
         <div className="welcome-overlay">
@@ -420,6 +446,13 @@ function DoctorDashboard() {
           </div>
           <div className="notification-wrapper">
             <button 
+              className="theme-toggle-btn mobile-theme-toggle m-2"
+              onClick={toggleDarkMode}
+              title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              {isDarkMode ? <FaSun /> : <FaMoon />}
+            </button>
+            <button 
               className="notification-btn mobile-notification-btn"
               onClick={() => setNotificationsOpen(!notificationsOpen)}
             >
@@ -439,7 +472,7 @@ function DoctorDashboard() {
       )}
 
       {/* Sidebar */}
-      <div className={`doctor-sidebar  ${sidebarOpen ? 'sidebar-open' : ''}`}>
+      <div className={`doctor-sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
         <div className="sidebar-header">
           <div className="sidebar-brand">
             <FaStethoscope className="brand-icon" />
@@ -496,6 +529,20 @@ function DoctorDashboard() {
           
           <div className="sidebar-footer">
             <button
+              className="nav-link theme-toggle-sidebar"
+              onClick={toggleDarkMode}
+            >
+              <span className="nav-icon-wrapper">
+                <span className="nav-icon">
+                  {isDarkMode ? <FaSun /> : <FaMoon />}
+                </span>
+              </span>
+              <span className="nav-text">
+                {isDarkMode ? "Light Mode" : "Dark Mode"}
+              </span>
+            </button>
+            
+            <button
               className="nav-link logout-link"
               onClick={handleLogout}
             >
@@ -526,6 +573,17 @@ function DoctorDashboard() {
             </div>
             
             <div className="header-actions">
+              <button 
+                className="theme-toggle-btn"
+                onClick={toggleDarkMode}
+                title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              >
+                {isDarkMode ? <FaSun /> : <FaMoon />}
+                <span className="theme-toggle-text">
+                  {isDarkMode ? "Light Mode" : "Dark Mode"}
+                </span>
+              </button>
+              
               <div className="notification-wrapper">
                 <button 
                   className="notification-btn header-notification-btn"
