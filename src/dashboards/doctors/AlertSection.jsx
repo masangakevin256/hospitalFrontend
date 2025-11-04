@@ -380,7 +380,7 @@ function AlertsSection() {
                         <div className="d-flex justify-content-between align-items-center">
                           <small className="text-muted">
                             <FaClock className="me-1" size={12} />
-                            {new Date(alert.createdAt).toLocaleString()}
+                            {new Date(alert.timeStamp || alert.timestamp).toLocaleString()}
                           </small>
                           
                           <div className="btn-group" role="group">
@@ -513,7 +513,7 @@ function AlertsSection() {
                         Timestamp
                       </label>
                       <p className="form-control-static">
-                        {new Date(selectedAlert.createdAt).toLocaleString()}
+                        {new Date(selectedAlert.timestamp || selectedAlert.timeStamp).toLocaleString()}
                       </p>
                     </div>
                     {selectedAlert.details && (
