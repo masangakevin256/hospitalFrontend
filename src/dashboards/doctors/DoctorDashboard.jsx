@@ -381,7 +381,7 @@ function DoctorDashboard() {
                             <div className={`activity-dot dot-${notification.type} me-3`}></div>
                             <div className="flex-grow-1">
                               <p className="mb-1 small">{notification.message}</p>
-                              <small className="text-muted">{formatTime(notification.createdAt)}</small>
+                              <small className="text-muted">{formatTime(notification.timestamp || notification.timeStamp)}</small>
                             </div>
                             {!notification.read && <span className="badge bg-primary ms-2">New</span>}
                           </div>
@@ -618,7 +618,7 @@ function DoctorDashboard() {
                             </div>
                             <div className="notification-content">
                               <p className="notification-message">{notification.message}</p>
-                              <small className="notification-time">{formatTime(notification.createdAt)}</small>
+                              <small className="notification-time">{formatTime(notification.timestamp || notification.timeStamp)}</small>
                             </div>
                             {!notification.read && <div className="unread-indicator"></div>}
                           </div>
