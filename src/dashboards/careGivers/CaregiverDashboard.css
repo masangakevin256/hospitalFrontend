@@ -910,7 +910,7 @@ body {
 
 @media (max-width: 576px) {
   .caregiver-sidebar {
-    max-width: 100%;
+    width: 210px;
   }
 
   .notifications-dropdown {
