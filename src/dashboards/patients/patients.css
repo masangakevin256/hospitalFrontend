@@ -622,7 +622,9 @@ body {
   .logout-text {
     font-size: 2rem;
   }
-  
+  .patient-sidebar{
+    width: 210px;
+  }
   .welcome-icon,
   .logout-icon {
     font-size: 3rem;

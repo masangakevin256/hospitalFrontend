@@ -3,7 +3,8 @@ import { jwtDecode } from "jwt-decode";
 import { 
   FaBell, FaBars, FaTimes, FaHome, FaUserInjured, FaHandsHelping, 
   FaHandSparkles, FaExclamationTriangle, FaHeartbeat, FaSignOutAlt, 
-  FaUserCircle, FaCalendarCheck, FaPills, FaEnvelope, FaStethoscope
+  FaUserCircle, FaCalendarCheck, FaPills, FaEnvelope, FaStethoscope,
+  FaSun, FaMoon
 } from "react-icons/fa";
 import profile from "../../assets/bg.jpg";
 import PatientOverview from "./patientOverView";
@@ -14,6 +15,7 @@ import ProfileSection from "./profile";
 import VitalsSection from "./vitals";
 import AlertsSection from "./alerts";
 import "./patients.css";
+import "./dark-mode.css"; // Import dark mode styles
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -29,7 +31,17 @@ function PatientDashboard() {
   const [appointments, setAppointments] = useState([]);
   const [vitals, setVitals] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
+
+  // Initialize theme on component mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("patientDashboardTheme");
+    // Always start with light mode for first login
+    const initialTheme = savedTheme || "light";
+    setDarkMode(initialTheme === "dark");
+    document.documentElement.setAttribute("data-theme", initialTheme);
+  }, []);
 
   // Show welcome animation on component mount
   useEffect(() => {
@@ -45,135 +57,136 @@ function PatientDashboard() {
     fetchPatientData();
   }, []);
 
-        const fetchPatientData = async () => {
-        try {
-            setLoading(true);
-            const token = localStorage.getItem("token");
-            
-            if (!token) {
-            console.error("No token found");
-            navigate("/login");
-            return;
-            }
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    const theme = newDarkMode ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("patientDashboardTheme", theme);
+  };
 
-            // Decode token to get current patient info
-            const decoded = jwtDecode(token);
-            // console.log("Decoded token:", decoded);
-            
-            const currentPatientName = decoded.userInfo?.name || decoded.userInfo?.username;
+  const fetchPatientData = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("token");
+      
+      if (!token) {
+        console.error("No token found");
+        navigate("/login");
+        return;
+      }
 
-            if (!currentPatientName) {
-            console.error("No patient name found in token");
-            return;
-            }
+      // Decode token to get current patient info
+      const decoded = jwtDecode(token);
+      const currentPatientName = decoded.userInfo?.name || decoded.userInfo?.username;
 
-            // Fetch ALL patients and find the current one by name
-            const patientsRes = await axios.get("https://hospitalbackend-1-eail.onrender.com/patients", {
-            headers: { Authorization: `Bearer ${token}` },
-            });
+      if (!currentPatientName) {
+        console.error("No patient name found in token");
+        return;
+      }
 
-            // console.log("All patients from API:", patientsRes.data);
+      // Fetch ALL patients and find the current one by name
+      const patientsRes = await axios.get("https://hospitalbackend-1-eail.onrender.com/patients", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-            // Find current patient by name since we don't have ID in token
-            const currentPatient = patientsRes.data.find(patient => 
-            patient.name === currentPatientName || 
-            patient.username === currentPatientName
-            );
+      // Find current patient by name since we don't have ID in token
+      const currentPatient = patientsRes.data.find(patient => 
+        patient.name === currentPatientName || 
+        patient.username === currentPatientName
+      );
 
-            if (!currentPatient) {
-            console.error("Current patient not found. Available patients:", patientsRes.data.map(p => ({ id: p._id, name: p.name })));
-            return;
-            }
+      if (!currentPatient) {
+        console.error("Current patient not found. Available patients:", patientsRes.data.map(p => ({ id: p._id, name: p.name })));
+        return;
+      }
 
-            // console.log("Found current patient:", currentPatient);
-            setPatientData(currentPatient);
+      setPatientData(currentPatient);
 
-            // Use the found patient's ID for subsequent requests
-            const patientId = currentPatient._id || currentPatient.patientId;
+      // Use the found patient's ID for subsequent requests
+      const patientId = currentPatient._id || currentPatient.patientId;
 
-            // Fetch appointments
-            try {
-            const appointmentsRes = await axios.get("https://hospitalbackend-1-eail.onrender.com/appointments", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            
-            const patientAppointments = appointmentsRes.data.filter(
-                apt => apt.patientId === patientId || apt.patientName === currentPatientName
-            );
-            // console.log("Patient appointments:", patientAppointments);
-            setAppointments(patientAppointments);
-            } catch (appointmentError) {
-            console.error("Error fetching appointments:", appointmentError);
-            setAppointments([]);
-            }
+      // Fetch appointments
+      try {
+        const appointmentsRes = await axios.get("https://hospitalbackend-1-eail.onrender.com/appointments", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        
+        const patientAppointments = appointmentsRes.data.filter(
+          apt => apt.patientId === patientId || apt.patientName === currentPatientName
+        );
+        setAppointments(patientAppointments);
+      } catch (appointmentError) {
+        console.error("Error fetching appointments:", appointmentError);
+        setAppointments([]);
+      }
 
-            // Fetch vitals
-            try {
-            const vitalsRes = await axios.get("https://hospitalbackend-1-eail.onrender.com/vitals", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            
-            const patientVitals = vitalsRes.data.filter(
-                vital => vital.patientId === patientId || vital.patientName === currentPatientName
-            );
-            // console.log("Patient vitals:", patientVitals);
-            setVitals(patientVitals);
-            } catch (vitalsError) {
-            console.error("Error fetching vitals:", vitalsError);
-            setVitals([]);
-            }
+      // Fetch vitals
+      try {
+        const vitalsRes = await axios.get("https://hospitalbackend-1-eail.onrender.com/vitals", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        
+        const patientVitals = vitalsRes.data.filter(
+          vital => vital.patientId === patientId || vital.patientName === currentPatientName
+        );
+        setVitals(patientVitals);
+      } catch (vitalsError) {
+        console.error("Error fetching vitals:", vitalsError);
+        setVitals([]);
+      }
 
-            // Set notifications based on patient data
-            const patientNotifications = [
-            { 
-                id: 1, 
-                message: `Appointment with Dr. ${currentPatient.assignedDoctor?.name || 'your doctor'} tomorrow`, 
-                type: "appointment", 
-                time: "10 min ago", 
-                read: false 
-            },
-            { 
-                id: 2, 
-                message: "New vital signs recorded", 
-                type: "vitals", 
-                time: "30 min ago", 
-                read: false 
-            },
-            { 
-                id: 3, 
-                message: `Message from ${currentPatient.assignedCareGiver?.name || 'your caregiver'}`, 
-                type: "message", 
-                time: "1 hour ago", 
-                read: true 
-            },
-            { 
-                id: 4, 
-                message: "Prescription ready for review", 
-                type: "prescription", 
-                time: "2 hours ago", 
-                read: true 
-            },
-            { 
-                id: 5, 
-                message: "Health checkup reminder", 
-                type: "reminder", 
-                time: "3 hours ago", 
-                read: false 
-            },
-            ];
-            setNotifications(patientNotifications);
-            setUnreadCount(patientNotifications.filter(n => !n.read).length);
+      // Set notifications based on patient data
+      const patientNotifications = [
+        { 
+          id: 1, 
+          message: `Appointment with Dr. ${currentPatient.assignedDoctor?.name || 'your doctor'} tomorrow`, 
+          type: "appointment", 
+          time: "10 min ago", 
+          read: false 
+        },
+        { 
+          id: 2, 
+          message: "New vital signs recorded", 
+          type: "vitals", 
+          time: "30 min ago", 
+          read: false 
+        },
+        { 
+          id: 3, 
+          message: `Message from ${currentPatient.assignedCareGiver?.name || 'your caregiver'}`, 
+          type: "message", 
+          time: "1 hour ago", 
+          read: true 
+        },
+        { 
+          id: 4, 
+          message: "Prescription ready for review", 
+          type: "prescription", 
+          time: "2 hours ago", 
+          read: true 
+        },
+        { 
+          id: 5, 
+          message: "Health checkup reminder", 
+          type: "reminder", 
+          time: "3 hours ago", 
+          read: false 
+        },
+      ];
+      setNotifications(patientNotifications);
+      setUnreadCount(patientNotifications.filter(n => !n.read).length);
 
-        } catch (error) {
-            console.error("Error fetching patient data:", error);
-            if (error.response?.status === 401) {
-            localStorage.removeItem("token");
-            navigate("/login");
-            }
-        } finally {
-            setLoading(false);
-        }
-        };
+    } catch (error) {
+      console.error("Error fetching patient data:", error);
+      if (error.response?.status === 401) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getToken = () => localStorage.getItem("token");
 
@@ -200,10 +213,12 @@ function PatientDashboard() {
       try {
         await axios.post("https://hospitalbackend-1-eail.onrender.com/logout/patients");
         localStorage.removeItem("token");
+        localStorage.removeItem("patientDashboardTheme"); // Clear theme preference on logout
         navigate("/");
       } catch (error) {
         console.log("Logout failed:", error);
         localStorage.removeItem("token");
+        localStorage.removeItem("patientDashboardTheme");
         navigate("/");
       }
     }, 2000);
@@ -239,20 +254,22 @@ function PatientDashboard() {
             patientData={patientData} 
             appointments={appointments} 
             vitals={vitals} 
+            darkMode={darkMode}
           />
         );
-      case "appointments": return <AppointmentsSection appointments={appointments} patientData={patientData} />;
-      case "prescriptions": return <PrescriptionsSection patientData={patientData}  />;
-      case "vitals": return <VitalsSection vitals={vitals} patientData={patientData} />;
-      // case "messages": return <MessagesSection patientData={patientData} />;
-      case "alerts": return <AlertsSection patientData={patientData} />;
-      case "profile": return <ProfileSection patientData={patientData} onUpdate={fetchPatientData} />;
+      case "appointments": return <AppointmentsSection appointments={appointments} patientData={patientData} darkMode={darkMode} />;
+      case "prescriptions": return <PrescriptionsSection patientData={patientData} darkMode={darkMode} />;
+      case "vitals": return <VitalsSection vitals={vitals} patientData={patientData} darkMode={darkMode} />;
+      // case "messages": return <MessagesSection patientData={patientData} darkMode={darkMode} />;
+      case "alerts": return <AlertsSection patientData={patientData} darkMode={darkMode} />;
+      case "profile": return <ProfileSection patientData={patientData} onUpdate={fetchPatientData} darkMode={darkMode} />;
       default: 
         return (
           <PatientOverview 
             patientData={patientData} 
             appointments={appointments} 
             vitals={vitals} 
+            darkMode={darkMode}
           />
         );
     }
@@ -294,14 +311,23 @@ function PatientDashboard() {
           {sidebarOpen ? <FaTimes /> : <FaBars />}
         </button>
         <h2 className="mobile-title">Patient Dashboard</h2>
-        <div className="notification-wrapper">
+        <div className="header-actions">
           <button 
-            className="notification-btn"
-            onClick={() => setNotificationsOpen(!notificationsOpen)}
+            className="theme-toggle-btn"
+            onClick={toggleDarkMode}
+            title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
           >
-            <FaBell />
-            {unreadCount > 0 && <span className="notification-badge">{unreadCount}</span>}
+            {darkMode ? <FaSun /> : <FaMoon />}
           </button>
+          <div className="notification-wrapper">
+            <button 
+              className="notification-btn"
+              onClick={() => setNotificationsOpen(!notificationsOpen)}
+            >
+              <FaBell />
+              {unreadCount > 0 && <span className="notification-badge">{unreadCount}</span>}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -403,6 +429,13 @@ function PatientDashboard() {
             {navItems.find(item => item.key === activeSection)?.label || "Dashboard"}
           </h1>
           <div className="header-actions">
+            <button 
+              className="theme-toggle-btn"
+              onClick={toggleDarkMode}
+              title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {darkMode ? <FaSun /> : <FaMoon />}
+            </button>
             <div className="notification-wrapper">
               <button 
                 className="notification-btn"
