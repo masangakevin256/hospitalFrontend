@@ -5,7 +5,7 @@ import {
   FaClipboardList, FaHeartbeat, FaExclamationTriangle, 
   FaUserMd, FaSignOutAlt, FaUser, FaHandsHelping,
   FaCalendarCheck, FaChartLine, FaUserCircle, FaProcedures,
-  FaTasks, FaUsers
+  FaTasks, FaUsers, FaMoon, FaSun
 } from "react-icons/fa";
 import profile from "../../assets/bg.jpg";
 import AssignedPatientsSection from "./careGiverPatientSection";
@@ -14,6 +14,8 @@ import VitalsSection from "./VitalSection";
 import AlertsSection from "./AlertSection";
 import ProfileSection from "./ProfileSection";
 import "./CaregiverDashboard.css";
+import "../admins/dark-mode.css"
+import "./dark-mode.css"; // Import dark mode CSS
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -33,6 +35,37 @@ function CaregiverDashboard() {
   });
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  // Initialize dark mode from localStorage or system preference
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Apply dark mode class to document and save preference
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('caregiver-theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+      setIsDarkMode(true);
+      document.body.classList.add('dark-mode');
+    } else {
+      setIsDarkMode(false);
+      document.body.classList.remove('dark-mode');
+    }
+  }, []);
+
+  // Toggler for dark/light mode
+  const toggleDarkMode = () => {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+    
+    if (newDarkMode) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('caregiver-theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('caregiver-theme', 'light');
+    }
+  };
 
   // Show welcome animation on component mount
   useEffect(() => {
@@ -126,6 +159,7 @@ function CaregiverDashboard() {
       try {
         await axios.post("https://hospitalbackend-1-eail.onrender.com/logout/caregivers");
         localStorage.removeItem("token");
+        localStorage.removeItem("caregiver-theme"); // Clean up theme preference
         navigate("/");
       } catch (error) {
         console.error("Logout failed:", error);
@@ -136,12 +170,10 @@ function CaregiverDashboard() {
   // Decode JWT token
   const token = getToken();
   let username = "Caregiver";
-//   let caregiverId = "";
   if (token) {
     try {
       const decoded = jwtDecode(token);
       username = decoded.userInfo?.username || decoded.userInfo?.name || "Caregiver";
-    //   caregiverId = decoded.userInfo?.userId || decoded.userInfo?.id || "";
     } catch (error) {
       console.error("Token decode error:", error);
     }
@@ -149,7 +181,6 @@ function CaregiverDashboard() {
 
   const navItems = [
     { key: "dashboard", label: "Dashboard", icon: <FaHome />, color: "primary" },
-    // { key: "patients", label: "All Patients", icon: <FaUserInjured />, color: "info" },
     { key: "patients", label: "My Patients", icon: <FaUserMd />, color: "success" },
     { key: "tasks", label: "Care Tasks", icon: <FaTasks />, color: "warning" },
     { key: "vitals", label: "Vitals Monitor", icon: <FaHeartbeat />, color: "danger" },
@@ -290,7 +321,7 @@ function CaregiverDashboard() {
                       <div className="col-lg-3 col-md-6">
                         <button 
                           className="btn btn-outline-primary w-100 h-100 p-3 text-start quick-action-btn"
-                          onClick={() => handleNavClick("assignedPatients")}
+                          onClick={() => handleNavClick("patients")}
                         >
                           <FaUserMd className="mb-2" size={20} />
                           <h6 className="fw-bold">My Patients</h6>
@@ -367,7 +398,7 @@ function CaregiverDashboard() {
   };
 
   return (
-    <div className="caregiver-dashboard">
+    <div className={`caregiver-dashboard ${isDarkMode ? 'dark-mode' : ''}`}>
       {/* Welcome Animation */}
       {showWelcome && (
         <div className="welcome-overlay">
@@ -414,6 +445,13 @@ function CaregiverDashboard() {
             <h2 className="mobile-title">Caregiver Dashboard</h2>
           </div>
           <div className="notification-wrapper">
+            <button 
+              className="theme-toggle-btn mobile-theme-toggle m-2"
+              onClick={toggleDarkMode}
+              title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              {isDarkMode ? <FaSun /> : <FaMoon />}
+            </button>
             <button 
               className="notification-btn mobile-notification-btn"
               onClick={() => setNotificationsOpen(!notificationsOpen)}
@@ -491,6 +529,20 @@ function CaregiverDashboard() {
           
           <div className="sidebar-footer">
             <button
+              className="nav-link theme-toggle-sidebar"
+              onClick={toggleDarkMode}
+            >
+              <span className="nav-icon-wrapper">
+                <span className="nav-icon">
+                  {isDarkMode ? <FaSun /> : <FaMoon />}
+                </span>
+              </span>
+              <span className="nav-text">
+                {isDarkMode ? "Light Mode" : "Dark Mode"}
+              </span>
+            </button>
+            
+            <button
               className="nav-link logout-link"
               onClick={handleLogout}
             >
@@ -521,6 +573,17 @@ function CaregiverDashboard() {
             </div>
             
             <div className="header-actions">
+              <button 
+                className="theme-toggle-btn"
+                onClick={toggleDarkMode}
+                title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              >
+                {isDarkMode ? <FaSun /> : <FaMoon />}
+                <span className="theme-toggle-text">
+                  {isDarkMode }
+                </span>
+              </button>
+              
               <div className="notification-wrapper">
                 <button 
                   className="notification-btn header-notification-btn"

@@ -36,23 +36,35 @@ function DoctorDashboard() {
   const navigate = useNavigate();
   
   // Initialize dark mode from localStorage or system preference
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-  const saved = localStorage.getItem("doctorDashboardDarkMode");
-  if (saved !== null) {
-    return JSON.parse(saved);
-  }
-  return false; // Default to light mode instead of system preference
-});
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Apply dark mode class to document and save preference
   useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.setAttribute("data-theme", "dark");
+    const savedTheme = localStorage.getItem('doctor-theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+      setIsDarkMode(true);
+      document.body.classList.add('dark-mode');
     } else {
-      document.documentElement.removeAttribute("data-theme");
+      setIsDarkMode(false);
+      document.body.classList.remove('dark-mode');
     }
-    localStorage.setItem("doctorDashboardDarkMode", JSON.stringify(isDarkMode));
-  }, [isDarkMode]);
+  }, []);
+
+  // Toggler for dark/light mode
+  const toggleDarkMode = () => {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+    
+    if (newDarkMode) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('doctor-theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('doctor-theme', 'light');
+    }
+  };
 
   // Show welcome animation on component mount
   useEffect(() => {
@@ -101,11 +113,6 @@ function DoctorDashboard() {
     }
   };
 
-  // Toggler for dark/light mode
-  const toggleDarkMode = () => {
-    setIsDarkMode(prev => !prev);
-  };
-
   const getToken = () => localStorage.getItem("token");
 
   const handleNavClick = (section) => {
@@ -151,7 +158,7 @@ function DoctorDashboard() {
       try {
         await axios.post("https://hospitalbackend-1-eail.onrender.com/logout/doctors");
         localStorage.removeItem("token");
-        localStorage.removeItem("doctorDashboardDarkMode"); // Clean up dark mode preference
+        localStorage.removeItem("doctor-theme"); // Clean up theme preference
         navigate("/");
       } catch (error) {
         console.error("Logout failed:", error);
@@ -580,7 +587,7 @@ function DoctorDashboard() {
               >
                 {isDarkMode ? <FaSun /> : <FaMoon />}
                 <span className="theme-toggle-text">
-                  {isDarkMode}
+                  {isDarkMode ? "Light Mode" : "Dark Mode"}
                 </span>
               </button>
               

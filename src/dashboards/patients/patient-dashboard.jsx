@@ -34,14 +34,33 @@ function PatientDashboard() {
   const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
 
-  // Initialize theme on component mount
+  // Initialize theme from localStorage or system preference
   useEffect(() => {
-    const savedTheme = localStorage.getItem("patientDashboardTheme");
-    // Always start with light mode for first login
-    const initialTheme = savedTheme || "light";
-    setDarkMode(initialTheme === "dark");
-    document.documentElement.setAttribute("data-theme", initialTheme);
+    const savedTheme = localStorage.getItem('patient-theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+      setDarkMode(true);
+      document.body.classList.add('dark-mode');
+    } else {
+      setDarkMode(false);
+      document.body.classList.remove('dark-mode');
+    }
   }, []);
+
+  // Toggle dark mode function
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    
+    if (newDarkMode) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('patient-theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('patient-theme', 'light');
+    }
+  };
 
   // Show welcome animation on component mount
   useEffect(() => {
@@ -56,14 +75,6 @@ function PatientDashboard() {
   useEffect(() => {
     fetchPatientData();
   }, []);
-
-  const toggleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode);
-    const theme = newDarkMode ? "dark" : "light";
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("patientDashboardTheme", theme);
-  };
 
   const fetchPatientData = async () => {
     try {
@@ -213,12 +224,12 @@ function PatientDashboard() {
       try {
         await axios.post("https://hospitalbackend-1-eail.onrender.com/logout/patients");
         localStorage.removeItem("token");
-        localStorage.removeItem("patientDashboardTheme"); // Clear theme preference on logout
+        localStorage.removeItem("patient-theme"); // Clear theme preference on logout
         navigate("/");
       } catch (error) {
         console.log("Logout failed:", error);
         localStorage.removeItem("token");
-        localStorage.removeItem("patientDashboardTheme");
+        localStorage.removeItem("patient-theme");
         navigate("/");
       }
     }, 2000);
@@ -276,7 +287,7 @@ function PatientDashboard() {
   };
 
   return (
-    <div className="patient-dashboard">
+    <div className={`patient-dashboard ${darkMode ? 'dark-mode' : ''}`}>
       {/* Welcome Animation */}
       {showWelcome && (
         <div className="welcome-animation">
