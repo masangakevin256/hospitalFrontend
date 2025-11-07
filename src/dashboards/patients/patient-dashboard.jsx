@@ -47,6 +47,19 @@ function PatientDashboard() {
       document.body.classList.remove('dark-mode');
     }
   }, []);
+  // Show welcome animation on component mount
+  useEffect(() => {
+    setShowWelcome(true);
+    const timer = setTimeout(() => {
+      setShowWelcome(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Fetch patient data
+  useEffect(() => {
+    fetchPatientData();
+  }, []);
 
   // Toggle dark mode function
   const toggleDarkMode = () => {
@@ -61,20 +74,6 @@ function PatientDashboard() {
       localStorage.setItem('patient-theme', 'light');
     }
   };
-
-  // Show welcome animation on component mount
-  useEffect(() => {
-    setShowWelcome(true);
-    const timer = setTimeout(() => {
-      setShowWelcome(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Fetch patient data
-  useEffect(() => {
-    fetchPatientData();
-  }, []);
 
   const fetchPatientData = async () => {
     try {
@@ -218,22 +217,22 @@ function PatientDashboard() {
     setUnreadCount(0);
   };
 
-  const handleLogout = async () => {
-    setShowLogout(true);
-    setTimeout(async () => {
-      try {
-        await axios.post("https://hospitalbackend-1-eail.onrender.com/logout/patients");
-        localStorage.removeItem("token");
-        localStorage.removeItem("patient-theme"); // Clear theme preference on logout
-        navigate("/");
-      } catch (error) {
-        console.log("Logout failed:", error);
-        localStorage.removeItem("token");
-        localStorage.removeItem("patient-theme");
-        navigate("/");
-      }
-    }, 2000);
-  };
+ const handleLogout = async () => {
+  setShowLogout(true);
+  setTimeout(async () => {
+    try {
+      await axios.post("https://hospitalbackend-1-eail.onrender.com/logout/patients");
+      localStorage.removeItem("token");
+      localStorage.removeItem("patient-theme"); 
+      navigate("/");
+    } catch (error) {
+      console.log("Logout failed:", error);
+      localStorage.removeItem("token");
+      localStorage.removeItem("patient-theme"); 
+      navigate("/");
+    }
+  }, 2000);
+};
 
   // Decode JWT token for username
   const token = getToken();
@@ -287,7 +286,7 @@ function PatientDashboard() {
   };
 
   return (
-    <div className={`patient-dashboard ${darkMode ? 'dark-mode' : ''}`}>
+    <div className="patient-dashboard">
       {/* Welcome Animation */}
       {showWelcome && (
         <div className="welcome-animation">

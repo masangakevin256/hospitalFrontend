@@ -587,7 +587,7 @@ function DoctorDashboard() {
               >
                 {isDarkMode ? <FaSun /> : <FaMoon />}
                 <span className="theme-toggle-text">
-                  {isDarkMode ? "Light Mode" : "Dark Mode"}
+                  {isDarkMode }
                 </span>
               </button>
               
