@@ -1,6 +1,22 @@
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import { FaBell, FaBars, FaTimes, FaHome, FaUserShield, FaUserMd , FaUserInjured, FaHandsHelping,FaHandSparkles, FaExclamationTriangle, FaHeartbeat, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
+import { 
+  FaBell, 
+  FaBars, 
+  FaTimes, 
+  FaHome, 
+  FaUserShield, 
+  FaUserMd, 
+  FaUserInjured, 
+  FaHandsHelping,
+  FaHandSparkles, 
+  FaExclamationTriangle, 
+  FaHeartbeat, 
+  FaSignOutAlt, 
+  FaUserCircle,
+  FaSun,
+  FaMoon 
+} from "react-icons/fa";
 import profile from "../../assets/bg.jpg";
 import DashboardCharts from "./dashboardCharts";
 import DoctorsSection from "./doctorsSection";
@@ -11,10 +27,9 @@ import AdminsSection from "./adminSection";
 import VitalsSection from "./vitalDashboard";
 import AdminProfileSection from "./profilePicture"
 import "./admins.css";
+import "./dark-mode.css"; // Import dark mode CSS
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-
 
 function AdminDashboard() {
   const [activeSection, setActiveSection] = useState("dashboard");
@@ -24,7 +39,22 @@ function AdminDashboard() {
   const [unreadCount, setUnreadCount] = useState(0);
   const [showWelcome, setShowWelcome] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
+  const [darkMode, setDarkMode] = useState(false); // Dark mode state
   const navigate = useNavigate();
+
+  // Initialize dark mode from localStorage or system preference
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('admin-theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+      setDarkMode(true);
+      document.body.classList.add('dark-mode');
+    } else {
+      setDarkMode(false);
+      document.body.classList.remove('dark-mode');
+    }
+  }, []);
 
   // Show welcome animation on component mount
   useEffect(() => {
@@ -35,7 +65,7 @@ function AdminDashboard() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Mock notifications data - replace with actual API calls
+  // Mock notifications data
   useEffect(() => {
     const mockNotifications = [
       { id: 1, message: "New patient registration pending approval", type: "patient", time: "2 min ago", read: false },
@@ -49,6 +79,20 @@ function AdminDashboard() {
   }, []);
 
   const getToken = () => localStorage.getItem("token");
+
+  // Toggle dark mode function
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    
+    if (newDarkMode) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('admin-theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('admin-theme', 'light');
+    }
+  };
 
   const handleNavClick = (section) => {
     setActiveSection(section);
@@ -67,25 +111,22 @@ function AdminDashboard() {
     setUnreadCount(0);
   };
 
- const handleLogout = async () => {
-  setShowLogout(true);
-
-  setTimeout(() => {
-    const performLogout = async () => {
-      try {
-        await axios.post("https://hospitalbackend-1-eail.onrender.com/logout/admins");
-        localStorage.removeItem("token");
-        navigate("/");
-      } catch (error) {
-        console.log("Logout failed:", error);
-        // Optionally show error to user
-      }
-    };
-
-    performLogout();
-  }, 2000);
-};
-
+  const handleLogout = async () => {
+    setShowLogout(true);
+    setTimeout(() => {
+      const performLogout = async () => {
+        try {
+          await axios.post("https://hospitalbackend-1-eail.onrender.com/logout/admins");
+          localStorage.removeItem("token");
+          localStorage.removeItem('admin-theme'); // Clear theme preference on logout
+          navigate("/");
+        } catch (error) {
+          console.log("Logout failed:", error);
+        }
+      };
+      performLogout();
+    }, 2000);
+  };
 
   // Decode JWT token
   const token = getToken();
@@ -125,8 +166,7 @@ function AdminDashboard() {
   };
 
   return (
-    <div className="">
-        <div className="admin-dashboard">
+    <div className={`admin-dashboard ${darkMode ? 'dark-mode' : ''}`}>
       {/* Welcome Animation */}
       {showWelcome && (
         <div className="welcome-animation">
@@ -145,7 +185,7 @@ function AdminDashboard() {
         <div className="logout-animation">
           <div className="logout-content">
             <div className="logout-icon"><FaSignOutAlt/> </div>
-            <div className="logout-text">Bye  {username}</div>
+            <div className="logout-text">Bye {username}</div>
             <h2 className="logout-text">Logging out...</h2>
             <div className="logout-progress"></div>
           </div>
@@ -161,7 +201,14 @@ function AdminDashboard() {
           {sidebarOpen ? <FaTimes /> : <FaBars />}
         </button>
         <h2 className="mobile-title mb-2">Admin Dashboard</h2>
-        <div className="notification-wrapper">
+        <div className="header-actions-mobile">
+          <button 
+            className="theme-toggle-btn"
+            onClick={toggleDarkMode}
+            title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {darkMode ? <FaSun className="theme-icon" /> : <FaMoon className="theme-icon" />}
+          </button>
           <button 
             className="notification-btn"
             onClick={() => setNotificationsOpen(!notificationsOpen)}
@@ -244,6 +291,13 @@ function AdminDashboard() {
             {navItems.find(item => item.key === activeSection)?.label || "Dashboard"}
           </h1>
           <div className="header-actions">
+            <button 
+              className="theme-toggle-btn"
+              onClick={toggleDarkMode}
+              title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {darkMode ? <FaSun className="theme-icon" /> : <FaMoon className="theme-icon" />}
+            </button>
             <div className="notification-wrapper">
               <button 
                 className="notification-btn"
@@ -299,8 +353,6 @@ function AdminDashboard() {
         </div>
       </div>
     </div>
-    </div>
-    
   );
 }
 
