@@ -1,4 +1,131 @@
 /* Caregiver Dashboard Dark Mode */
+/* Add missing CSS variable definitions at the top */
+:root {
+  --dark-bg-primary: #0f172a;
+  --dark-bg-secondary: #1e293b;
+  --dark-bg-tertiary: #334155;
+  --dark-bg-card: #1e293b;
+  --dark-text-primary: #f8fafc;
+  --dark-text-secondary: #cbd5e1;
+  --dark-text-muted: #94a3b8;
+  --dark-border-color: #334155;
+  --dark-border-light: #475569;
+  --dark-accent-primary: #3b82f6;
+  --dark-accent-secondary: #1d4ed8;
+}
+
+/* Fix the main container structure */
+.dark-mode .caregiver-dashboard,
+.dark-mode .caregiver-dashboard .main-content,
+.dark-mode .caregiver-dashboard .content-area {
+  background-color: var(--dark-bg-primary) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+/* Fix theme toggle button styles */
+.theme-toggle-btn {
+  background: none !important;
+  border: none !important;
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .theme-toggle-btn:hover {
+  background-color: var(--dark-bg-tertiary) !important;
+  color: var(--dark-accent-primary) !important;
+}
+
+/* Fix notification button styles */
+.notification-btn {
+  background: none !important;
+  border: none !important;
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .notification-btn:hover {
+  background-color: var(--dark-bg-tertiary) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+/* Fix sidebar navigation active state */
+.dark-mode .nav-link.active .nav-icon {
+  color: white !important;
+}
+
+/* Fix button focus states */
+.dark-mode .btn:focus {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5) !important;
+}
+
+/* Fix form controls */
+.dark-mode .form-control,
+.dark-mode .form-select {
+  background-color: var(--dark-bg-tertiary) !important;
+  border-color: var(--dark-border-color) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .form-control:focus,
+.dark-mode .form-select:focus {
+  border-color: var(--dark-accent-primary) !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+}
+
+/* Fix table styles */
+.dark-mode .table {
+  --bs-table-bg: var(--dark-bg-card) !important;
+  --bs-table-color: var(--dark-text-primary) !important;
+  --bs-table-border-color: var(--dark-border-color) !important;
+}
+
+/* Fix modal styles */
+.dark-mode .modal-content {
+  background-color: var(--dark-bg-card) !important;
+  border: 1px solid var(--dark-border-color) !important;
+}
+
+.dark-mode .modal-header {
+  background-color: var(--dark-bg-tertiary) !important;
+  border-bottom-color: var(--dark-border-color) !important;
+}
+
+/* Fix badge colors */
+.dark-mode .badge.bg-primary {
+  background-color: var(--dark-accent-primary) !important;
+}
+
+.dark-mode .badge.bg-success {
+  background-color: #10b981 !important;
+}
+
+.dark-mode .badge.bg-warning {
+  background-color: #f59e0b !important;
+}
+
+.dark-mode .badge.bg-danger {
+  background-color: #ef4444 !important;
+}
+
+/* Fix alert styles */
+.dark-mode .alert {
+  background-color: var(--dark-bg-tertiary) !important;
+  border-color: var(--dark-border-color) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+/* Fix spinner color */
+.dark-mode .spinner-border.text-primary {
+  color: var(--dark-accent-primary) !important;
+}
+
+/* Ensure proper inheritance */
+.dark-mode * {
+  box-sizing: border-box;
+}
+.dark-mode body {
+  background-color: var(--dark-bg-primary) !important;
+  color: var(--dark-text-primary) !important;
+  
+}
 .dark-mode .caregiver-dashboard {
   background-color: var(--dark-bg-primary) !important;
   color: var(--dark-text-primary) !important;
