@@ -72,7 +72,7 @@ function AlertsSection({ patientData }) {
         message: newAlert.message,
         priority: newAlert.priority,
         status: "pending",
-        timeStamp: new Date().toISOString()
+        timestamp: new Date().toISOString()
       };
 
       const response = await axios.post("https://hospitalbackend-1-eail.onrender.com/alerts", alertData, {
@@ -372,7 +372,7 @@ function AlertsSection({ patientData }) {
                           {alert.status?.toUpperCase()}
                         </Badge>
                       </td>
-                      <td>{formatTimestamp(alert.timeStamp)}</td>
+                      <td>{formatTimestamp(alert.timestamp || alert.timeStamp || alert.createdAt)}</td>
                       <td>
                         <div className="d-flex gap-1 justify-content-center">
                           <Button
@@ -454,7 +454,7 @@ function AlertsSection({ patientData }) {
                 </div>
                 <div className="mb-3">
                   <strong>Date & Time:</strong>
-                  <p>{formatTimestamp(selectedAlert.timeStamp)}</p>
+                  <p>{formatTimestamp(selectedAlert.timestamp || selectedAlert.timeStamp || selectedAlert.createdAt)}</p>
                 </div>
               </div>
             </div>
