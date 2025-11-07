@@ -135,7 +135,8 @@ const DashboardCharts = () => {
       const dayName = days[date.getDay()];
       
       const dayAlerts = alerts.filter(alert => {
-        const alertDate = new Date(alert.timeStamp || alert.createdAt);
+        const alertDate = new Date(alert.timestamp || alert.timeStamp || alert.createdAt);
+
         return alertDate.toDateString() === date.toDateString();
       }).length;
 
