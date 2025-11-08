@@ -63,7 +63,7 @@ function AlertsSection() {
   const handleStatusUpdate = async (id, newStatus) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.patch(
+      const response = await axios.put(
         `https://hospitalbackend-1-eail.onrender.com/alerts/${id}`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
