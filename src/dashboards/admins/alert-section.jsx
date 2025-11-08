@@ -240,7 +240,7 @@ function AlertsSection() {
                           {alert.status?.toUpperCase()}
                         </Badge>
                       </td>
-                      <td>{formatTimestamp(alert.timeStamp)}</td>
+                      <td>{formatTimestamp(alert.timeStamp || alert.timestamp || alert.createdAt)}</td>
                       <td>
                         <div className="d-flex gap-1 justify-content-center">
                           <Button
@@ -318,7 +318,7 @@ function AlertsSection() {
                 </div>
                 <div className="mb-3">
                   <strong>Timestamp:</strong>
-                  <p>{formatTimestamp(selectedAlert.timeStamp)}</p>
+                  <p>{formatTimestamp(selectedAlert.timeStamp || selectedAlert.timestamp || selectedAlert.createdAt)}</p>
                 </div>
                 {selectedAlert._id && (
                   <div className="mb-3">
