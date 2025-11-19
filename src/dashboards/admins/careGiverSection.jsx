@@ -20,7 +20,6 @@ function CaregiversSection() {
     name: "",
     phoneNumber: "",
     regId: "",
-    careGiverId: "",
     password: "",
     gender: "",
     email: "",
@@ -81,7 +80,6 @@ function CaregiversSection() {
         name: "",
         phoneNumber: "",
         regId: "",
-        careGiverId: "",
         password: "",
         gender: "",
         email: "",
@@ -169,7 +167,6 @@ function CaregiversSection() {
       name: "",
       phoneNumber: "",
       regId: "",
-      careGiverId: "",
       password: "",
       gender: "",
       email: "",
@@ -456,16 +453,6 @@ function CaregiversSection() {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label className="fw-semibold">Caregiver ID</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={newCaregiver.careGiverId}
-                    onChange={(e) => setNewCaregiver({ ...newCaregiver, careGiverId: e.target.value })}
-                    placeholder="Enter caregiver ID"
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
                   <Form.Label className="fw-semibold">Password *</Form.Label>
                   <Form.Control
                     type="password"
@@ -574,8 +561,12 @@ function CaregiversSection() {
                   <Form.Control
                     type="text"
                     value={editCaregiver.careGiverId}
-                    onChange={(e) => setEditCaregiver({ ...editCaregiver, careGiverId: e.target.value })}
+                    disabled
+                    readOnly
                   />
+                  <Form.Text className="text-muted">
+                    Caregiver ID cannot be changed once created.
+                  </Form.Text>
                 </Form.Group>
               </div>
             </div>

@@ -27,7 +27,6 @@ function DoctorPatientsSection() {
 
   // Form state
   const [formData, setFormData] = useState({
-    patientId: "",
     name: "",
     age: "",
     gender: "",
@@ -180,7 +179,6 @@ function DoctorPatientsSection() {
 
   const resetForm = () => {
     setFormData({
-      patientId: "",
       name: "",
       age: "",
       gender: "",
@@ -210,7 +208,6 @@ function DoctorPatientsSection() {
     const caregiver = caregivers.find(c => c.name === patient.assignedCareGiver?.name);
     
     setFormData({
-      patientId: patient.patientId || "",
       name: patient.name || "",
       age: patient.age || "",
       gender: patient.gender || "",
@@ -657,18 +654,6 @@ function DoctorPatientsSection() {
                         <FaUserInjured className="me-2" />
                         Personal Information
                       </h6>
-                    </div>
-                    
-                    <div className="col-md-6">
-                      <label className="form-label fw-semibold">Patient ID *</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={formData.patientId}
-                        onChange={(e) => setFormData({...formData, patientId: e.target.value})}
-                        required
-                        placeholder="PAT001"
-                      />
                     </div>
                     
                     <div className="col-md-6">
@@ -1200,14 +1185,15 @@ function DoctorPatientsSection() {
                     </div>
                     
                     <div className="col-md-6">
-                      <label className="form-label fw-semibold">Patient ID *</label>
+                      <label className="form-label fw-semibold">Patient ID</label>
                       <input
                         type="text"
                         className="form-control"
-                        value={formData.patientId}
-                        onChange={(e) => setFormData({...formData, patientId: e.target.value})}
-                        required
+                        value={selectedPatient.patientId || ""}
+                        disabled
+                        readOnly
                       />
+                      <small className="text-muted">Patient ID cannot be changed once created.</small>
                     </div>
                     
                     <div className="col-md-6">
@@ -1417,36 +1403,6 @@ function DoctorPatientsSection() {
                         ))}
                       </select>
                     </div>
-
-                    {/* Password Update */}
-                    {/* <div className="col-12 mt-4">
-                      <h6 className="fw-semibold text-primary mb-3 d-flex align-items-center">
-                        <FaLock className="me-2" />
-                        Password Update
-                      </h6>
-                    </div>
-
-                    <div className="col-12">
-                      <label className="form-label fw-semibold">New Password</label>
-                      <div className="input-group">
-                        <input
-                          type={showPassword ? "text" : "password"}
-                          className="form-control"
-                          value={formData.password}
-                          onChange={(e) => setFormData({...formData, password: e.target.value})}
-                          placeholder="Leave blank to keep current password"
-                          minLength="6"
-                        />
-                        <button
-                          type="button"
-                          className="btn btn-outline-secondary"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          {showPassword ? <FaEye /> : <FaEye />}
-                        </button>
-                      </div>
-                      <small className="text-muted">Leave blank to keep current password</small>
-                    </div> */}
                   </div>
                 </div>
                 <div className="modal-footer border-0">

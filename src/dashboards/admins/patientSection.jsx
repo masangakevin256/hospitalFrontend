@@ -20,7 +20,6 @@ function PatientsSection() {
   const [newPatient, setNewPatient] = useState({
     name: "",
     age: "",
-    patientId: "",
     phoneNumber: "",
     address: "",
     sickness: "",
@@ -182,7 +181,6 @@ function PatientsSection() {
     setNewPatient({
       name: "",
       age: "",
-      patientId: "",
       phoneNumber: "",
       address: "",
       sickness: "",
@@ -205,7 +203,6 @@ function PatientsSection() {
   const formFields = [
     { label: "Name", key: "name", type: "text", required: true },
     { label: "Age", key: "age", type: "number", required: true },
-    { label: "Patient ID", key: "patientId", type: "text", required: true },
     { label: "Phone Number", key: "phoneNumber", type: "tel", required: true },
     { label: "Address", key: "address", type: "text", required: false },
     { label: "Sickness", key: "sickness", type: "text", required: false },
@@ -559,6 +556,20 @@ function PatientsSection() {
               <option value="Female">Female</option>
               <option value="Other">Other</option>
             </Form.Select>
+          </Form.Group>
+
+          {/* Patient ID Field (read-only) */}
+          <Form.Group className="mb-3 col-md-6">
+            <Form.Label className="fw-semibold">Patient ID</Form.Label>
+            <Form.Control
+              type="text"
+              value={editPatient.patientId || ""}
+              disabled
+              readOnly
+            />
+            <Form.Text className="text-muted">
+              Patient ID cannot be changed once created.
+            </Form.Text>
           </Form.Group>
 
           {/* Assigned Doctor (non-editable, show name + phone) */}

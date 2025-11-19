@@ -19,7 +19,6 @@ function DoctorsSection() {
     email: "",
     username: "",
     password: "",
-    doctorId: "",
     phoneNumber: "",
     gender: "",
     specialty: "",
@@ -84,7 +83,6 @@ function DoctorsSection() {
         email: "",
         username: "",
         password: "",
-        doctorId: "",
         phoneNumber: "",
         gender: "",
         specialty: "",
@@ -159,7 +157,6 @@ function DoctorsSection() {
       email: "",
       username: "",
       password: "",
-      doctorId: "",
       phoneNumber: "",
       gender: "",
       specialty: "",
@@ -507,17 +504,6 @@ function DoctorsSection() {
               </Form.Group>
 
               <Form.Group className="mb-3 col-md-6">
-                <Form.Label>Doctor ID <span className="text-danger">*</span></Form.Label>
-                <Form.Control
-                  type="text"
-                  value={newDoctor.doctorId}
-                  onChange={(e) => setNewDoctor({ ...newDoctor, doctorId: e.target.value })}
-                  required
-                  placeholder="e.g., DOC001"
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3 col-md-6">
                 <Form.Label>Phone Number <span className="text-danger">*</span></Form.Label>
                 <Form.Control
                   type="tel"
@@ -631,14 +617,17 @@ function DoctorsSection() {
               </Form.Group>
 
               <Form.Group className="mb-3 col-md-6">
-                <Form.Label>Doctor ID <span className="text-danger">*</span></Form.Label>
+                <Form.Label>Doctor ID</Form.Label>
                 <Form.Control
                   type="text"
                   value={editDoctor.doctorId}
-                  onChange={(e) => setEditDoctor({ ...editDoctor, doctorId: e.target.value })}
-                  required
+                  disabled
+                  readOnly
                   placeholder="e.g., DOC001"
                 />
+                <Form.Text className="text-muted">
+                  Doctor ID cannot be changed once created.
+                </Form.Text>
               </Form.Group>
 
               <Form.Group className="mb-3 col-md-6">

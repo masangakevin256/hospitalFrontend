@@ -20,7 +20,6 @@ function AdminsSection() {
     email: "",
     username: "",
     password: "",
-    adminId: "",
     phoneNumber: "",
     secretReg: "",
     gender: "",
@@ -84,7 +83,6 @@ function AdminsSection() {
         email: "",
         username: "",
         password: "",
-        adminId: "",
         phoneNumber: "",
         secretReg: "",
         gender: "",
@@ -159,7 +157,6 @@ function AdminsSection() {
       email: "",
       username: "",
       password: "",
-      adminId: "",
       phoneNumber: "",
       secretReg: "",
       gender: "",
@@ -454,17 +451,6 @@ function AdminsSection() {
               </Form.Group>
 
               <Form.Group className="form-group">
-                <Form.Label>Admin ID <span className="required">*</span></Form.Label>
-                <Form.Control
-                  type="text"
-                  value={newAdmin.adminId}
-                  onChange={(e) => setNewAdmin({ ...newAdmin, adminId: e.target.value })}
-                  required
-                  placeholder="e.g., AD001"
-                />
-              </Form.Group>
-
-              <Form.Group className="form-group">
                 <Form.Label>Phone Number <span className="required">*</span></Form.Label>
                 <Form.Control
                   type="tel"
@@ -573,19 +559,19 @@ function AdminsSection() {
                 />
               </Form.Group>
 
-              {/* <Form.Group className="form-group"> */}
-            {/* <Form.Label>Admin ID <span className="required">*</span></Form.Label> */}
-            {/* <Form.Control
-              type="text"
-              value={editAdmin.adminId}
-              disabled // 👈 disables editing
-              readOnly // 👈 extra safety (user can’t even focus it)
-              placeholder="e.g., AD001"
-            />
-            <Form.Text className="text-muted">
-              Admin ID cannot be changed once created.
-            </Form.Text> */}
-          {/* </Form.Group> */}
+              <Form.Group className="form-group">
+                <Form.Label>Admin ID</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={editAdmin.adminId}
+                  disabled
+                  readOnly
+                  placeholder="e.g., AD001"
+                />
+                <Form.Text className="text-muted">
+                  Admin ID cannot be changed once created.
+                </Form.Text>
+              </Form.Group>
 
               <Form.Group className="form-group">
                 <Form.Label>Phone Number <span className="required">*</span></Form.Label>
