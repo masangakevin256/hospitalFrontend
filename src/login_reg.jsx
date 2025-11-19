@@ -23,7 +23,6 @@ import {
 } from "react-icons/fa";
 import "./Login.css";
 
-
 function Login() {
   const [formData, setFormData] = useState({
     username: "",
@@ -31,8 +30,6 @@ function Login() {
     email: "",
     phoneNumber: "",
     gender: "",
-    adminId: "",
-    doctorId: "",
     secretReg: "",
     roles: ""
   });
@@ -157,14 +154,6 @@ function Login() {
       errors.push("Please select your role!");
     }
     
-    if (formData.roles === "doctor" && !formData.doctorId) {
-      errors.push("Doctor ID is required!");
-    }
-    
-    if (formData.roles === "admin" && !formData.adminId) {
-      errors.push("Admin ID is required!");
-    }
-    
     if ((formData.roles === "doctor" || formData.roles === "admin") && !formData.secretReg) {
       errors.push("Registration code is required!");
     }
@@ -211,9 +200,7 @@ function Login() {
 
     } catch (error) {
       setError("Login failed! Please check your credentials.");
-      // error.response?.data?.message || 
       console.log(error);
-      
     } finally {
       setLoading(false);
     }
@@ -233,7 +220,6 @@ function Login() {
           phoneNumber: formData.phoneNumber,
           gender: formData.gender,
           password: formData.password,
-          doctorId: formData.doctorId,
           secretReg: formData.secretReg
         });
       } else if (formData.roles === "admin") {
@@ -243,7 +229,6 @@ function Login() {
           phoneNumber: formData.phoneNumber,
           gender: formData.gender,
           password: formData.password,
-          adminId: formData.adminId,
           secretReg: formData.secretReg
         });
       }
@@ -258,8 +243,6 @@ function Login() {
           email: "",
           phoneNumber: "",
           gender: "",
-          adminId: "",
-          doctorId: "",
           secretReg: "",
           roles: ""
         });
@@ -529,31 +512,15 @@ function Login() {
                       <span>{formData.roles === "admin" ? "Administrator" : "Medical Doctor"} Registration</span>
                     </div>
                     
-                    <div className="input-row">
-                      <div className="input-group">
-                        <FaIdCard className="input-icon" />
-                        <input
-                          type="text"
-                          placeholder={formData.roles === "admin" ? "Admin ID (e.g., ADM001)" : "Doctor ID (e.g., DOC001)"}
-                          value={formData.roles === "admin" ? formData.adminId : formData.doctorId}
-                          onChange={(e) => handleInputChange(
-                            formData.roles === "admin" ? "adminId" : "doctorId", 
-                            e.target.value
-                          )}
-                          className="form-input"
-                        />
-                      </div>
-
-                      <div className="input-group">
-                        <FaShieldAlt className="input-icon" />
-                        <input
-                          type="text"
-                          placeholder="Registration code"
-                          value={formData.secretReg}
-                          onChange={(e) => handleInputChange("secretReg", e.target.value)}
-                          className="form-input"
-                        />
-                      </div>
+                    <div className="input-group">
+                      <FaShieldAlt className="input-icon" />
+                      <input
+                        type="text"
+                        placeholder="Registration code"
+                        value={formData.secretReg}
+                        onChange={(e) => handleInputChange("secretReg", e.target.value)}
+                        className="form-input"
+                      />
                     </div>
                     
                     <div className="role-info">
