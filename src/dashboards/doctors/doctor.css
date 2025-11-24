@@ -921,7 +921,11 @@ body {
     width: 80%; /* Slightly smaller on very small screens */
     max-width: 280px;
   }
-
+  .DoctorPatientsSection,
+  .welcome-header,
+  .section-container{
+    margin-top: 70px !important;
+  }
   .notifications-dropdown {
     width: 280px;
     right: -80px;

@@ -30,7 +30,9 @@
 .dark-mode .main-content {
   background-color: var(--bg-primary) !important;
 }
-
+.dark-mode .welcome-header {
+  background-color: var(--bg-primary) !important;
+}
 .dark-mode .desktop-header {
   background-color: var(--header-bg) !important;
   border-bottom-color: var(--border-color) !important;

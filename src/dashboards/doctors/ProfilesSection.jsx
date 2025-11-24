@@ -202,7 +202,7 @@ function DoctorProfileSection() {
   }
 
   return (
-    <div className="container-fluid py-4">
+    <div className="section-container container-fluid py-4">
       {/* Message Alert */}
       {message.text && (
         <div className={`alert alert-${message.type === 'success' ? 'success' : 'danger'} alert-dismissible fade show`}>
