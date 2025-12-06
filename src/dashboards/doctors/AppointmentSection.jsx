@@ -62,7 +62,7 @@ function AppointmentsSection() {
       resetForm();
       fetchAppointments();
     } catch (err) {
-      setError("Failed to add appointment.");
+      setError(err.response.data ||"Failed to add appointment.");
       console.log(err);
     }
   };
