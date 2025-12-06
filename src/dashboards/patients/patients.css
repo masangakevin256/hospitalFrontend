@@ -17,7 +17,10 @@ body {
   min-height: 100vh;
   background-color: #f8f9fa;
 }
-
+a{
+  text-decoration: none;
+  font-style: normal;
+}
 /* Mobile Header */
 .mobile-header {
   display: none;
