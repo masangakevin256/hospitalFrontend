@@ -95,7 +95,7 @@ function PatientOverview({ patientData, appointments, vitals }) {
             <div className="row align-items-center">
               <div className="col-md-8">
                 <h1 className="display-6 fw-bold text-dark mb-2">
-                  Hello, {patientData.name}! 👋
+                  Hello, {patientData.name}! 
                 </h1>
                 <p className="text-muted mb-0">
                   Here's your health overview for today
