@@ -1,15 +1,22 @@
- 
+/* Footer Styles with Light Theme */
+:root {
+  --hospital-primary: #1a73e8;
+  --hospital-secondary: #0d47a1;
+  --hospital-teal: #0097a7;
+  --hospital-light: #f8f9fa;
+  --hospital-dark: #212529;
+  --hospital-success: #4caf50;
+}
 
 .footer {
-  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
-  color: white;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  color: #495057;
   margin-top: auto;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid #dee2e6;
 }
- a{
-  font-style: normal;
- }
+
 .footer::before {
   content: '';
   position: absolute;
@@ -17,86 +24,53 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(26, 115, 232, 0.3), transparent);
 }
 
 .footer-main {
-  padding: 3rem 0 2rem;
+  position: relative;
+  z-index: 1;
 }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-.footer-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.footer-logo {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.logo-icon {
-  font-size: 2rem;
-  color: #ff6b6b;
-  animation: pulse 2s infinite;
-}
-
-.footer-logo h3 {
-  font-size: 1.5rem;
+.hospital-title {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 700;
-  margin: 0;
-  background: linear-gradient(45deg, #fff, #e3f2fd);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 1.5rem;
 }
 
 .footer-description {
   line-height: 1.6;
-  opacity: 0.9;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
-.social-links {
-  display: flex;
-  gap: 1rem;
-}
-
-.social-link {
-  display: flex;
+/* Social Links */
+.social-links .social-link {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(255, 255, 255, 0.1);
+  background: white;
   border-radius: 50%;
-  color: white;
+  color: var(--hospital-primary);
   text-decoration: none;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #dee2e6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.social-link:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px) scale(1.1);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+.social-links .social-link:hover {
+  background: var(--hospital-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
 }
 
+/* Footer Titles */
 .footer-title {
-  font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 1rem;
   position: relative;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 .footer-title::after {
@@ -105,191 +79,111 @@
   bottom: 0;
   left: 0;
   width: 40px;
-  height: 2px;
-  background: linear-gradient(90deg, #ff6b6b, transparent);
+  height: 3px;
+  background: var(--hospital-primary);
+  border-radius: 2px;
 }
 
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.footer-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: rgba(255, 255, 255, 0.9);
+/* Footer Links */
+.footer-links .footer-link {
+  color: #6c757d;
   text-decoration: none;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
   padding: 0.5rem 0;
-  border-radius: 4px;
 }
 
-.footer-link:hover {
-  color: white;
+.footer-links .footer-link:hover {
+  color: var(--hospital-primary);
   transform: translateX(8px);
-  background: rgba(255, 255, 255, 0.1);
-  padding-left: 1rem;
 }
 
-.link-icon {
+.footer-links .link-icon {
   font-size: 0.8rem;
-  opacity: 0.7;
   transition: transform 0.3s ease;
 }
 
-.footer-link:hover .link-icon {
+.footer-links .footer-link:hover .link-icon {
   transform: translateX(4px);
-  opacity: 1;
+  color: var(--hospital-primary);
 }
 
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
+/* Contact Info */
 .contact-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.9rem;
-  opacity: 0.9;
+  transition: transform 0.3s ease;
+}
+
+.contact-item:hover {
+  transform: translateX(5px);
 }
 
 .contact-icon {
-  color: #ff6b6b;
+  color: var(--hospital-primary);
   font-size: 1rem;
-  flex-shrink: 0;
 }
 
+/* Newsletter */
 .newsletter {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1.5rem;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: white;
+  border-color: #e9ecef !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.newsletter h5 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.1rem;
+.newsletter .form-control:focus {
+  border-color: var(--hospital-primary);
+  box-shadow: 0 0 0 0.25rem rgba(26, 115, 232, 0.25);
 }
 
-.newsletter p {
-  margin: 0 0 1rem 0;
-  opacity: 0.8;
-  font-size: 0.9rem;
+.newsletter .btn-primary {
+  background: var(--hospital-primary);
+  border-color: var(--hospital-primary);
 }
 
-.subscribe-form {
-  display: flex;
-  gap: 0.5rem;
+.newsletter .btn-primary:hover {
+  background: var(--hospital-secondary);
+  border-color: var(--hospital-secondary);
 }
 
-.subscribe-input {
-  flex: 1;
-  padding: 0.75rem 1rem;
-  border: none;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  font-size: 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+/* IT Support Card */
+.it-support-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(26, 115, 232, 0.05) 0%, rgba(13, 71, 161, 0.05) 100%) !important;
 }
 
-.subscribe-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+.it-support-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--hospital-primary), var(--hospital-teal));
 }
 
-.subscribe-input:focus {
-  outline: none;
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+.it-support-card .fa-shield-alt {
+  animation: pulse-shield 2s infinite ease-in-out;
 }
 
-.subscribe-btn {
-  padding: 0.75rem;
-  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 50px;
-}
-
-.subscribe-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
-}
-
-/* Footer Bottom */
-.footer-bottom {
-  background: rgba(0, 0, 0, 0.2);
-  padding: 1.5rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.footer-bottom-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.copyright {
-  margin: 0;
-  opacity: 0.8;
-  font-size: 0.9rem;
-}
-
-.made-with {
-  margin-left: 1rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
+/* Heart Icon Animation */
 .heart-icon {
   color: #ff6b6b;
   animation: heartbeat 1.5s ease-in-out infinite;
 }
 
-.back-to-top {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
+/* Back to Top Button */
+.rotate-270 {
   transform: rotate(-90deg);
+  transition: transform 0.3s ease;
 }
 
-.back-to-top:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: rotate(-90deg) translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+.btn-outline-primary:hover .rotate-270 {
+  transform: rotate(-90deg) translateY(2px);
 }
 
 /* Animations */
-@keyframes pulse {
+@keyframes pulse-shield {
   0%, 100% {
     transform: scale(1);
   }
@@ -315,22 +209,12 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .footer-main {
-    padding: 2rem 0 1.5rem;
+  .hospital-title {
+    font-size: 1.25rem;
   }
 
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .footer-title {
     text-align: center;
-  }
-
-  .footer-logo {
-    justify-content: center;
-  }
-
-  .social-links {
-    justify-content: center;
   }
 
   .footer-title::after {
@@ -338,40 +222,101 @@
     transform: translateX(-50%);
   }
 
-  .footer-bottom-content {
-    flex-direction: column;
+  .footer-links .footer-link {
+    justify-content: center;
+  }
+
+  .it-support-card .d-flex {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .it-support-card .text-md-end {
+    text-align: center !important;
+  }
+
+  .copyright {
     text-align: center;
   }
 
   .made-with {
-    margin-left: 0;
-    margin-top: 0.5rem;
     display: block;
-  }
-
-  .subscribe-form {
-    flex-direction: column;
-  }
-
-  .subscribe-btn {
-    width: 100%;
+    margin-top: 0.5rem;
   }
 }
 
-@media (max-width: 480px) {
-  .footer-main {
-    padding: 1.5rem 0 1rem;
-  }
+/* Hover Effects */
+.footer-link {
+  position: relative;
+}
 
-  .footer-logo h3 {
-    font-size: 1.25rem;
-  }
+.footer-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--hospital-primary);
+  transition: width 0.3s ease;
+}
 
-  .footer-title {
-    font-size: 1.1rem;
-  }
+.footer-link:hover::before {
+  width: 100%;
+}
 
-  .newsletter {
-    padding: 1rem;
+/* Logo Icon Animation */
+.logo-icon {
+  animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
   }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Section Transitions */
+.footer-section {
+  transition: transform 0.3s ease;
+}
+
+.footer-section:hover {
+  transform: translateY(-5px);
+}
+
+/* Form Styling */
+.form-control {
+  border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+  border-color: var(--hospital-primary);
+  box-shadow: 0 0 0 0.25rem rgba(26, 115, 232, 0.25);
+}
+
+/* Button Styling */
+.btn-primary {
+  background: linear-gradient(135deg, var(--hospital-primary), var(--hospital-secondary));
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--hospital-secondary), var(--hospital-primary));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+}
+
+.btn-outline-primary {
+  border: 2px solid var(--hospital-primary);
+  color: var(--hospital-primary);
+}
+
+.btn-outline-primary:hover {
+  background: var(--hospital-primary);
+  border-color: var(--hospital-primary);
 }

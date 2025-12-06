@@ -4,13 +4,13 @@ import {
   FaBell, FaBars, FaTimes, FaHome, FaUserInjured, FaHandsHelping, 
   FaHandSparkles, FaExclamationTriangle, FaHeartbeat, FaSignOutAlt, 
   FaUserCircle, FaCalendarCheck, FaPills, FaEnvelope, FaStethoscope,
-  FaSun, FaMoon
+  FaSun, FaMoon, FaTasks
 } from "react-icons/fa";
 import profile from "../../assets/bg.jpg";
 import PatientOverview from "./patientOverView";
 import AppointmentsSection from "./appointments";
 import PrescriptionsSection from "./prescription";
-// import MessagesSection from "./messagesSection";
+import TaskSection from "./TaskSection";
 import ProfileSection from "./profile";
 import VitalsSection from "./vitals";
 import AlertsSection from "./alerts";
@@ -247,43 +247,43 @@ function PatientDashboard() {
   }
 
   const navItems = [
-    { key: "dashboard", label: "Dashboard", icon: <FaHome /> },
-    { key: "appointments", label: "Appointments", icon: <FaCalendarCheck /> },
-    { key: "prescriptions", label: "Prescriptions", icon: <FaPills /> },
-    { key: "vitals", label: "Vitals", icon: <FaHeartbeat /> },
-    // { key: "messages", label: "Messages", icon: <FaEnvelope /> },
-    { key: "alerts", label: "Alerts", icon: <FaExclamationTriangle /> },
-    { key: "profile", label: "Profile", icon: <FaUserCircle /> },
-  ];
+  { key: "dashboard", label: "Dashboard", icon: <FaHome /> },
+  { key: "tasks", label: "Care Tasks", icon: <FaTasks /> }, 
+  { key: "appointments", label: "Appointments", icon: <FaCalendarCheck /> },
+  { key: "prescriptions", label: "Prescriptions", icon: <FaPills /> },
+  { key: "vitals", label: "Vitals", icon: <FaHeartbeat /> },
+  { key: "alerts", label: "Alerts", icon: <FaExclamationTriangle /> },
+  { key: "profile", label: "Profile", icon: <FaUserCircle /> },
+];
 
-  const renderSection = () => {
-    switch (activeSection) {
-      case "dashboard": 
-        return (
-          <PatientOverview 
-            patientData={patientData} 
-            appointments={appointments} 
-            vitals={vitals} 
-            darkMode={darkMode}
-          />
-        );
-      case "appointments": return <AppointmentsSection appointments={appointments} patientData={patientData} darkMode={darkMode} />;
-      case "prescriptions": return <PrescriptionsSection patientData={patientData} darkMode={darkMode} />;
-      case "vitals": return <VitalsSection vitals={vitals} patientData={patientData} darkMode={darkMode} />;
-      // case "messages": return <MessagesSection patientData={patientData} darkMode={darkMode} />;
-      case "alerts": return <AlertsSection patientData={patientData} darkMode={darkMode} />;
-      case "profile": return <ProfileSection patientData={patientData} onUpdate={fetchPatientData} darkMode={darkMode} />;
-      default: 
-        return (
-          <PatientOverview 
-            patientData={patientData} 
-            appointments={appointments} 
-            vitals={vitals} 
-            darkMode={darkMode}
-          />
-        );
-    }
-  };
+ const renderSection = () => {
+  switch (activeSection) {
+    case "dashboard": 
+      return (
+        <PatientOverview 
+          patientData={patientData} 
+          appointments={appointments} 
+          vitals={vitals} 
+          darkMode={darkMode}
+        />
+      );
+    case "tasks": return <TaskSection darkMode={darkMode} />; 
+    case "appointments": return <AppointmentsSection appointments={appointments} patientData={patientData} darkMode={darkMode} />;
+    case "prescriptions": return <PrescriptionsSection patientData={patientData} darkMode={darkMode} />;
+    case "vitals": return <VitalsSection vitals={vitals} patientData={patientData} darkMode={darkMode} />;
+    case "alerts": return <AlertsSection patientData={patientData} darkMode={darkMode} />;
+    case "profile": return <ProfileSection patientData={patientData} onUpdate={fetchPatientData} darkMode={darkMode} />;
+    default: 
+      return (
+        <PatientOverview 
+          patientData={patientData} 
+          appointments={appointments} 
+          vitals={vitals} 
+          darkMode={darkMode}
+        />
+      );
+  }
+};
 
   return (
     <div className="patient-dashboard">

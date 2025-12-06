@@ -19,9 +19,15 @@ import {
   FaHandsHelping,
   FaArrowLeft,
   FaInfoCircle,
-  FaExclamationTriangle
+  FaExclamationTriangle,
+  FaHospital,
+  FaStethoscope,
+  FaUserInjured,
+  FaHandHoldingHeart,
+  FaHospitalUser
 } from "react-icons/fa";
 import "./Login.css";
+
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -233,7 +239,7 @@ function Login() {
         });
       }
 
-      setMessage("Registration successful!, check your email for more details .You can now sign in.");
+      setMessage("Registration successful! Check your email for more details.");
       
       setTimeout(() => {
         setIsLogin(true);
@@ -268,8 +274,8 @@ function Login() {
     const icons = {
       admin: <FaUserShield className="role-icon" />,
       doctor: <FaUserMd className="role-icon" />,
-      patient: <FaUser className="role-icon" />,
-      careGiver: <FaHandsHelping className="role-icon" />
+      patient: <FaUserInjured className="role-icon" />,
+      careGiver: <FaHandHoldingHeart className="role-icon" />
     };
     return icons[role] || <FaUser className="role-icon" />;
   };
@@ -288,316 +294,436 @@ function Login() {
 
   return (
     <div className="login-container">
-      <div className="login-background">
-        <div className="login-header">
-          <div className="logo-container">
-            <FaHeartbeat className="logo-icon" />
-            <div className="logo-text">
-              <h1>Medicare Hospital</h1>
-              <p>Advanced Healthcare Management System</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="form-wrapper">
-          {isLogin ? (
-            <div className="login-form-card">
-              <div className="form-header">
-                <h2>Welcome Back</h2>
-                <p>Sign in to continue to your dashboard</p>
-              </div>
-
-              <form onSubmit={handleLogin} className="auth-form">
-                <div className="input-group">
-                  <FaUser className="input-icon" />
-                  <input
-                    type="text"
-                    placeholder="Enter your username"
-                    value={formData.username}
-                    onChange={(e) => handleInputChange("username", e.target.value)}
-                    className="form-input"
-                  />
-                </div>
-
-                <div className="input-group">
-                  <FaLock className="input-icon" />
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Enter your password"
-                    value={formData.password}
-                    onChange={(e) => handleInputChange("password", e.target.value)}
-                    className="form-input"
-                  />
-                  <button
-                    type="button"
-                    className="password-toggle"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </button>
-                </div>
-
-                <div className="input-group">
-                  <FaUserShield className="input-icon" />
-                  <select
-                    value={formData.roles}
-                    onChange={(e) => handleInputChange("roles", e.target.value)}
-                    className="form-input"
-                  >
-                    <option value="">Select your role</option>
-                    <option value="admin">👨‍💼 Administrator</option>
-                    <option value="doctor">👨‍⚕️ Medical Doctor</option>
-                    <option value="patient">👤 Patient</option>
-                    <option value="careGiver">🤝 Caregiver</option>
-                  </select>
-                </div>
-
-                <div className="form-options">
-                  <label className="checkbox-label">
-                    <input
-                      type="checkbox"
-                      checked={remember}
-                      onChange={(e) => setRemember(e.target.checked)}
-                    />
-                    <span className="checkmark"></span>
-                    Remember me
-                  </label>
-                  
-                  <a href="#" className="forgot-link">Forgot password?</a>
-                </div>
-
-                <button 
-                  type="submit" 
-                  className={`submit-btn ${loading ? 'loading' : ''}`}
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <div className="spinner"></div>
-                  ) : (
-                    <>
-                      <FaLock className="btn-icon" />
-                      Sign In
-                    </>
-                  )}
-                </button>
-
-                {error && (
-                  <div className="message error">
-                    <FaExclamationTriangle className="message-icon" />
-                    {error}
-                  </div>
-                )}
-                {message && (
-                  <div className="message success">
-                    <FaCheck className="message-icon" />
-                    {message}
-                  </div>
-                )}
-
-                <div className="form-divider">
-                  <span>New to HealthSync?</span>
-                </div>
-
-                <button type="button" className="switch-btn" onClick={toggleForm}>
-                  Create an account
-                </button>
-              </form>
-            </div>
-          ) : (
-            <div className="signup-form-card">
-              <div className="form-header">
-                <button type="button" className="back-btn" onClick={toggleForm}>
-                  <FaArrowLeft />
-                </button>
-                <h2>Create Account</h2>
-                <p>Join our healthcare platform today</p>
-              </div>
-
-              <form onSubmit={handleSignUp} className="auth-form">
-                <div className="input-row">
-                  <div className="input-group">
-                    <FaEnvelope className="input-icon" />
-                    <input
-                      type="email"
-                      placeholder="Email address"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
-                      className="form-input"
-                    />
-                  </div>
-
-                  <div className="input-group">
-                    <FaUser className="input-icon" />
-                    <input
-                      type="text"
-                      placeholder="Username"
-                      value={formData.username}
-                      onChange={(e) => handleInputChange("username", e.target.value)}
-                      className="form-input"
-                    />
-                  </div>
-                </div>
-
-                <div className="input-row">
-                  <div className="input-group">
-                    <FaPhone className="input-icon" />
-                    <input
-                      type="tel"
-                      placeholder="Phone number"
-                      value={formData.phoneNumber}
-                      onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
-                      className="form-input"
-                    />
-                  </div>
-
-                  <div className="input-group">
-                    <FaVenusMars className="input-icon" />
-                    <select
-                      value={formData.gender}
-                      onChange={(e) => handleInputChange("gender", e.target.value)}
-                      className="form-input"
-                    >
-                      <option value="">Select gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="input-group">
-                  <FaLock className="input-icon" />
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Create password"
-                    value={formData.password}
-                    onChange={(e) => handleInputChange("password", e.target.value)}
-                    className="form-input"
-                  />
-                  <button
-                    type="button"
-                    className="password-toggle"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </button>
-                </div>
-
-                {formData.password && (
-                  <div className={`password-strength ${getPasswordStrengthColor()}`}>
-                    <span>Password Strength: {passwordStrength}</span>
-                    <div className="strength-bar">
-                      <div className="strength-fill"></div>
-                    </div>
-                  </div>
-                )}
-
-                <div className="input-group">
-                  <FaUserShield className="input-icon" />
-                  <select
-                    value={formData.roles}
-                    onChange={(e) => handleInputChange("roles", e.target.value)}
-                    className="form-input"
-                  >
-                    <option value="">Select account type</option>
-                    <option value="admin">👨‍💼 Administrator</option>
-                    <option value="doctor">👨‍⚕️ Medical Doctor</option>
-                  </select>
-                </div>
-
-                {(formData.roles === "admin" || formData.roles === "doctor") && (
-                  <div className="role-specific-fields">
-                    <div className="role-header">
-                      {getRoleIcon(formData.roles)}
-                      <span>{formData.roles === "admin" ? "Administrator" : "Medical Doctor"} Registration</span>
-                    </div>
-                    
-                    <div className="input-group">
-                      <FaShieldAlt className="input-icon" />
-                      <input
-                        type="text"
-                        placeholder="Registration code"
-                        value={formData.secretReg}
-                        onChange={(e) => handleInputChange("secretReg", e.target.value)}
-                        className="form-input"
-                      />
-                    </div>
-                    
-                    <div className="role-info">
-                      <FaInfoCircle className="info-icon" />
-                      <small>
-                        {formData.roles === "admin" 
-                          ? "Administrator accounts require special registration codes for security."
-                          : "Doctor accounts require valid medical registration codes."
-                        }
-                      </small>
-                    </div>
-                  </div>
-                )}
-
-                <div className="form-options">
-                  <label className="checkbox-label">
-                    <input
-                      type="checkbox"
-                      checked={showPassword}
-                      onChange={(e) => setShowPassword(e.target.checked)}
-                    />
-                    <span className="checkmark"></span>
-                    Show password
-                  </label>
-                </div>
-
-                <label className="checkbox-label terms">
-                  <input
-                    type="checkbox"
-                    checked={agree}
-                    onChange={(e) => setAgree(e.target.checked)}
-                  />
-                  <span className="checkmark"></span>
-                  I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>
-                </label>
-
-                <button 
-                  type="submit" 
-                  className={`submit-btn ${loading ? 'loading' : ''}`}
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <div className="spinner"></div>
-                  ) : (
-                    <>
-                      <FaUser className="btn-icon" />
-                      Create Account
-                    </>
-                  )}
-                </button>
-
-                {error && (
-                  <div className="message error">
-                    <FaExclamationTriangle className="message-icon" />
-                    {error}
-                  </div>
-                )}
-                {message && (
-                  <div className="message success">
-                    <FaCheck className="message-icon" />
-                    {message}
-                  </div>
-                )}
-
-                <div className="form-divider">
-                  <span>Already have an account?</span>
-                </div>
-
-                <button type="button" className="switch-btn" onClick={toggleForm}>
-                  Sign in to your account
-                </button>
-              </form>
-            </div>
-          )}
+      {/* Background Pattern */}
+      <div className="hospital-background">
+        <div className="background-pattern"></div>
+        <div className="medical-icons">
+          <FaHospital className="medical-icon icon-1" />
+          <FaStethoscope className="medical-icon icon-2" />
+          <FaHeartbeat className="medical-icon icon-3" />
+          <FaHospitalUser className="medical-icon icon-4" />
         </div>
       </div>
-      <Footer/>
+
+      <div className="container-fluid min-vh-100 d-flex flex-column">
+        {/* Header */}
+        <header className="hospital-header py-4">
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-12 text-center">
+                <div className="d-flex align-items-center justify-content-center gap-3 mb-2">
+                  <FaHospital className="hospital-main-icon" />
+                  <div className="text-start">
+                    <h1 className="hospital-title mb-0">MediCare Hospital</h1>
+                    <p className="hospital-subtitle mb-0">Advanced Healthcare Management System</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Main Content */}
+        <main className="flex-grow-1 d-flex align-items-center justify-content-center py-4">
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-md-8 col-lg-6 col-xl-5">
+                {isLogin ? (
+                  <div className="card hospital-card login-card shadow-lg border-0">
+                    <div className="card-body p-4 p-md-5">
+                      <div className="text-center mb-4">
+                        <h2 className="card-title h3 mb-2">Welcome Back</h2>
+                        <p className="text-muted">Sign in to access your healthcare dashboard</p>
+                      </div>
+
+                      <form onSubmit={handleLogin}>
+                        <div className="mb-3">
+                          <label className="form-label">Username</label>
+                          <div className="input-group">
+                            <span className="input-group-text bg-light border-end-0">
+                              <FaUser className="text-primary" />
+                            </span>
+                            <input
+                              type="text"
+                              className="form-control border-start-0"
+                              placeholder="Enter your username"
+                              value={formData.username}
+                              onChange={(e) => handleInputChange("username", e.target.value)}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="mb-3">
+                          <label className="form-label">Password</label>
+                          <div className="input-group">
+                            <span className="input-group-text bg-light border-end-0">
+                              <FaLock className="text-primary" />
+                            </span>
+                            <input
+                              type={showPassword ? "text" : "password"}
+                              className="form-control border-start-0"
+                              placeholder="Enter your password"
+                              value={formData.password}
+                              onChange={(e) => handleInputChange("password", e.target.value)}
+                            />
+                            <button
+                              type="button"
+                              className="btn btn-outline-secondary border-start-0"
+                              onClick={() => setShowPassword(!showPassword)}
+                            >
+                              {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="mb-3">
+                          <label className="form-label">Role</label>
+                          <div className="input-group">
+                            <span className="input-group-text bg-light border-end-0">
+                              <FaUserShield className="text-primary" />
+                            </span>
+                            <select
+                              className="form-select"
+                              value={formData.roles}
+                              onChange={(e) => handleInputChange("roles", e.target.value)}
+                            >
+                              <option value="">Select your role</option>
+                              <option value="admin">Administrator</option>
+                              <option value="doctor">Medical Doctor</option>
+                              <option value="patient">Patient</option>
+                              <option value="careGiver">Caregiver</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div className="mb-3 d-flex justify-content-between align-items-center">
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              id="rememberMe"
+                              checked={remember}
+                              onChange={(e) => setRemember(e.target.checked)}
+                            />
+                            <label className="form-check-label" htmlFor="rememberMe">
+                              Remember me
+                            </label>
+                          </div>
+                          <a href="#" className="text-decoration-none text-primary">Forgot password?</a>
+                        </div>
+
+                        <button 
+                          type="submit" 
+                          className="btn btn-primary btn-lg w-100 mb-3"
+                          disabled={loading}
+                        >
+                          {loading ? (
+                            <>
+                              <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                              Signing in...
+                            </>
+                          ) : (
+                            <>
+                              <FaLock className="me-2" />
+                              Sign In
+                            </>
+                          )}
+                        </button>
+
+                        {error && (
+                          <div className="alert alert-danger d-flex align-items-center mb-3" role="alert">
+                            <FaExclamationTriangle className="me-2" />
+                            <div>{error}</div>
+                          </div>
+                        )}
+
+                        {message && (
+                          <div className="alert alert-success d-flex align-items-center mb-3" role="alert">
+                            <FaCheck className="me-2" />
+                            <div>{message}</div>
+                          </div>
+                        )}
+
+                        <div className="text-center mt-4">
+                          <p className="text-muted">New to MediCare Hospital?</p>
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-primary"
+                            onClick={toggleForm}
+                          >
+                            Create an account
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="card hospital-card signup-card shadow-lg border-0">
+                    <div className="card-body p-4 p-md-5">
+                      <div className="d-flex align-items-center mb-4">
+                        <button 
+                          type="button" 
+                          className="btn btn-outline-secondary me-3"
+                          onClick={toggleForm}
+                        >
+                          <FaArrowLeft />
+                        </button>
+                        <div>
+                          <h2 className="card-title h4 mb-1">Create Account</h2>
+                          <p className="text-muted mb-0">Join our healthcare platform today</p>
+                        </div>
+                      </div>
+
+                      <form onSubmit={handleSignUp}>
+                        <div className="row g-3 mb-3">
+                          <div className="col-md-6">
+                            <label className="form-label">Email Address</label>
+                            <div className="input-group">
+                              <span className="input-group-text bg-light">
+                                <FaEnvelope className="text-primary" />
+                              </span>
+                              <input
+                                type="email"
+                                className="form-control"
+                                placeholder="Email address"
+                                value={formData.email}
+                                onChange={(e) => handleInputChange("email", e.target.value)}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-md-6">
+                            <label className="form-label">Username</label>
+                            <div className="input-group">
+                              <span className="input-group-text bg-light">
+                                <FaUser className="text-primary" />
+                              </span>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Username"
+                                value={formData.username}
+                                onChange={(e) => handleInputChange("username", e.target.value)}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="row g-3 mb-3">
+                          <div className="col-md-6">
+                            <label className="form-label">Phone Number</label>
+                            <div className="input-group">
+                              <span className="input-group-text bg-light">
+                                <FaPhone className="text-primary" />
+                              </span>
+                              <input
+                                type="tel"
+                                className="form-control"
+                                placeholder="Phone number"
+                                value={formData.phoneNumber}
+                                onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-md-6">
+                            <label className="form-label">Gender</label>
+                            <div className="input-group">
+                              <span className="input-group-text bg-light">
+                                <FaVenusMars className="text-primary" />
+                              </span>
+                              <select
+                                className="form-select"
+                                value={formData.gender}
+                                onChange={(e) => handleInputChange("gender", e.target.value)}
+                              >
+                                <option value="">Select gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="mb-3">
+                          <label className="form-label">Password</label>
+                          <div className="input-group">
+                            <span className="input-group-text bg-light">
+                              <FaLock className="text-primary" />
+                            </span>
+                            <input
+                              type={showPassword ? "text" : "password"}
+                              className="form-control"
+                              placeholder="Create password"
+                              value={formData.password}
+                              onChange={(e) => handleInputChange("password", e.target.value)}
+                            />
+                            <button
+                              type="button"
+                              className="btn btn-outline-secondary"
+                              onClick={() => setShowPassword(!showPassword)}
+                            >
+                              {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </button>
+                          </div>
+                          
+                          {formData.password && (
+                            <div className={`password-strength mt-2 ${getPasswordStrengthColor()}`}>
+                              <div className="d-flex justify-content-between mb-1">
+                                <small>Password Strength:</small>
+                                <small className="fw-bold">{passwordStrength}</small>
+                              </div>
+                              <div className="progress" style={{height: "5px"}}>
+                                <div 
+                                  className="progress-bar" 
+                                  role="progressbar" 
+                                  style={{width: `${passwordStrength === "Very Weak" ? "20%" : 
+                                          passwordStrength === "Weak" ? "40%" : 
+                                          passwordStrength === "Good" ? "60%" : 
+                                          passwordStrength === "Strong" ? "80%" : "100%"}`}}
+                                ></div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="mb-3">
+                          <label className="form-label">Account Type</label>
+                          <div className="input-group">
+                            <span className="input-group-text bg-light">
+                              <FaUserShield className="text-primary" />
+                            </span>
+                            <select
+                              className="form-select"
+                              value={formData.roles}
+                              onChange={(e) => handleInputChange("roles", e.target.value)}
+                            >
+                              <option value="">Select account type</option>
+                              <option value="admin">Administrator</option>
+                              <option value="doctor">Medical Doctor</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        {(formData.roles === "admin" || formData.roles === "doctor") && (
+                          <div className="card border-primary mb-4">
+                            <div className="card-header bg-primary bg-opacity-10 border-primary">
+                              <div className="d-flex align-items-center">
+                                {getRoleIcon(formData.roles)}
+                                <span className="ms-2 fw-semibold">
+                                  {formData.roles === "admin" ? "Administrator" : "Medical Doctor"} Registration
+                                </span>
+                              </div>
+                            </div>
+                            <div className="card-body">
+                              <div className="mb-3">
+                                <label className="form-label">Registration Code</label>
+                                <div className="input-group">
+                                  <span className="input-group-text bg-light">
+                                    <FaShieldAlt className="text-primary" />
+                                  </span>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Registration code"
+                                    value={formData.secretReg}
+                                    onChange={(e) => handleInputChange("secretReg", e.target.value)}
+                                  />
+                                </div>
+                              </div>
+                              <div className="alert alert-info d-flex align-items-start mb-0" role="alert">
+                                <FaInfoCircle className="me-2 mt-1" />
+                                <div>
+                                  <small>
+                                    {formData.roles === "admin" 
+                                      ? "Administrator accounts require special registration codes for security."
+                                      : "Doctor accounts require valid medical registration codes."
+                                    }
+                                  </small>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="form-check mb-3">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="showPassword"
+                            checked={showPassword}
+                            onChange={(e) => setShowPassword(e.target.checked)}
+                          />
+                          <label className="form-check-label" htmlFor="showPassword">
+                            Show password
+                          </label>
+                        </div>
+
+                        <div className="form-check mb-4">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="agreeTerms"
+                            checked={agree}
+                            onChange={(e) => setAgree(e.target.checked)}
+                          />
+                          <label className="form-check-label" htmlFor="agreeTerms">
+                            I agree to the <a href="#" className="text-decoration-none">Terms and Conditions</a> and <a href="#" className="text-decoration-none">Privacy Policy</a>
+                          </label>
+                        </div>
+
+                        <button 
+                          type="submit" 
+                          className="btn btn-primary btn-lg w-100 mb-3"
+                          disabled={loading}
+                        >
+                          {loading ? (
+                            <>
+                              <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                              Creating Account...
+                            </>
+                          ) : (
+                            <>
+                              <FaUser className="me-2" />
+                              Create Account
+                            </>
+                          )}
+                        </button>
+
+                        {error && (
+                          <div className="alert alert-danger d-flex align-items-center mb-3" role="alert">
+                            <FaExclamationTriangle className="me-2" />
+                            <div>{error}</div>
+                          </div>
+                        )}
+
+                        {message && (
+                          <div className="alert alert-success d-flex align-items-center mb-3" role="alert">
+                            <FaCheck className="me-2" />
+                            <div>{message}</div>
+                          </div>
+                        )}
+
+                        <div className="text-center mt-4">
+                          <p className="text-muted">Already have an account?</p>
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-primary"
+                            onClick={toggleForm}
+                          >
+                            Sign in to your account
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <Footer />
+      </div>
     </div>
   );
 }
