@@ -4,7 +4,7 @@ import {
   FaBell, FaBars, FaTimes, FaHome, FaUserInjured, 
   FaClipboardList, FaHeartbeat, FaExclamationTriangle, 
   FaUserMd, FaSignOutAlt, FaUser, FaStethoscope, FaMoon, FaSun,
-  FaCalendarCheck, FaChartLine, FaUserCircle, FaProcedures
+  FaCalendarCheck, FaChartLine, FaUserCircle, FaProcedures, FaPills
 } from "react-icons/fa";
 import profile from "../../assets/bg.jpg";
 import DoctorPatientsSection from "./DoctorsPatientsSection";
@@ -13,6 +13,7 @@ import AppointmentsSection from "./AppointmentSection";
 import VitalsSection from "./VitalSection";
 import AlertsSection from "./AlertSection";
 import ProfileSection from "./ProfilesSection";
+import PrescriptionsSection from "./prescriptionSection"
 import "./doctor.css";
 import "./dark-mode.css"
 import { useNavigate } from "react-router-dom";
@@ -185,6 +186,7 @@ function DoctorDashboard() {
     { key: "patients", label: "All Patients", icon: <FaUserInjured />, color: "info" },
     { key: "assignedPatients", label: "My Patients", icon: <FaUserMd />, color: "success" },
     { key: "appointments", label: "Appointments", icon: <FaCalendarCheck />, color: "warning" },
+    { key: "prescriptions", label: "Prescriptions", icon: <FaPills />, color: "info" },
     { key: "vitals", label: "Vitals Monitor", icon: <FaHeartbeat />, color: "danger" },
     { key: "alerts", label: "Alerts", icon: <FaExclamationTriangle />, color: "danger" },
     { key: "profile", label: "My Profile", icon: <FaUserCircle />, color: "secondary" },
@@ -219,6 +221,7 @@ function DoctorDashboard() {
     switch (activeSection) {
       case "patients": return <DoctorPatientsSection />;
       case "assignedPatients": return <AssignedPatientsSection doctorId={doctorId} />;
+      case "prescriptions": return <PrescriptionsSection doctorId={doctorId} />;
       case "appointments": return <AppointmentsSection doctorId={doctorId} />;
       case "vitals": return <VitalsSection />;
       case "alerts": return <AlertsSection />;

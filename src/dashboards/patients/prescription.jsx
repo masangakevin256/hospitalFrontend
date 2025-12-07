@@ -1,10 +1,11 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import {
   FaPills, FaSearch, FaFilter, FaSync, FaPrint,
   FaCalendarAlt, FaUserMd, FaExclamationTriangle,
   FaCheckCircle, FaTimesCircle, FaEye,
   FaFileMedical, FaPrescription, FaCapsules,
-  FaAllergies, FaClock, FaHistory
+  FaAllergies, FaClock, FaHistory, FaEdit, FaSave, FaTimes, FaInfoCircle
 } from "react-icons/fa";
 
 function PrescriptionsSection() {
@@ -15,127 +16,38 @@ function PrescriptionsSection() {
   const [filterStatus, setFilterStatus] = useState("all");
   const [selectedPrescription, setSelectedPrescription] = useState(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
-
-  // Sample prescription data
-  const samplePrescriptions = [
-    {
-      id: "RX-001",
-      patientId: "PAT-789123",
-      patientName: "John Smith",
-      medication: "Lisinopril 10mg",
-      dosage: "10mg once daily",
-      quantity: 30,
-      refills: 3,
-      prescribedDate: "2024-01-15",
-      expiryDate: "2024-07-15",
-      prescribingDoctor: "Dr. Sarah Wilson",
-      status: "active",
-      instructions: "Take one tablet daily in the morning. May cause dizziness.",
-      pharmacy: "City Center Pharmacy",
-      condition: "Hypertension",
-      lastFilled: "2024-01-15",
-      nextRefill: "2024-02-15"
-    },
-    {
-      id: "RX-002",
-      patientId: "PAT-789123",
-      patientName: "John Smith",
-      medication: "Metformin 500mg",
-      dosage: "500mg twice daily",
-      quantity: 60,
-      refills: 5,
-      prescribedDate: "2024-01-10",
-      expiryDate: "2024-07-10",
-      prescribingDoctor: "Dr. Michael Chen",
-      status: "active",
-      instructions: "Take with meals. Monitor blood sugar levels regularly.",
-      pharmacy: "Wellness Pharmacy",
-      condition: "Type 2 Diabetes",
-      lastFilled: "2024-01-10",
-      nextRefill: "2024-02-10"
-    },
-    {
-      id: "RX-003",
-      patientId: "PAT-789123",
-      patientName: "John Smith",
-      medication: "Atorvastatin 20mg",
-      dosage: "20mg once daily at bedtime",
-      quantity: 30,
-      refills: 2,
-      prescribedDate: "2023-12-20",
-      expiryDate: "2024-06-20",
-      prescribingDoctor: "Dr. Sarah Wilson",
-      status: "expired",
-      instructions: "Take at bedtime. Report any muscle pain immediately.",
-      pharmacy: "City Center Pharmacy",
-      condition: "High Cholesterol",
-      lastFilled: "2023-12-20",
-      nextRefill: "Expired"
-    },
-    {
-      id: "RX-004",
-      patientId: "PAT-789123",
-      patientName: "John Smith",
-      medication: "Amoxicillin 500mg",
-      dosage: "500mg three times daily",
-      quantity: 21,
-      refills: 0,
-      prescribedDate: "2024-01-18",
-      expiryDate: "2024-02-18",
-      prescribingDoctor: "Dr. Emily Rodriguez",
-      status: "completed",
-      instructions: "Take until finished. Complete full course even if feeling better.",
-      pharmacy: "QuickCare Pharmacy",
-      condition: "Sinus Infection",
-      lastFilled: "2024-01-18",
-      nextRefill: "Not applicable"
-    },
-    {
-      id: "RX-005",
-      patientId: "PAT-789123",
-      patientName: "John Smith",
-      medication: "Albuterol Inhaler",
-      dosage: "2 puffs every 4-6 hours as needed",
-      quantity: 1,
-      refills: 1,
-      prescribedDate: "2024-01-05",
-      expiryDate: "2024-07-05",
-      prescribingDoctor: "Dr. Michael Chen",
-      status: "active",
-      instructions: "Use before physical activity. Shake well before use.",
-      pharmacy: "Wellness Pharmacy",
-      condition: "Asthma",
-      lastFilled: "2024-01-05",
-      nextRefill: "2024-02-05"
-    },
-    {
-      id: "RX-006",
-      patientId: "PAT-789123",
-      patientName: "John Smith",
-      medication: "Ibuprofen 400mg",
-      dosage: "400mg every 6 hours as needed",
-      quantity: 90,
-      refills: 0,
-      prescribedDate: "2024-01-12",
-      expiryDate: "2024-07-12",
-      prescribingDoctor: "Dr. Sarah Wilson",
-      status: "active",
-      instructions: "Take with food. Do not exceed 1200mg in 24 hours.",
-      pharmacy: "City Center Pharmacy",
-      condition: "Arthritis Pain",
-      lastFilled: "2024-01-12",
-      nextRefill: "Not applicable"
-    }
-  ];
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState({});
+  const [isSaving, setIsSaving] = useState(false);
+  const [userRole, setUserRole] = useState("patient");
 
   useEffect(() => {
-    // Simulate API call
-    setTimeout(() => {
-      setPrescriptions(samplePrescriptions);
-      setFilteredPrescriptions(samplePrescriptions);
-      setLoading(false);
-    }, 1000);
+    // Get user role from token or localStorage
+    const token = localStorage.getItem("token");
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      setUserRole(payload.roles || "patient");
+    }
+    
+    fetchPrescriptions();
   }, []);
+
+  const fetchPrescriptions = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios.get("https://hospitalbackend-1-eail.onrender.com/prescriptions", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setTimeout(() => {
+        setPrescriptions(res.data);
+        setFilteredPrescriptions(res.data);
+        setLoading(false);
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     filterPrescriptions();
@@ -144,16 +56,14 @@ function PrescriptionsSection() {
   const filterPrescriptions = () => {
     let filtered = prescriptions;
 
-    // Apply search filter
     if (searchTerm) {
       filtered = filtered.filter(prescription =>
-        prescription.medication.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        prescription.prescribingDoctor.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        prescription.condition.toLowerCase().includes(searchTerm.toLowerCase())
+        prescription.medication?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        prescription.prescribingDoctor?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        prescription.condition?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
-    // Apply status filter
     if (filterStatus !== "all") {
       filtered = filtered.filter(prescription => prescription.status === filterStatus);
     }
@@ -184,7 +94,10 @@ function PrescriptionsSection() {
     if (prescription.status !== "active") return null;
     
     const today = new Date();
-    const nextRefill = new Date(prescription.nextRefill);
+    const nextRefill = prescription.nextRefill ? new Date(prescription.nextRefill) : null;
+    
+    if (!nextRefill) return { type: "none", text: "No refill date", color: "secondary" };
+    
     const daysUntilRefill = Math.ceil((nextRefill - today) / (1000 * 60 * 60 * 24));
 
     if (daysUntilRefill <= 0) {
@@ -201,8 +114,67 @@ function PrescriptionsSection() {
     setShowDetailsModal(true);
   };
 
+  const startEditing = (prescription) => {
+    setEditingId(prescription._id);
+    setEditForm({
+      instructions: prescription.instructions || "",
+      pharmacy: prescription.pharmacy || "",
+      status: prescription.status || "active",
+      lastFilled: prescription.lastFilled ? new Date(prescription.lastFilled).toISOString().split('T')[0] : "",
+      nextRefill: prescription.nextRefill ? new Date(prescription.nextRefill).toISOString().split('T')[0] : ""
+    });
+  };
+
+  const cancelEditing = () => {
+    setEditingId(null);
+    setEditForm({});
+  };
+
+  const handleEditChange = (e) => {
+    const { name, value } = e.target;
+    setEditForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const saveEdit = async (prescriptionId) => {
+    setIsSaving(true);
+    const token = localStorage.getItem("token");
+    
+    try {
+      // Remove empty fields
+      const updates = Object.fromEntries(
+        Object.entries(editForm).filter(([_, v]) => v !== "")
+      );
+
+      await axios.patch(
+        `https://hospitalbackend-1-eail.onrender.com/prescriptions/${prescriptionId}`,
+        updates,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+
+      // Update local state
+      setPrescriptions(prev => prev.map(p =>
+        p._id === prescriptionId ? { ...p, ...updates } : p
+      ));
+
+      setEditingId(null);
+      setEditForm({});
+      
+      // Show success message
+      alert("Prescription updated successfully!");
+    } catch (error) {
+      console.error("Error updating prescription:", error);
+      alert("Failed to update prescription. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   const printPrescription = (prescription) => {
-    // Simulate print functionality
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
       <html>
@@ -216,39 +188,45 @@ function PrescriptionsSection() {
             .value { margin-bottom: 10px; }
             .instructions { background: #f5f5f5; padding: 15px; border-radius: 5px; }
             .footer { margin-top: 40px; text-align: center; color: #666; font-size: 12px; }
+            @media print { body { margin: 20px; } }
           </style>
         </head>
         <body>
           <div class="header">
             <h1>MEDICAL PRESCRIPTION</h1>
-            <p>${prescription.prescribingDoctor}</p>
+            <p>${prescription.prescribingDoctor || 'Not specified'}</p>
           </div>
           <div class="section">
             <div class="label">Patient:</div>
-            <div class="value">${prescription.patientName} (${prescription.patientId})</div>
+            <div class="value">${prescription.patientName || 'Unknown'} (${prescription.patientId || 'N/A'})</div>
           </div>
           <div class="section">
             <div class="label">Medication:</div>
-            <div class="value"><strong>${prescription.medication}</strong></div>
+            <div class="value"><strong>${prescription.medication || 'Not specified'}</strong></div>
           </div>
           <div class="section">
             <div class="label">Dosage:</div>
-            <div class="value">${prescription.dosage}</div>
+            <div class="value">${prescription.dosage || 'Not specified'}</div>
           </div>
           <div class="section">
             <div class="label">Instructions:</div>
-            <div class="value instructions">${prescription.instructions}</div>
+            <div class="value instructions">${prescription.instructions || 'No instructions provided'}</div>
           </div>
           <div class="section">
             <div class="label">Quantity:</div>
-            <div class="value">${prescription.quantity} with ${prescription.refills} refill(s)</div>
+            <div class="value">${prescription.quantity || 'N/A'} units with ${prescription.refills || 0} refill(s)</div>
           </div>
           <div class="section">
             <div class="label">Pharmacy:</div>
-            <div class="value">${prescription.pharmacy}</div>
+            <div class="value">${prescription.pharmacy || 'Not specified'}</div>
+          </div>
+          <div class="section">
+            <div class="label">Condition:</div>
+            <div class="value">${prescription.condition || 'Not specified'}</div>
           </div>
           <div class="footer">
-            <p>Prescribed on ${new Date(prescription.prescribedDate).toLocaleDateString()} | Valid until ${new Date(prescription.expiryDate).toLocaleDateString()}</p>
+            <p>Prescribed on ${prescription.prescribedDate ? new Date(prescription.prescribedDate).toLocaleDateString() : 'Unknown date'} | 
+               Expiry: ${prescription.expiryDate ? new Date(prescription.expiryDate).toLocaleDateString() : 'No expiry date'}</p>
           </div>
         </body>
       </html>
@@ -265,8 +243,9 @@ function PrescriptionsSection() {
     const today = new Date();
     const thirtyDaysFromNow = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
     return prescriptions.filter(p => {
+      if (!p.expiryDate || p.status !== "active") return false;
       const expiryDate = new Date(p.expiryDate);
-      return p.status === "active" && expiryDate <= thirtyDaysFromNow && expiryDate >= today;
+      return expiryDate <= thirtyDaysFromNow && expiryDate >= today;
     }).length;
   };
 
@@ -292,14 +271,15 @@ function PrescriptionsSection() {
             <FaPills className="me-2 text-primary" />
             My Prescriptions
           </h2>
-          <p className="text-muted mb-0">Manage and track your medications</p>
+          <p className="text-muted mb-0">View and manage your medications</p>
         </div>
         <button 
           className="btn btn-outline-primary d-flex align-items-center"
-          onClick={() => window.print()}
+          onClick={fetchPrescriptions}
+          disabled={loading}
         >
-          <FaPrint className="me-2" />
-          Print All
+          <FaSync className={`me-2 ${loading ? 'fa-spin' : ''}`} />
+          Refresh
         </button>
       </div>
 
@@ -418,6 +398,12 @@ function PrescriptionsSection() {
         </div>
       </div>
 
+      {/* Permissions Notice */}
+      <div className="alert alert-info mb-4">
+        <FaInfoCircle className="me-2" />
+        <strong>Note:</strong> As a patient, you can view all your prescriptions and update certain information like pharmacy preferences and refill dates.
+      </div>
+
       {/* Prescriptions List */}
       <div className="card border-0 shadow-sm">
         <div className="card-header bg-light border-0 py-3">
@@ -433,80 +419,123 @@ function PrescriptionsSection() {
                   <th className="ps-4">Medication</th>
                   <th>Prescribing Doctor</th>
                   <th>Condition</th>
-                  <th>Dosage</th>
                   <th>Status</th>
-                  <th>Refill</th>
+                  <th>Last Filled</th>
                   <th className="text-center pe-4">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredPrescriptions.length === 0 ? (
                   <tr>
-                    <td colSpan="7" className="text-center py-5 text-muted">
+                    <td colSpan="6" className="text-center py-5 text-muted">
                       <FaPills size={48} className="mb-3 opacity-25" />
                       <p className="mb-0">No prescriptions found matching your criteria.</p>
                     </td>
                   </tr>
                 ) : (
                   filteredPrescriptions.map((prescription) => {
+                    const isEditing = editingId === prescription._id;
                     const refillStatus = getRefillStatus(prescription);
                     
                     return (
-                      <tr key={prescription.id} className="align-middle">
+                      <tr key={prescription._id} className="align-middle">
                         <td className="ps-4">
                           <div className="d-flex align-items-center">
                             <div className="avatar-sm bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3">
                               <FaCapsules className="text-primary" size={14} />
                             </div>
                             <div>
-                              <div className="fw-semibold">{prescription.medication}</div>
-                              <small className="text-muted">RX: {prescription.id}</small>
+                              <div className="fw-semibold">{prescription.medication || 'Unknown medication'}</div>
+                              <small className="text-muted">Dosage: {prescription.dosage || 'N/A'}</small>
                             </div>
                           </div>
                         </td>
                         <td>
                           <div className="d-flex align-items-center">
                             <FaUserMd className="me-2 text-muted" size={12} />
-                            {prescription.prescribingDoctor}
+                            {prescription.prescribingDoctor || 'Unknown doctor'}
                           </div>
                         </td>
                         <td>
-                          <span className="text-muted">{prescription.condition}</span>
+                          <span className="text-muted">{prescription.condition || 'Not specified'}</span>
                         </td>
                         <td>
-                          <small className="text-muted">{prescription.dosage}</small>
-                        </td>
-                        <td>
-                          {getStatusBadge(prescription.status)}
-                        </td>
-                        <td>
-                          {refillStatus && (
-                            <span className={`badge bg-${refillStatus.color} bg-opacity-10 text-${refillStatus.color}`}>
-                              {refillStatus.text}
-                            </span>
+                          {isEditing ? (
+                            <select
+                              name="status"
+                              className="form-select form-select-sm"
+                              value={editForm.status}
+                              onChange={handleEditChange}
+                            >
+                              <option value="active">Active</option>
+                              <option value="completed">Completed</option>
+                              <option value="cancelled">Cancelled</option>
+                            </select>
+                          ) : (
+                            getStatusBadge(prescription.status)
                           )}
-                          {!refillStatus && prescription.status === "active" && (
-                            <span className="badge bg-secondary bg-opacity-10 text-secondary">
-                              No refills
+                        </td>
+                        <td>
+                          {isEditing ? (
+                            <input
+                              type="date"
+                              name="lastFilled"
+                              className="form-control form-control-sm"
+                              value={editForm.lastFilled}
+                              onChange={handleEditChange}
+                            />
+                          ) : (
+                            <span className="text-muted">
+                              {prescription.lastFilled 
+                                ? new Date(prescription.lastFilled).toLocaleDateString()
+                                : 'Not filled yet'}
                             </span>
                           )}
                         </td>
                         <td className="text-center pe-4">
                           <div className="btn-group btn-group-sm" role="group">
-                            <button
-                              className="btn btn-outline-primary"
-                              onClick={() => openDetailsModal(prescription)}
-                              title="View Details"
-                            >
-                              <FaEye />
-                            </button>
-                            <button
-                              className="btn btn-outline-success"
-                              onClick={() => printPrescription(prescription)}
-                              title="Print Prescription"
-                            >
-                              <FaPrint />
-                            </button>
+                            {isEditing ? (
+                              <>
+                                <button
+                                  className="btn btn-success"
+                                  onClick={() => saveEdit(prescription._id)}
+                                  disabled={isSaving}
+                                >
+                                  <FaSave className={isSaving ? 'fa-spin' : ''} />
+                                </button>
+                                <button
+                                  className="btn btn-secondary"
+                                  onClick={cancelEditing}
+                                  disabled={isSaving}
+                                >
+                                  <FaTimes />
+                                </button>
+                              </>
+                            ) : (
+                              <>
+                                <button
+                                  className="btn btn-outline-primary"
+                                  onClick={() => openDetailsModal(prescription)}
+                                  title="View Details"
+                                >
+                                  <FaEye />
+                                </button>
+                                <button
+                                  className="btn btn-outline-warning"
+                                  onClick={() => startEditing(prescription)}
+                                  title="Edit Prescription"
+                                >
+                                  <FaEdit />
+                                </button>
+                                <button
+                                  className="btn btn-outline-success"
+                                  onClick={() => printPrescription(prescription)}
+                                  title="Print Prescription"
+                                >
+                                  <FaPrint />
+                                </button>
+                              </>
+                            )}
                           </div>
                         </td>
                       </tr>
@@ -542,19 +571,19 @@ function PrescriptionsSection() {
                     <div className="mb-3">
                       <label className="form-label fw-semibold">Medication Name</label>
                       <div className="form-control-plaintext border rounded px-3 py-2 bg-light fw-semibold">
-                        {selectedPrescription.medication}
+                        {selectedPrescription.medication || 'Not specified'}
                       </div>
                     </div>
                     <div className="mb-3">
                       <label className="form-label fw-semibold">Dosage</label>
                       <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                        {selectedPrescription.dosage}
+                        {selectedPrescription.dosage || 'Not specified'}
                       </div>
                     </div>
                     <div className="mb-3">
                       <label className="form-label fw-semibold">Condition</label>
                       <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                        {selectedPrescription.condition}
+                        {selectedPrescription.condition || 'Not specified'}
                       </div>
                     </div>
                   </div>
@@ -564,7 +593,7 @@ function PrescriptionsSection() {
                     <div className="mb-3">
                       <label className="form-label fw-semibold">Prescribing Doctor</label>
                       <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                        {selectedPrescription.prescribingDoctor}
+                        {selectedPrescription.prescribingDoctor || 'Not specified'}
                       </div>
                     </div>
                     <div className="mb-3">
@@ -576,7 +605,7 @@ function PrescriptionsSection() {
                     <div className="mb-3">
                       <label className="form-label fw-semibold">Pharmacy</label>
                       <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                        {selectedPrescription.pharmacy}
+                        {selectedPrescription.pharmacy || 'Not specified'}
                       </div>
                     </div>
                   </div>
@@ -585,7 +614,7 @@ function PrescriptionsSection() {
                     <div className="mb-3">
                       <label className="form-label fw-semibold">Instructions</label>
                       <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                        {selectedPrescription.instructions}
+                        {selectedPrescription.instructions || 'No instructions provided'}
                       </div>
                     </div>
                   </div>
@@ -595,13 +624,13 @@ function PrescriptionsSection() {
                     <div className="mb-3">
                       <label className="form-label fw-semibold">Quantity</label>
                       <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                        {selectedPrescription.quantity} units
+                        {selectedPrescription.quantity || 'N/A'} units
                       </div>
                     </div>
                     <div className="mb-3">
                       <label className="form-label fw-semibold">Refills Remaining</label>
                       <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                        {selectedPrescription.refills}
+                        {selectedPrescription.refills || 0}
                       </div>
                     </div>
                   </div>
@@ -611,19 +640,25 @@ function PrescriptionsSection() {
                     <div className="mb-3">
                       <label className="form-label fw-semibold">Prescribed Date</label>
                       <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                        {new Date(selectedPrescription.prescribedDate).toLocaleDateString()}
+                        {selectedPrescription.prescribedDate 
+                          ? new Date(selectedPrescription.prescribedDate).toLocaleDateString()
+                          : 'Unknown date'}
                       </div>
                     </div>
                     <div className="mb-3">
                       <label className="form-label fw-semibold">Expiry Date</label>
                       <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                        {new Date(selectedPrescription.expiryDate).toLocaleDateString()}
+                        {selectedPrescription.expiryDate 
+                          ? new Date(selectedPrescription.expiryDate).toLocaleDateString()
+                          : 'No expiry date'}
                       </div>
                     </div>
                     <div className="mb-3">
                       <label className="form-label fw-semibold">Last Filled</label>
                       <div className="form-control-plaintext border rounded px-3 py-2 bg-light">
-                        {new Date(selectedPrescription.lastFilled).toLocaleDateString()}
+                        {selectedPrescription.lastFilled 
+                          ? new Date(selectedPrescription.lastFilled).toLocaleDateString()
+                          : 'Not filled yet'}
                       </div>
                     </div>
                   </div>

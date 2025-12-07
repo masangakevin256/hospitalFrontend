@@ -112,8 +112,8 @@ function Login() {
     
     if (!formData.password) {
       errors.push("Please enter your password!");
-    } else if (formData.password.length < 8) {
-      errors.push("Password must be at least 8 characters!");
+    } else if (formData.password.length < 6) {
+      errors.push("Password must be at least 6 characters!");
     }
     
     if (!formData.roles) {
