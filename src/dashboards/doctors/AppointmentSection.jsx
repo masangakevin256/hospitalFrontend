@@ -1056,7 +1056,7 @@ function AppointmentsSection() {
                       </label>
                       <input
                         type="text"
-                        className={`form-control ${formErrors.patientName ? 'is-invalid' : ''}`}
+                        className={`form-control`}
                         value={formData.patientName}
                         onChange={(e) => setFormData({...formData, patientName: e.target.value})}
                         placeholder="Enter patient's full name (optional)"
