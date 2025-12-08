@@ -20,7 +20,7 @@ function Footer() {
 
   const handleLinkClick = (e) => {
     e.preventDefault();
-    // Open the 404 page in a new tab
+    // Open the 404 page in a sane tab
    window.open("https://hospitalbackend-1-eail.onrender.com/error", "_self");
   };
 

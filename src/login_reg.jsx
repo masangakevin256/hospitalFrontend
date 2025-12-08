@@ -174,6 +174,11 @@ function Login() {
     }
     return true;
   };
+  const handleLinkClick = (e) => {
+    e.preventDefault();
+    // Open the 404 page in a same tab
+   window.open("https://hospitalbackend-1-eail.onrender.com/error", "_self");
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -409,7 +414,7 @@ function Login() {
                               Remember me
                             </label>
                           </div>
-                          <a href="#" className="text-decoration-none text-primary">Forgot password?</a>
+                          <a href="#" className="text-decoration-none text-primary" onClick={handleLinkClick}>Forgot password?</a>
                         </div>
 
                         <button 
