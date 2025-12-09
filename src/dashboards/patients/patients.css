@@ -404,7 +404,8 @@ a{
 
   .patient-sidebar {
     transform: translateX(-100%);
-    width: 280px;
+    width: 80%; /* Slightly smaller on very small screens */
+    max-width: 280px;
   }
 
   .patient-sidebar.sidebar-open {
